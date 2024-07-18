@@ -9,5 +9,5 @@ import Foundation
 struct Favori: Identifiable {
     let id = UUID()
     var dateAjout: Date
-    var utilisateur: Utilisateur
+    var astuce : Astuce
 }

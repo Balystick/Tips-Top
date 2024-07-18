@@ -10,6 +10,5 @@ import Foundation
 struct Step: Identifiable {
     let id = UUID()
     var titre: String
-    var description: [String]
-    var astuce: Astuce
+    var description: String
 }

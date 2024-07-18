@@ -11,6 +11,6 @@ struct Categorie: Identifiable {
     let titre: String
     let description: String
     let icon: String
-    var astuces: [Astuce]?
-    var topics: [Topic]?
+    var astuces: [Astuce]
+    var topics: [Topic]
 }

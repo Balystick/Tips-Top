@@ -11,5 +11,4 @@ struct Reponse: Identifiable {
     var date: Date
     var contenu: String
     var utilisateur: Utilisateur
-    var topic: Topic
 }

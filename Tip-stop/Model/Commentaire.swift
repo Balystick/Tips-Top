@@ -12,5 +12,4 @@ struct Commentaire: Identifiable {
     var date: String
     var nombreDeLikes: Int
     var utilisateur: Utilisateur
-    var astuce: Astuce
 }

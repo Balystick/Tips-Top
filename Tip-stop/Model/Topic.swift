@@ -10,7 +10,6 @@ struct Topic: Identifiable {
     let id = UUID()
     var dateDebut: Date
     var sujet: String
-    var reponse: [Reponse]?
-    var utilisateur: [Utilisateur]?
+    var reponse: [Reponse]
     var categorie: Categorie
 }

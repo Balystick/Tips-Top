@@ -13,8 +13,6 @@ struct Astuce: Identifiable {
     var dateDeCreation: Date
     var pourcentageVue: Int
     var nombreDeLikes: Int
-    var astuce: [Categorie]
     var steps: [Step]
-    var favoris: Favori?
-    var commentaires: [Commentaire]?
+    var commentaires: [Commentaire]
 }
