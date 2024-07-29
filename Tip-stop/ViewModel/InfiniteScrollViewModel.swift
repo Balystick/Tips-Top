@@ -8,7 +8,7 @@
 import Foundation
 
 class InfiniteScrollViewModel {
-    @Published var astuces: [Astuce] = []
+    @Published var astuces: [Astuce] = [] // À modifier ?
     @Published var commentaires: [Commentaire] = []
     @Published var steps: [Step] = []
     

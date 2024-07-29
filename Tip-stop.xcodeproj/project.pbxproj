@@ -30,6 +30,10 @@
 		699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */; };
 		699DFD622C49045100044FB4 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD612C49045000044FB4 /* TopicView.swift */; };
 		699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD632C4904BF00044FB4 /* TopicViewModel.swift */; };
+		E1D28F202C5792D4001B9766 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */; };
+		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
+		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
+		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,10 @@
 		699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		699DFD612C49045000044FB4 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		699DFD632C4904BF00044FB4 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,10 +188,12 @@
 		699DFD412C48FC1E00044FB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E1D28F162C57843E001B9766 /* Onboarding */,
 				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
 				699DFD612C49045000044FB4 /* TopicView.swift */,
+				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +207,16 @@
 				699DFD632C4904BF00044FB4 /* TopicViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E1D28F162C57843E001B9766 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */,
+				E1D28F232C57A196001B9766 /* OnboardingViewController.swift */,
+				E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D28F202C5792D4001B9766 /* Onboarding.storyboard in Resources */,
 				699DFD1E2C48FADA00044FB4 /* Preview Assets.xcassets in Resources */,
 				699DFD1B2C48FADA00044FB4 /* Assets.xcassets in Resources */,
 			);
@@ -330,11 +351,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				699DFD4C2C48FEC200044FB4 /* Favori.swift in Sources */,
+				E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */,
 				699DFD522C49002B00044FB4 /* Topic.swift in Sources */,
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
+				E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */,
 				699DFD562C49012700044FB4 /* InfiniteScrollView.swift in Sources */,
 				699DFD542C4900F400044FB4 /* DecouverteView.swift in Sources */,
 				699DFD502C48FF8B00044FB4 /* Reponse.swift in Sources */,
@@ -342,6 +365,7 @@
 				699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */,
 				699DFD4A2C48FE6000044FB4 /* Step.swift in Sources */,
 				699DFD5E2C4902BF00044FB4 /* InfiniteScrollViewModel.swift in Sources */,
+				E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */,
 				699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
