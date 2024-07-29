@@ -30,6 +30,7 @@
 		699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */; };
 		699DFD622C49045100044FB4 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD612C49045000044FB4 /* TopicView.swift */; };
 		699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD632C4904BF00044FB4 /* TopicViewModel.swift */; };
+		74E656FD2C57D35C00D438E0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E656FC2C57D35C00D438E0 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		699DFD612C49045000044FB4 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		699DFD632C4904BF00044FB4 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		74E656FC2C57D35C00D438E0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
 				699DFD612C49045000044FB4 /* TopicView.swift */,
+				74E656FC2C57D35C00D438E0 /* ImagePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				699DFD562C49012700044FB4 /* InfiniteScrollView.swift in Sources */,
+				74E656FD2C57D35C00D438E0 /* ImagePicker.swift in Sources */,
 				699DFD542C4900F400044FB4 /* DecouverteView.swift in Sources */,
 				699DFD502C48FF8B00044FB4 /* Reponse.swift in Sources */,
 				699DFD482C48FDD000044FB4 /* Commentaire.swift in Sources */,
