@@ -11,7 +11,7 @@ import UIKit
 class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var pages: [UIViewController] = []
-    
+
     let pageData = [
         ["imageName": "welcome_image", "text": "Bienvenue dans Tips Top !", "buttonText": "Suivant"],
         ["imageName": "suggestions_image", "text": "Découvrez des astuces personnalisées", "buttonText": "Suivant"],
@@ -63,5 +63,11 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let currentVC = viewControllers?.first, let currentIndex = pages.firstIndex(of: currentVC) else { return 0 }
         return currentIndex
+    }
+    
+    func completeOnboarding() {
+        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
+        self.dismiss(animated: true, completion: nil)
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
 }

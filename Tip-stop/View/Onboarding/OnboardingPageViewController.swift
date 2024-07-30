@@ -29,25 +29,21 @@ class OnboardingPageViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         if isLastPage {
-            dismissToRootView()
-        } else {
-            if let onboardingVC = parent as? UIPageViewController {
-                guard let currentIndex = (onboardingVC as? OnboardingViewController)?.pages.firstIndex(of: self) else { return }
-                let nextIndex = currentIndex + 1
-                if nextIndex < (onboardingVC as? OnboardingViewController)?.pages.count ?? 0 {
-                    (onboardingVC as? OnboardingViewController)?.setViewControllers([(onboardingVC as? OnboardingViewController)?.pages[nextIndex] ?? UIViewController()], direction: .forward, animated: true, completion: nil)
-                } else {
-                    onboardingVC.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    
-    @IBAction func ignoreButtonTapped(_ sender: UIButton) {
-        dismissToRootView()
-    }
-    
-    private func dismissToRootView() {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-}
+              (parent as? OnboardingViewController)?.completeOnboarding()
+          } else {
+              if let onboardingVC = parent as? UIPageViewController {
+                  guard let currentIndex = (onboardingVC as? OnboardingViewController)?.pages.firstIndex(of: self) else { return }
+                  let nextIndex = currentIndex + 1
+                  if nextIndex < (onboardingVC as? OnboardingViewController)?.pages.count ?? 0 {
+                      (onboardingVC as? OnboardingViewController)?.setViewControllers([(onboardingVC as? OnboardingViewController)?.pages[nextIndex] ?? UIViewController()], direction: .forward, animated: true, completion: nil)
+                  } else {
+                      onboardingVC.dismiss(animated: true, completion: nil)
+                  }
+              }
+          }
+      }
+      
+      @IBAction func ignoreButtonTapped(_ sender: UIButton) {
+          (parent as? OnboardingViewController)?.completeOnboarding()
+      }
+  }
