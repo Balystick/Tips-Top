@@ -30,6 +30,7 @@
 		699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */; };
 		699DFD622C49045100044FB4 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD612C49045000044FB4 /* TopicView.swift */; };
 		699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD632C4904BF00044FB4 /* TopicViewModel.swift */; };
+		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
 		E1D28F202C5792D4001B9766 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
@@ -80,6 +81,7 @@
 		699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		699DFD612C49045000044FB4 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		699DFD632C4904BF00044FB4 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				E1D28F162C57843E001B9766 /* Onboarding */,
 				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
+				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
 				699DFD612C49045000044FB4 /* TopicView.swift */,
@@ -352,6 +355,7 @@
 			files = (
 				699DFD4C2C48FEC200044FB4 /* Favori.swift in Sources */,
 				E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */,
+				E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */,
 				699DFD522C49002B00044FB4 /* Topic.swift in Sources */,
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
@@ -594,7 +598,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K33SV66CH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kamil.Tip-stopTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -613,7 +617,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K33SV66CH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kamil.Tip-stopTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,6 +635,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K33SV66CH8;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kamil.Tip-stopUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -648,6 +653,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K33SV66CH8;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kamil.Tip-stopUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

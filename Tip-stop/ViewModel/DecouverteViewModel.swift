@@ -11,12 +11,43 @@ class DecouverteViewModel: ObservableObject {
         Categorie(
             titre: "Photo & Vidéo",
             description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
-            image: "photo.on.rectangle"
+            image: "Productivité"
+        ),
+        Categorie(
+            titre: "Photo & Vidéo",
+            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            image: "Personnalisation"
+        ),
+        Categorie(
+            titre: "Photo & Vidéo",
+            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            image: "Performance"
+        ),
+        Categorie(
+            titre: "Photo & Vidéo",
+            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            image: "Accessibilité"
+        ),
+        Categorie(
+            titre: "Photo & Vidéo",
+            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            image: "Sécurité"
         )
     ]
     
-    init(categories: [Categorie], topics: [Topic]) {
-        self.categories = categories
+    init(categories: [Categorie] = []) {
+        if !categories.isEmpty {
+                   self.categories = categories
+               }
     }
+    
+    func getCarouselImages() -> [CarouselImage] {
+        return categories.map { CarouselImage(id: $0.id, image: $0.image) }
+    }
+}
+
+struct CarouselImage: Identifiable {
+    var id: UUID
+    var image: String
 }
 
