@@ -18,7 +18,7 @@ struct DecouverteView: View {
             VStack(spacing: 15) {
                 CarouselView(
                     scaleValue: 0.2,
-                    imageWidth: 252,
+                    imageWidth: 250,
                     spacing: 10,
                     cornerRadius: 30,
                     minimumImageWidth: 40,
@@ -36,7 +36,7 @@ struct DecouverteView: View {
                             .clipped()
                     )
                 }
-                .frame(height: 355)
+                .frame(height: 350)
                 .animation(.snappy(duration: 0.3, extraBounce: 0), value: activeID)
                 .padding(.top, 20)
                 

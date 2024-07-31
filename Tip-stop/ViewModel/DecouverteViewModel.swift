@@ -12,29 +12,44 @@ class DecouverteViewModel: ObservableObject {
     // Liste des catégories affichées dans la vue Découverte
     @Published var categories: [Categorie] = [
         Categorie(
-            titre: "Photo & Vidéo",
-            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            titre: "Productivité",
+            description: "Maximiser votre efficacité au quotidien",
             image: "Productivité"
         ),
         Categorie(
-            titre: "Photo & Vidéo",
-            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
+            titre: "Personnalisation",
+            description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
             image: "Personnalisation"
         ),
         Categorie(
-            titre: "Photo & Vidéo",
-            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
-            image: "Performance"
+            titre: "Utilisation Avancée",
+            description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
+            image: "UtilisationAvancée"
         ),
         Categorie(
-            titre: "Photo & Vidéo",
-            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
-            image: "Accessibilité"
+            titre: "Sécurité & Confidentialité",
+            description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
+            image: "SécuritéConfidentialité"
         ),
         Categorie(
-            titre: "Photo & Vidéo",
-            description: "Découvrez et maîtrisez toutes les fonctionnalités photo et vidéo de votre iPhone.",
-            image: "Sécurité"
+            titre: "Connectivité et Communication",
+            description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
+            image: "ConnectivitéCommunication"
+        ),
+        Categorie(
+            titre: "Multimédia",
+            description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
+            image: "Multimédia"
+        ),
+        Categorie(
+            titre: "Accessibilité",
+            description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
+            image: "Accessibilité"
+        ),
+        Categorie(
+            titre: "Batterie et Performances",
+            description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
+            image: "BatteriePerformances"
         )
     ]
     
