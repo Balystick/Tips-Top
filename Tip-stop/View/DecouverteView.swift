@@ -6,11 +6,13 @@
 //
 import SwiftUI
 
+/// `DecouverteView` est la vue qui affiche les catégories d'astuce.
+/// Elle utilise un carrousel pour afficher les images des catégories.
 struct DecouverteView: View {
     @StateObject private var viewModel = DecouverteViewModel()
-    @State private var activeID: UUID?
+    @State private var activeID: UUID?  // Identifiant de l'image active dans le carrousel
     @State private var carouselImages: [CarouselImage] = []
-
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
@@ -25,13 +27,13 @@ struct DecouverteView: View {
                 ) { carouselImage in
                     AnyView(
                         GeometryReader { _ in
-                            NavigationLink(destination: InfiniteScrollView(categoryID: carouselImage.id)) {
+                            NavigationLink(destination: InfiniteScrollView(categoryID: carouselImage.categoryId)) {
                                 Image(carouselImage.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                             }
                         }
-                        .clipped()
+                            .clipped()
                     )
                 }
                 .frame(height: 355)
@@ -42,7 +44,13 @@ struct DecouverteView: View {
             }
             .navigationTitle("Découverte")
             .onAppear {
-                carouselImages = viewModel.getCarouselImages()
+                carouselImages = viewModel.getCarouselImages() // Récupère les images du carrousel à l'apparition de la vue
+                DispatchQueue.main.async { // Prévient une erreur de mise à jour de l'interface
+                    if !carouselImages.isEmpty {
+                        let middleIndex = carouselImages.count / 2   // Calcul de l'index du milieu
+                        activeID = carouselImages[middleIndex].id  // Définit l'image active à l'index du milieu
+                    }
+                }
             }
         }
     }

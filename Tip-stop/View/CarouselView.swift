@@ -1,3 +1,4 @@
+
 //
 //  CarouselView.swift
 //  Tip-stop
@@ -6,6 +7,8 @@
 //
 import SwiftUI
 
+/// `CarouselView` est une vue personnalisée pour afficher un carrousel d'images.
+/// Elle permet de redimensionner et d'aligner les images en fonction de la position de défilement.
 struct CarouselView: View {
     var scaleValue: CGFloat
     var imageWidth: CGFloat
@@ -15,7 +18,7 @@ struct CarouselView: View {
     @Binding var selection: UUID?
     var data: [CarouselImage]
     var content: (CarouselImage) -> AnyView
-
+    
     var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
@@ -35,6 +38,9 @@ struct CarouselView: View {
         }
     }
     
+    /// Génère une vue pour un élément du carrousel avec les effets de redimensionnement et de décalage.
+    /// - Parameter item: L'image du carrousel à afficher.
+    /// - Returns: Une vue pour l'image du carrousel.
     func ItemView(_ item: CarouselImage) -> some View {
         GeometryReader { proxy in
             let size = proxy.size

@@ -6,7 +6,10 @@
 //
 import Foundation
 
+/// `DecouverteViewModel` est une classe qui gère les données et la logique pour la vue de découverte.
 class DecouverteViewModel: ObservableObject {
+    
+    // Liste des catégories affichées dans la vue Découverte
     @Published var categories: [Categorie] = [
         Categorie(
             titre: "Photo & Vidéo",
@@ -37,17 +40,23 @@ class DecouverteViewModel: ObservableObject {
     
     init(categories: [Categorie] = []) {
         if !categories.isEmpty {
-                   self.categories = categories
-               }
+            self.categories = categories
+        }
     }
     
+    /// Génère une liste d'images pour le carrousel en dupliquant les catégories.
+    /// - Returns: Une liste d'images dupliquées pour donner l'illusion d'un carrousel infini.
     func getCarouselImages() -> [CarouselImage] {
-        return categories.map { CarouselImage(id: $0.id, image: $0.image) }
+        let duplicatedCategories = Array(repeating: categories, count: 10).flatMap { $0 }
+        return duplicatedCategories.map { CarouselImage(id: UUID(), categoryId: $0.id, image: $0.image) }
     }
 }
 
+/// `CarouselImage` représente une image dans le carrousel.
+/// Chaque image est identifiée de manière unique et liée à une catégorie spécifique.
 struct CarouselImage: Identifiable {
     var id: UUID
+    var categoryId: UUID
     var image: String
 }
 
