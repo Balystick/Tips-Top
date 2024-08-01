@@ -53,13 +53,13 @@ struct DecouverteView: View {
                 }
             }
             VStack {
-//             NavigationLink(destination: InfiniteScrollView()) {
+                NavigationLink(destination: InfiniteScrollView(categorieTitre: "Nouveautés")) {
                 Image("Nouveautés")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 350)
                     .clipShape(RoundedRectangle(cornerRadius: 30))
-//            }
+            }
                 Spacer()
             }
         }
