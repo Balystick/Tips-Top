@@ -52,6 +52,16 @@ struct DecouverteView: View {
                     }
                 }
             }
+            VStack {
+//             NavigationLink(destination: InfiniteScrollView()) {
+                Image("Nouveautés")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 350)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+//            }
+                Spacer()
+            }
         }
     }
 }
