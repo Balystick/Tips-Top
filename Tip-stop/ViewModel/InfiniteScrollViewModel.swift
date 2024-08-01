@@ -10,7 +10,7 @@ import Combine
 class InfiniteScrollViewModel: ObservableObject {
     @Published var astuces: [Astuce] = []
     
-    private var currentAstuceIndex = 0
+    private var currentAstuceIndex = 1
 
     init() {
         loadMoreAstuces()
@@ -18,9 +18,10 @@ class InfiniteScrollViewModel: ObservableObject {
 
     func loadMoreAstuces() {
         let newAstuces = (currentAstuceIndex..<currentAstuceIndex + 10).map { index in
-            Astuce(
+            let videoName = "Vid\(index % 10 + 1)"
+            return Astuce(
                 titre: "Astuce \(index)",
-                video: "video_url_\(index)",
+                video: videoName,
                 dateDeCreation: Date(),
                 pourcentageVue: Int.random(in: 0...100),
                 nombreDeLikes: Int.random(in: 0...1000),
