@@ -7,14 +7,14 @@
 import SwiftUI
 
 struct InfiniteScrollView: View {
-    var categoryID: UUID
+    var categorieTitre: String
 
     var body: some View {
-        Text("Infinite Scroll View for Category ID: \(categoryID)")
+        Text("Infinite Scroll View for Category : \(categorieTitre)")
             .navigationTitle("Infinite Scroll")
     }
 }
 
 #Preview {
-    InfiniteScrollView(categoryID: UUID())
+    InfiniteScrollView(categorieTitre: String())
 }

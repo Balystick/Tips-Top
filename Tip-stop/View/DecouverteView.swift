@@ -27,7 +27,7 @@ struct DecouverteView: View {
                 ) { carouselImage in
                     AnyView(
                         GeometryReader { _ in
-                            NavigationLink(destination: InfiniteScrollView(categoryID: carouselImage.categoryId)) {
+                            NavigationLink(destination: InfiniteScrollView(categorieTitre: carouselImage.categorieTitre)) {
                                 Image(carouselImage.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

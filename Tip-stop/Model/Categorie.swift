@@ -10,5 +10,7 @@ struct Categorie: Identifiable {
     let id = UUID()
     let titre: String
     let description: String
-    let image: String
+    let icon: String
+    var astuces: [Astuce]
+    var topics: [Topic]
 }
