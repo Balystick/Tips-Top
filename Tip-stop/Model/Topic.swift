@@ -11,5 +11,5 @@ struct Topic: Identifiable {
     var dateDebut: Date
     var sujet: String
     var reponse: [Reponse]
-    var categorie: Categorie
+   // var categorie: Categorie
 }
