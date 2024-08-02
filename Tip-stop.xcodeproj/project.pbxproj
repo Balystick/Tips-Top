@@ -78,6 +78,7 @@
 		699DFD612C49045000044FB4 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		699DFD632C4904BF00044FB4 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
 		74E656FC2C57D35C00D438E0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		74E656FE2C58D81F00D438E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +129,7 @@
 		699DFD152C48FAD900044FB4 /* Tip-stop */ = {
 			isa = PBXGroup;
 			children = (
+				74E656FE2C58D81F00D438E0 /* Info.plist */,
 				699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */,
 				699DFD182C48FAD900044FB4 /* ContentView.swift */,
 				699DFD402C48FC0E00044FB4 /* Model */,
@@ -517,6 +519,10 @@
 				DEVELOPMENT_TEAM = 746GA298QV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Tip-stop/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access you photo library to select a picture";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access you photo library to select a picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -547,6 +553,10 @@
 				DEVELOPMENT_TEAM = 746GA298QV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Tip-stop/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access you photo library to select a picture";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need to access you photo library to select a picture";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

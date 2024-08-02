@@ -11,4 +11,5 @@ struct Utilisateur: Identifiable {
     var nom: String
     var photo: String
     var favoris: [Favori]
+
 }
