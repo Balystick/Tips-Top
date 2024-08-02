@@ -4,7 +4,7 @@
 //
 //  Created by Apprenant 122 on 18/07/2024.
 //
-import Foundation
+import SwiftUI
 
 struct Categorie: Identifiable {
     let id = UUID()

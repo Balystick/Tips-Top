@@ -6,12 +6,12 @@
 //
 import Foundation
 
-class ProfileViewModel {
-    @Published var favoris: [Favori]
-    @Published var utilisateur: Utilisateur
-    
-    init(favoris: [Favori], utilisateur: Utilisateur) {
-        self.favoris = favoris
-        self.utilisateur = utilisateur
-    }
-}
+//class ProfileViewModel {
+//    @Published var favoris: [Favori]
+//    @Published var utilisateur: Utilisateur
+//    
+//    init(favoris: [Favori], utilisateur: Utilisateur) {
+//        self.favoris = favoris
+//        self.utilisateur = utilisateur
+//    }
+//}
