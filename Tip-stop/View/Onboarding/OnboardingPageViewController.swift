@@ -2,48 +2,54 @@
 //  OnboardingPageViewController.swift
 //  Tip-stop
 //
-//  Created by Aurélien on 29/07/2024.
+//  Created par Aurélien le 29/07/2024.
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
+/// Extension de UIView pour la lecture en boucle des vidéos
+extension UIView {
+    func playVideoInLoop(fileName: String, fileType: String) {
+        guard let path = Bundle.main.path(forResource: fileName, ofType: fileType) else {
+            debugPrint("\(fileName).\(fileType) not found")
+            return
+        }
+        
+        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.bounds
+        playerLayer.videoGravity = .resizeAspectFill
+        self.layer.addSublayer(playerLayer)
+        
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: .main) { [weak player] _ in
+            player?.seek(to: .zero)
+            player?.play()
+        }
+        
+        player.play()
+    }
+}
+
+/// Un view controller pour une page de l'onboarding
 class OnboardingPageViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var videoContainerView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var ignoreButton: UIButton!
     
-    var imageName: String?
-    var text: String?
-    var buttonText: String?
-    var isLastPage: Bool = false
+    var videoName: String?
+    var titleText: String?
+    var descriptionText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.image = UIImage(named: imageName ?? "")
-        label.text = text
-        nextButton.setTitle(buttonText, for: .normal)
+        if let videoName = videoName {
+            videoContainerView.playVideoInLoop(fileName: videoName, fileType: "mp4")
+        }
+        titleLabel.text = titleText
+        label.text = descriptionText
     }
-    
-    @IBAction func nextButtonTapped(_ sender: UIButton) {
-        if isLastPage {
-              (parent as? OnboardingViewController)?.completeOnboarding()
-          } else {
-              if let onboardingVC = parent as? UIPageViewController {
-                  guard let currentIndex = (onboardingVC as? OnboardingViewController)?.pages.firstIndex(of: self) else { return }
-                  let nextIndex = currentIndex + 1
-                  if nextIndex < (onboardingVC as? OnboardingViewController)?.pages.count ?? 0 {
-                      (onboardingVC as? OnboardingViewController)?.setViewControllers([(onboardingVC as? OnboardingViewController)?.pages[nextIndex] ?? UIViewController()], direction: .forward, animated: true, completion: nil)
-                  } else {
-                      onboardingVC.dismiss(animated: true, completion: nil)
-                  }
-              }
-          }
-      }
-      
-      @IBAction func ignoreButtonTapped(_ sender: UIButton) {
-          (parent as? OnboardingViewController)?.completeOnboarding()
-      }
-  }
+}
