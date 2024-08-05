@@ -10,5 +10,5 @@ struct Utilisateur: Identifiable {
     let id = UUID()
     var nom: String
     var photo: String
-    //var favoris: [Favori]
+    var favoris: [Favori]
 }
