@@ -8,6 +8,7 @@ import SwiftUI
 
 struct InfiniteScrollView: View {
     @StateObject private var viewModel = InfiniteScrollViewModel()
+    @State var carouselImage : String
     @State private var currentIndex: Int = 0
 
     var body: some View {
@@ -28,8 +29,4 @@ struct InfiniteScrollView: View {
             .ignoresSafeArea()
         }
     }
-}
-
-#Preview {
-    InfiniteScrollView()
 }

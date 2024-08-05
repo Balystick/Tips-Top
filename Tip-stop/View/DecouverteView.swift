@@ -27,7 +27,7 @@ struct DecouverteView: View {
                 ) { carouselImage in
                     AnyView(
                         GeometryReader { _ in
-                            NavigationLink(destination: InfiniteScrollView(categorieTitre: carouselImage.categorieTitre)) {
+                            NavigationLink(destination: InfiniteScrollView(carouselImage: carouselImage.categorieTitre)) {
                                 Image(carouselImage.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -53,7 +53,7 @@ struct DecouverteView: View {
                 }
             }
             VStack {
-                NavigationLink(destination: InfiniteScrollView(categorieTitre: "Nouveautés")) {
+                NavigationLink(destination: InfiniteScrollView(carouselImage: "Nouveautés")) {
                 Image("Nouveautés")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

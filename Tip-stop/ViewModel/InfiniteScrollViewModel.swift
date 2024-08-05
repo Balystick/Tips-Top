@@ -9,7 +9,6 @@ import Combine
 
 class InfiniteScrollViewModel: ObservableObject {
     @Published var astuces: [Astuce] = []
-    
     private var currentAstuceIndex = 1
 
     init() {
@@ -25,6 +24,13 @@ class InfiniteScrollViewModel: ObservableObject {
                 dateDeCreation: Date(),
                 pourcentageVue: Int.random(in: 0...100),
                 nombreDeLikes: Int.random(in: 0...1000),
+                categorie: Categorie(
+                    titre: "Nouveautés",
+                    description: "Nouvelles fonctionnalités du dernier IOS",
+                    icon: "Nouveautés",
+                    astuces: [],
+                    topics: []
+                ),
                 steps: (1...5).map { Step(titre: "Step \($0) Title", description: "Step \($0) description for Astuce \(index)") },
                 commentaires: (1...5).map { Commentaire(
                     contenu: "Comment content \($0) for Astuce \(index)",
