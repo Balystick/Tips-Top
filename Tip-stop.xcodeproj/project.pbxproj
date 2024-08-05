@@ -31,6 +31,7 @@
 		699DFD622C49045100044FB4 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD612C49045000044FB4 /* TopicView.swift */; };
 		699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD632C4904BF00044FB4 /* TopicViewModel.swift */; };
 		F5C0697B2C5B6BE800BA33C3 /* ReponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C0697A2C5B6BE800BA33C3 /* ReponseView.swift */; };
+		F5C0697D2C5FA9AB00BA33C3 /* ListTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		699DFD612C49045000044FB4 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		699DFD632C4904BF00044FB4 /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
 		F5C0697A2C5B6BE800BA33C3 /* ReponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReponseView.swift; sourceTree = "<group>"; };
+		F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTopicView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,13 +169,13 @@
 		699DFD402C48FC0E00044FB4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				699DFD432C48FC5600044FB4 /* Categorie.swift */,
 				699DFD452C48FD4200044FB4 /* Astuce.swift */,
+				699DFD432C48FC5600044FB4 /* Categorie.swift */,
 				699DFD472C48FDC900044FB4 /* Commentaire.swift */,
-				699DFD492C48FE5D00044FB4 /* Step.swift */,
 				699DFD4B2C48FEC000044FB4 /* Favori.swift */,
-				699DFD4D2C48FF3B00044FB4 /* Utilisateur.swift */,
 				699DFD4F2C48FF8500044FB4 /* Reponse.swift */,
+				699DFD4D2C48FF3B00044FB4 /* Utilisateur.swift */,
+				699DFD492C48FE5D00044FB4 /* Step.swift */,
 				699DFD512C49002A00044FB4 /* Topic.swift */,
 			);
 			path = Model;
@@ -182,11 +184,12 @@
 		699DFD412C48FC1E00044FB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				699DFD612C49045000044FB4 /* TopicView.swift */,
+				F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */,
 				F5C0697A2C5B6BE800BA33C3 /* ReponseView.swift */,
 				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
-				699DFD612C49045000044FB4 /* TopicView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				699DFD522C49002B00044FB4 /* Topic.swift in Sources */,
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
+				F5C0697D2C5FA9AB00BA33C3 /* ListTopicView.swift in Sources */,
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				699DFD562C49012700044FB4 /* InfiniteScrollView.swift in Sources */,

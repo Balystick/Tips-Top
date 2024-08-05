@@ -13,7 +13,7 @@ struct ReponseView: View {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet nibh malesuada consectetur vitae a nulla. Sed enim ligula, tincidunt vel pharetra venenatis, efficitur sed tortor. Ut varius purus vitae volutpat feugiat. Morbi non magna ut tellus aliquet fringilla. Etiam efficitur lorem sed dolor tristique, sed scelerisque odio faucibus. Duis tristique sed leo et rhoncus. Etiam mattis aliquet lacus eget iaculis
 """, utilisateur: utilisateur1)
     
-   @State var upVote = false
+    @State var upVote = false
     @State var downVote = false
     @State var imageUpVote:Image =  Image(systemName: "arrowshape.up")
     var body: some View {
@@ -65,29 +65,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet
                         
                         
                         
-                            Button
+                        Button
+                        {
+                            downVote.toggle()
+                        }
+                    label:
+                        {
+                            if downVote
                             {
-                                downVote.toggle()
+                                Image(systemName: "arrowshape.down.fill")
+                                    .foregroundStyle(.blue)
                             }
-                        label:
+                            else
                             {
-                                if downVote
-                                {
-                                    Image(systemName: "arrowshape.down.fill")
-                                        .foregroundStyle(.blue)
-                                }
-                                else
-                                {
-                                    Image(systemName: "arrowshape.down")
-                                        .foregroundStyle(.black)
-                                }
+                                Image(systemName: "arrowshape.down")
+                                    .foregroundStyle(.black)
                             }
+                        }
                         Text("Repondre")
                         Image(systemName: "arrowshape.turn.up.left")
                         
                     }
                     
-                }.padding(.trailing,200)
+                }.padding(.leading,200)
             }
             //Copie 1 de rep1
             VStack(spacing: 20) {
@@ -123,7 +123,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet
                         
                     }
                     
-                }.padding(.trailing,200)
+                }.padding(.leading,200)
             }
             //Copie 2 de rep1
             VStack(spacing: 20) {
@@ -159,7 +159,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet
                         
                     }
                     
-                }.padding(.trailing,200)
+                }.padding(.leading,200)
             }
             
         }

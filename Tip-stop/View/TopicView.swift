@@ -13,9 +13,16 @@ var rep1 = Reponse(date: Date(), contenu: "Lorem Ipsum", utilisateur:
                     utilisateur1)
 var topic1 = Topic(dateDebut: Date(), sujet: "Pourquoi les dauphins volent dans l'eau?  ", reponse: [rep1])
 
+
+
 var Thootpick =  TopicViewModel.init(topics: [topic1], reponses: [rep1])
 
 struct TopicView: View {
+    
+    var sujetName = ""
+    var userName = ""
+    var categorieName = ""
+    
     var body: some View {
         ScrollView
         {
@@ -23,14 +30,20 @@ struct TopicView: View {
                 
                 HStack
                 {
-                    Circle()
+                    
+                    Text("NameCategorie \(categorieName)")
+                    Image("")
+                        .resizable()
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         .frame(width: 50)
-                    Text("Animaux")
+                  
+                    
+                    Text(userName)
                 }
                 
                 .padding(.trailing,200)
                 
-                Text(topic1.sujet)
+                Text(sujetName)
                     .font(.system(size: 30))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .frame(width: 350)
