@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
 
     var body: some View {
-        DecouverteView()
+        ProfileView()
             .fullScreenCover(isPresented: $showOnboarding) {
                 OnboardingPageView()
             }

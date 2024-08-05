@@ -4,6 +4,7 @@
 //
 //  Created by Apprenant 122 on 18/07/2024.
 //
+import SwiftUI
 import Foundation
 import Combine
 
@@ -38,7 +39,7 @@ class InfiniteScrollViewModel: ObservableObject {
                     nombreDeLikes: Int.random(in: 0...100),
                     utilisateur: Utilisateur(
                         nom: "User \($0)",
-                        photo: "user_photo_\($0)",
+                        photo: UIImage(named:"user_photo_\($0)"),
                         favoris: []
                     )
                 )}

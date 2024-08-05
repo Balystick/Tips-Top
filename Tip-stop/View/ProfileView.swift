@@ -79,7 +79,7 @@ struct ProfileView: View {
             astuces: [],
             topics: []
         )
-    ], topics: [])
+    ])
    
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
