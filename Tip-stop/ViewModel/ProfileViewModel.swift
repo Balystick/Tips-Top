@@ -16,6 +16,6 @@ class ProfileViewModel: ObservableObject {
     }
     
     func addUtilisateur() {
-        var user = Utilisateur(nom: "", photo: "", favoris: [])
+        var user = Utilisateur(nom: "", photo: utilisateur.photo, favoris: [])
     }
 }
