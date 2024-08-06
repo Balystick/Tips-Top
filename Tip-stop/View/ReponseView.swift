@@ -35,7 +35,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet
 
 struct FormReponseView: View {
     
-    var imageProfile :UIImage?
+    var imageProfile :String
     var nameUser:String
     var contenu:String
     
@@ -52,7 +52,7 @@ struct FormReponseView: View {
                     {
                         Circle()
                             .frame(width: 50)
-                           Image(uiImage: imageProfile ?? UIImage(systemName: "person.crop.square")!)
+                           Image("")
                     }
                     Text(nameUser)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)

@@ -24,7 +24,7 @@ var commentaires1 = Commentaire(contenu: "", date: "", nombreDeLikes: 0, utilisa
 
 var favoris = Favori(dateAjout: Date(), astuce: astuce )
 
-var utilisateur1 = Utilisateur(nom: "Piolord", photo: UIImage(named: ""), favoris: [favoris])
+var utilisateur1 = Utilisateur(nom: "Piolord", photo: "", favoris: [favoris])
 
 struct TopicView: View {
     

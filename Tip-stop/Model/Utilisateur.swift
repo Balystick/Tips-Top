@@ -10,6 +10,6 @@ import UIKit
 struct Utilisateur: Identifiable {
     let id = UUID()
     var nom: String
-    var photo: UIImage?
+    var photo: String
     var favoris: [Favori]
 }
