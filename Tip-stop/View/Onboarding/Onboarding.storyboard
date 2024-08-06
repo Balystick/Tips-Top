@@ -25,21 +25,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVm-fR-maY">
-                                <rect key="frame" x="0.0" y="59" width="393" height="540"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="560"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="540" id="DY9-Qk-JQP"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="540" id="ykI-rD-sld"/>
+                                    <constraint firstAttribute="height" constant="560" id="DY9-Qk-JQP"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSa-sN-Cbj">
-                                <rect key="frame" x="20" y="619" width="353" height="26.333333333333371"/>
+                                <rect key="frame" x="20" y="639" width="353" height="26.333333333333371"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jq-d2-yTM">
-                                <rect key="frame" x="20" y="665.33333333333337" width="353" height="20.333333333333371"/>
+                                <rect key="frame" x="20" y="685.33333333333337" width="353" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
