@@ -6,8 +6,19 @@
 //
 import Foundation
 
+/// Une structure représentant un favori avec des informations détaillées.
+///
+/// La structure `Favori` est utilisée pour modéliser les données d'un favori,
+/// incluant un identifiant unique, la date d'ajout et l'astuce associée.
+///
+/// Conformément au protocole `Identifiable`, chaque favori a un identifiant unique généré automatiquement.
 struct Favori: Identifiable {
+    /// L'identifiant unique du favori.
     let id = UUID()
+    
+    /// La date à laquelle l'astuce a été ajoutée aux favoris.
     var dateAjout: Date
-    var astuce : Astuce
+    
+    /// L'astuce associée à ce favori.
+    var astuce: Astuce
 }

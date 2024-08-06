@@ -93,10 +93,9 @@ struct ProfileView: View {
 
     //VAR recuperer lien image profil choisie
     private var url: URL {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return paths[0].appendingPathComponent("image.jpg")
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0].appendingPathComponent("image.jpg")
     }
-
 
     //Booleens boutons textfield
     @State private var isModify = false
@@ -105,6 +104,7 @@ struct ProfileView: View {
     //Booleens alert textield
     @State private var failedEnterName = false
     @State private var showingAlert = false
+    @State private var showAlert = false
     //Clear button x in textfield
     init() {
       UITextField.appearance().clearButtonMode = .whileEditing
@@ -113,7 +113,9 @@ struct ProfileView: View {
     @State private var oldName: String = ""
     @State private var newName: String = ""
   
-    
+    //Lire valeur user defaults nom
+    @State var name : String = UserDefaults.standard.string(forKey: "name") ?? ""
+
     //Liste tab catégories
     @State private var categories: [Categorie] = [
             Categorie(
@@ -210,13 +212,11 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading){
+                
                 HStack {
                     Image(systemName: "arrow.left")
                         .onAppear {
                             url.loadImage(&image)
-                        }
-                        .onTapGesture {
-                            url.saveImage(image)
                         }
                     Text("Profil")
                         .multilineTextAlignment(.center)
@@ -229,86 +229,97 @@ struct ProfileView: View {
                     VStack{
                         // Photo image profile ou vide avec icone
                         if let uiImage = image {
-                            //viewModel.addUtilisateur()
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .frame(width: 150, height: 150)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                 .shadow(radius: 5)
+                                .onTapGesture {
+                                    showImagePicker = true
+                                }
                         }else {
                             ZStack{
                                 Circle()
                                     .frame(width: 150, height: 150)
-                                    .foregroundColor(Color(red: 229, green: 229, blue: 234, opacity: 1.0))
-                                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                                    .shadow(radius: 5)
+                                    .foregroundColor(Color(.customLightGray))
+                                    .overlay(Circle().stroke(Color(.customMediumGray), lineWidth: 0.1))
+                                    .shadow(radius: 2)
                                     .onTapGesture {
                                         showImagePicker = true
                                     }
                                     Image(systemName: "photo")
                                         .resizable()
                                         .frame(width: 30, height: 30)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(Color(.customMediumGray))
                             }
                         }
                     }.sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
+                    .onTapGesture {
+                        url.saveImage(image)
+                    }
                     Spacer()
                     Spacer()
-                    Section{
+                    HStack{
                         VStack {
                             // Textfield pour modifier nom profil
                             if isModify {
                                 TextField("Entrer votre nom", text: $viewModel.utilisateur.nom)
                                     .textFieldStyle(.roundedBorder)
-                                    .frame(width: 180, height: 30)
+                                    .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                     .textContentType(.username)
                                     .onSubmit {
                                         isValidate.toggle()
                                         viewModel.addUtilisateur()
-                                        saveName(data: viewModel.utilisateur.nom)
+                                        saveName()
                                         isModify = false
                                     }
                                 HStack {
                                     Spacer()
                                     //Bouton annuler et retour au text
                                     Button(action: {
-                                        viewModel.utilisateur.nom = oldName
-
+                                        oldName =  viewModel.utilisateur.nom
                                         isCancel = true
                                         isModify = false
                                     }, label: {
                                         Text("Annuler")
                                             .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
-                                            .scaleEffect(isModify ? 1.2 : 1)
                                             .animation(.easeOut(duration: 0.2), value: isModify)
+                                            .foregroundColor(.gray)
                                     })
-                                    Spacer()
+                                    
                                     //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
                                         //Ajout contraintes texte avec alerte si pas respectées
-                                        self.saveName(data: viewModel.utilisateur.nom)
+                                        self.saveName()
                                         self.failedEnterName = false
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
                                             self.failedEnterName.toggle()
                                         }else {
-                                            isValidate.toggle()
-                                            //Fonction pour garder le nom dans les model utilisateur
+                                            //Fonction pour garder le nom dans le model utilisateur
                                             viewModel.addUtilisateur()
                                             //Fonction pour garder le nom dans les Userdefaults
-                                            oldName = viewModel.utilisateur.nom
-                                            saveName(data: viewModel.utilisateur.nom)
                                             newName = viewModel.utilisateur.nom
+                                            saveName()
+                                            oldName = viewModel.utilisateur.nom
+                                            isValidate.toggle()
                                             isModify = false
+                                        
+                                            if oldName != newName{
+                                                showAlert.toggle()
+                                                isValidate.toggle()
+                                                isModify = false
+                                            }
                                         }
                                     }, label: {
                                         Text("Valider")
-                                            .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
+                                            .font(.footnote)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                            .foregroundColor(Color(.customBlue))
                                     })
                                     //Affiche alerte si contraintes pas respectées
                                     .alert(isPresented: $showingAlert) {
@@ -323,21 +334,25 @@ struct ProfileView: View {
                                     .scaleEffect(isModify ? 1.2 : 1)
                                     .animation(.easeOut(duration: 0.2), value: isModify)
                                 }
+                                .padding(.horizontal, 15)
                             } else {
                                 if viewModel.utilisateur.nom.isEmpty{
                                     Text("Veuillez entrer voter nom")
                                         .foregroundColor(Color.gray)
                                         .font(.caption)
-                                        
                                 }else {
-                                
-                                
                                 //Nom profil affiché
-                                    Text(viewModel.utilisateur.nom)
+                                    Text(name)
+                                        .multilineTextAlignment(.leading)
+                                        .onAppear() {
+                                            let data = newName
+                                            UserDefaults.standard.set(data, forKey: "name")
+                                        }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
-                                               Rectangle()
-                                                   .stroke(.gray, lineWidth: 1)
+                                               RoundedRectangle(cornerRadius: 5)
+                                                .stroke(.gray, lineWidth: 0.2)
+                                                .shadow(radius: 20)
                                            )
                                         .shadow(radius: 10)
                                 HStack {
@@ -349,6 +364,8 @@ struct ProfileView: View {
                                     .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
                                     .padding(.horizontal, 5)
+                                    .foregroundColor(.gray)
+                                    .padding(.horizontal, 5)
                                 }
                                 
                             }
@@ -356,31 +373,45 @@ struct ProfileView: View {
                     }
                 }
             }
-            .padding()
         }
+            
             Section{
                 HStack {
-                    Text("Favoris")
-                        .font(.title2)
-                    .fontWeight(.semibold)
+                    HStack{
+                        Text("Favoris")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color(.customYellow))
+                    }
+                    .padding(.top, 20)
                     Spacer()
                 }
                 .padding(.horizontal)
                 Spacer()
                 HStack {
                     Text("Catégories:")
+                        .font(.headline)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
-                    Picker("Choisir une catégorie", selection: $selectedCategory) {
+                    Picker("Choisir une catégorie", selection: $selectedCategory){
                         ForEach(viewModelDecouverte.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
+                                .font(.footnote)
                         }
                     }
+                    .font(.footnote)
                     .pickerStyle(.menu)
+                    .colorScheme(.dark)
+                    .foregroundColor(Color(.customMediumGray))
+                    .accentColor(Color(.customMediumGray))
+      
                     Spacer()
+                    
                 }
                 .padding(.horizontal)
-                .font(.headline)
             }
             
                 VStack {
@@ -392,26 +423,29 @@ struct ProfileView: View {
                                     .frame(height: 160)
                             }
                         }
-                        .padding(.horizontal)
                 }
             }
         }
         .padding()
+        .containerRelativeFrame([.horizontal, .vertical])
+        .background(Color(.customLightGray))
     }
     
     //Fonction pour garder le nom dans les Userdefaults
-    func saveName(data: String) {
+    /// Enregistre le nom fourni dans les User Defaults et met à jour la propriété `name`.
+    ///
+    /// Cette méthode stocke la valeur de `newName` dans les User Defaults sous la clé `"name"`
+    /// et met à jour la propriété `name` avec la nouvelle valeur.
+    ///
+    /// - Note: Assurez-vous que `newName` est défini avant d'appeler cette méthode.
+    ///
+    /// - Important: Cette méthode ne vérifie pas si le nom est vide ou nul avant de le sauvegarder.
+    func saveName() {
+        let data = newName
         UserDefaults.standard.set(data, forKey: "name")
-
-        print("saved name string:" + data.description)
-//        print(savedName)
-        print(viewModel.utilisateur.nom)
-//        print(url)
-        print("oldName is: \(oldName)")
-        print("newName is: \(newName)")
+        name = newName
     }
 }
-
 
 #Preview {
     ProfileView()
