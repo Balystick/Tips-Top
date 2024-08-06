@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewCommentaire: View {
+struct NewReponse: View {
     
     @State var textCommentaire:String = ""
     var date = Date()
@@ -54,5 +54,5 @@ struct NewCommentaire: View {
 }
 
 #Preview {
-    NewCommentaire()
+    NewReponse()
 }
