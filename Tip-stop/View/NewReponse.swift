@@ -6,51 +6,29 @@
 //
 
 import SwiftUI
+import UIKit
 
-struct NewReponse: View {
+struct NewReponse: UIViewControllerRepresentable {
     
     @State var textCommentaire:String = ""
     var date = Date()
     var user1 = utilisateur1
-    var body: some View {
-        
-        
-      ScrollView
+    
+        func makeUIViewController(context: Context) -> NewReponseController
         {
-            VStack
+            guard let finalVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "NewReponseController")as? NewReponseController
+            else
             {
-                Text("Commentaire")
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 32))
-                    .padding(.trailing,100)
-                
-                
-                ZStack
-                {
-                    Rectangle()
-                        .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-                        .foregroundStyle(.gray)
-                        .frame(width: 300,height: 250)
-                    
-                        
-                    TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $textCommentaire)
-                        .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
-                        .foregroundStyle(.black)
-                        .frame(width: 200,height: 250)
-                }
-               
-                
-                Button("Ajouter")
-                {
-                    ReponseView().allReponse.append(Reponse(date: Date(), contenu: textCommentaire, utilisateur: user1))
-                }
+                fatalError("Unable to Instantiate Detail View Controller")
             }
+            return finalVC
         }
         
-       
-    }
     
-       
+        func updateUIViewController(_ viewController: NewReponseController,context: Context)
+        {
+            
+        }
 }
 
 #Preview {

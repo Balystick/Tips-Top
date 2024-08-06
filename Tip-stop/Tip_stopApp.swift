@@ -11,7 +11,7 @@ import SwiftUI
 struct Tip_stopApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListTopicView()
         }
     }
 }

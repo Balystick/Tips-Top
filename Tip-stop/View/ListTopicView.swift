@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ListTopicView: View {
     
@@ -21,7 +22,7 @@ struct ListTopicView: View {
                 List(allTopic)
                 {
                    
-                    topic in NavigationLink(destination: TopicView(sujetName: topic.sujet))
+                    topic in NavigationLink(destination: TopicView(sujetName: topic.sujet, categorieName: topic.categorie.titre))
                     {
                         Text(topic.sujet)
                     }
@@ -32,6 +33,7 @@ struct ListTopicView: View {
         }
     
 }
+
 
 
 
