@@ -45,6 +45,19 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         if let firstVC = pages.first {
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
+        
+        configurePageControl()
+    }
+
+    private func configurePageControl() {
+        let pageControlAppearance = UIPageControl.appearance(whenContainedInInstancesOf: [OnboardingViewController.self])
+        pageControlAppearance.pageIndicatorTintColor = UIColor { (traitCollection) -> UIColor in
+            return traitCollection.userInterfaceStyle == .dark ? UIColor.lightGray : UIColor(white: 0.7, alpha: 1.0)
+        }
+        pageControlAppearance.currentPageIndicatorTintColor = UIColor { (traitCollection) -> UIColor in
+            return traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor(white: 0.2, alpha: 1.0)
+        }
+        pageControlAppearance.backgroundColor = UIColor.clear
     }
     
     // Retourne le view controller qui précède le view controller actuel
