@@ -2,24 +2,25 @@
 //  ContentView.swift
 //  Tip-stop
 //
-//  Created by Apprenant 122 on 18/07/2024.
+//  Modified par Aurélien on 18/07/2024.
 //
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+
     var body: some View {
-        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundStyle(.tint)
-//            Text("Hello, world!")
-            ProfileView()
-        }
-        .padding()
+        InfiniteScrollView(categoryTitre: "Découverte")
+            .fullScreenCover(isPresented: $showOnboarding) {
+                OnboardingPageView()
+            }
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

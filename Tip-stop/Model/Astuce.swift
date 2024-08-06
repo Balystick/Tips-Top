@@ -36,6 +36,7 @@ struct Astuce: Identifiable {
     ///
     /// La propriété `steps` est un tableau d'éléments de type `Step`, représentant les différentes
     /// étapes à suivre pour réaliser l'astuce.
+    var categorie: Categorie
     var steps: [Step]
     
     /// La liste des commentaires laissés par les utilisateurs sur l'astuce.
