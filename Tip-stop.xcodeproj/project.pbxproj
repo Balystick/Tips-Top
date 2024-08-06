@@ -34,6 +34,7 @@
 		F5C0697D2C5FA9AB00BA33C3 /* ListTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */; };
 		F5C381AE2C61AD2A00ACA081 /* StoryboardReponseView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5C381AD2C61AD2A00ACA081 /* StoryboardReponseView.storyboard */; };
 		F5C381B02C620AD200ACA081 /* NewReponseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C381AF2C620AD200ACA081 /* NewReponseController.swift */; };
+		F5E6F8FB2C624FD2009190FB /*  ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E6F8FA2C624FD2009190FB /*  ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTopicView.swift; sourceTree = "<group>"; };
 		F5C381AD2C61AD2A00ACA081 /* StoryboardReponseView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryboardReponseView.storyboard; sourceTree = "<group>"; };
 		F5C381AF2C620AD200ACA081 /* NewReponseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReponseController.swift; sourceTree = "<group>"; };
+		F5E6F8FA2C624FD2009190FB /*  ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ContentView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 		699DFD412C48FC1E00044FB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5E6F8FA2C624FD2009190FB /*  ContentView.swift */,
 				699DFD612C49045000044FB4 /* TopicView.swift */,
 				F50224F02C60FC1A00F89DD1 /* NewReponse.swift */,
 				F5C0697C2C5FA9AB00BA33C3 /* ListTopicView.swift */,
@@ -359,6 +362,7 @@
 				699DFD4A2C48FE6000044FB4 /* Step.swift in Sources */,
 				699DFD5E2C4902BF00044FB4 /* InfiniteScrollViewModel.swift in Sources */,
 				F5C0697B2C5B6BE800BA33C3 /* ReponseView.swift in Sources */,
+				F5E6F8FB2C624FD2009190FB /*  ContentView.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,
