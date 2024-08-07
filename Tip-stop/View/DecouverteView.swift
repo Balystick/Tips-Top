@@ -9,6 +9,8 @@ import SwiftUI
 /// `DecouverteView` est la vue qui affiche les catégories d'astuce.
 /// Elle utilise un carrousel pour afficher les images des catégories.
 struct DecouverteView: View {
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel = DecouverteViewModel()
     @State private var activeID: UUID?  // Identifiant de l'image active dans le carrousel
     @State private var carouselImages: [CarouselImage] = []
@@ -27,7 +29,9 @@ struct DecouverteView: View {
                 ) { carouselImage in
                     AnyView(
                         GeometryReader { _ in
-                            NavigationLink(destination: InfiniteScrollView(categoryTitre:  carouselImage.categorieTitre)) {
+                            Button(action: {
+                                path.append("InfiniteScrollView:\(carouselImage.categorieTitre)")
+                            }) {
                                 Image(carouselImage.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -53,12 +57,14 @@ struct DecouverteView: View {
                 }
             }
             VStack {
-                NavigationLink(destination: InfiniteScrollView(categoryTitre: "Nouveautés")) {
-                Image("Nouveautés")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 350)
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                Button(action: {
+                                path.append("InfiniteScrollView:Nouveautés")
+                            }) {
+                                Image("Nouveautés")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 350)
+                                    .clipShape(RoundedRectangle(cornerRadius: 30))
             }
                 Spacer()
             }
@@ -67,5 +73,5 @@ struct DecouverteView: View {
 }
 
 #Preview {
-    DecouverteView()
+    DecouverteView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }

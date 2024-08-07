@@ -57,6 +57,7 @@
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
+		E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +203,6 @@
 			children = (
 				74E656FE2C58D81F00D438E0 /* Info.plist */,
 				699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */,
-				699DFD182C48FAD900044FB4 /* ContentView.swift */,
 				699DFD402C48FC0E00044FB4 /* Model */,
 				699DFD422C48FC3200044FB4 /* ViewModel */,
 				699DFD412C48FC1E00044FB4 /* View */,
@@ -254,6 +255,7 @@
 		699DFD412C48FC1E00044FB4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				699DFD182C48FAD900044FB4 /* ContentView.swift */,
 				E1D28F162C57843E001B9766 /* Onboarding */,
 				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
 				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
@@ -276,6 +278,7 @@
 		699DFD422C48FC3200044FB4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */,
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
@@ -476,6 +479,7 @@
 				E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */,
 				699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */,
 				E12943A02C62607400F8BB83 /* NewReponseController.swift in Sources */,
+				E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,

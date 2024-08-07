@@ -74,5 +74,5 @@ struct CarouselView: View {
 }
 
 #Preview {
-    DecouverteView()
+    DecouverteView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }

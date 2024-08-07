@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct InfiniteScrollView: View {
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel = InfiniteScrollViewModel()
     @State var categoryTitre: String
     @State private var currentIndex: Int = 0
