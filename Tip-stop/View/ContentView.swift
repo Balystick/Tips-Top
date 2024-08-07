@@ -45,15 +45,12 @@ struct ContentView: View {
                             InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Nouveautés")
                         case "Discussions":
                             ListTopicView(path: $path, globalDataModel: globalDataModel)
-//                        case "ProfileView":
-//                            ProfileView()
-                            //                    case "DiscussionView":
-                            //                        DiscussionView(path: $path, globalDataModel: globalDataModel)
-                            //                    case "StepsView":
-                            //                        StepsView(path: $path, globalDataModel: globalDataModel)
-                            //                    case "CommentsView":
-                            //                        CommentsView(path: $path, globalDataModel: globalDataModel)
-
+                        case "ProfileView":
+                            ProfileView(path: $path, globalDataModel: globalDataModel)
+//                      case "StepsView":
+//                        StepsView(path: $path, globalDataModel: globalDataModel)
+//                      case "CommentsView":
+//                        CommentsView(path: $path, globalDataModel: globalDataModel)
                         default:
                             Text("Vue inconnue")
                         }

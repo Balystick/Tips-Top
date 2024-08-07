@@ -10,6 +10,11 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
+// Aurélien - Ajout navigationPath & globalDataModel
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
+
+        
     //viewModel Profile View Model
     @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))
     //viewModel Decouverte View Model
@@ -105,9 +110,12 @@ struct ProfileView: View {
     @State private var failedEnterName = false
     @State private var showingAlert = false
     //Clear button x in textfield
-    init() {
-      UITextField.appearance().clearButtonMode = .whileEditing
-    }
+    
+// Aurélien - Déplacement init
+//    init() {
+//      UITextField.appearance().clearButtonMode = .whileEditing
+//    }
+    
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
@@ -205,7 +213,14 @@ struct ProfileView: View {
     let columns = [
          GridItem(.adaptive(minimum: 100))
      ]
-
+    
+// Aurélien - Déplacement et complétion init
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+        UITextField.appearance().clearButtonMode = .whileEditing
+    }
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading){
@@ -396,6 +411,21 @@ struct ProfileView: View {
             }
         }
         .padding()
+// Aurélien - Modification Back Button
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    path.removeLast()
+                }) {
+                    Image(systemName: "arrow.uturn.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(Color(white: 0.2))
+                }
+            }
+        }
     }
     
     //Fonction pour garder le nom dans les Userdefaults
@@ -411,7 +441,7 @@ struct ProfileView: View {
     }
 }
 
-
+// Aurélien - Modif preview
 #Preview {
-    ProfileView()
+    ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }

@@ -14,6 +14,11 @@ struct ListTopicView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
     
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+    }
+    
     var allTopic:[Topic] = [
         Topic(dateDebut: Date(), sujet: "Les androïdes rêvent-ils de moutons électriques ?", reponse: [rep1], categorie: categorie1),
         Topic(dateDebut: Date(), sujet: "Les dauphins volent-ils dans l'eau", reponse: [rep1], categorie: categorie1),

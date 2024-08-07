@@ -1,9 +1,3 @@
-//
-//  InfiniteScroll.swift
-//  Tip-stop
-//
-//  Created by Apprenant 122 on 18/07/2024.
-//
 import SwiftUI
 
 struct InfiniteScrollView: View {
@@ -30,41 +24,47 @@ struct InfiniteScrollView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .ignoresSafeArea()
-                
-                // Navigation buttons
-                Button(action: {
-                    path.append("DecouverteView")
-                }) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.black.opacity(0.001))
-                            .frame(width: 75, height: 75)
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.white)
-                    }
-                    .position(x: 50, y: 75)
-                }
-                
-//                Button(action: {
-//                    path.append("ProfileView")
-//                }) {
-//                    ZStack {
-//                        Circle()
-//                            .fill(Color.black.opacity(0.001))
-//                            .frame(width: 75, height: 75)
-//                        Image(systemName: "person.crop.circle")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 37, height: 37)
-//                            .foregroundColor(.white)
-//                    }
-//                    .position(x: UIScreen.main.bounds.width - 50, y: 75)              
-//                }
             }
             
+            VStack {
+                Spacer().frame(height: 40)
+                HStack {
+                    Button(action: {
+                        path.append("DecouverteView")
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.black.opacity(0.001))
+                                .frame(width: 75, height: 75)
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding(.leading, 15)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        path.append("ProfileView")
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.black.opacity(0.001))
+                                .frame(width: 75, height: 75)
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding(.trailing, 15)
+                }
+                Spacer()
+            }
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
