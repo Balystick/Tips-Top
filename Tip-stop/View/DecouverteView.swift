@@ -85,7 +85,16 @@ struct DecouverteView: View {
                     .frame(width: 350)
                     .clipShape(RoundedRectangle(cornerRadius: 30))
             }
-            Spacer()
+
+        Button(action: {
+                path.append("Discussions")
+        }) {
+            Image("Discussions")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 350)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+        }
         }
     }
 }

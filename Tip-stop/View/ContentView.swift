@@ -25,8 +25,8 @@ struct ContentView: View {
                         switch value {
                         case "DecouverteView":
                             DecouverteView(path: $path, globalDataModel: globalDataModel)
-                        case "ProfileView":
-                            ProfileView()
+//                        case "ProfileView":
+//                            ProfileView()
                             //                    case "DiscussionView":
                             //                        DiscussionView(path: $path, globalDataModel: globalDataModel)
                             //                    case "StepsView":
