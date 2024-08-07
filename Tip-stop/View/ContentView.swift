@@ -26,7 +26,7 @@ struct ContentView: View {
                         case "DecouverteView":
                             DecouverteView(path: $path, globalDataModel: globalDataModel)
                         case "ProfileView":
-                            ProfileView(path: $path, globalDataModel: globalDataModel)
+                            ProfileView()
                             //                    case "DiscussionView":
                             //                        DiscussionView(path: $path, globalDataModel: globalDataModel)
                             //                    case "StepsView":
