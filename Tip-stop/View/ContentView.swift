@@ -43,8 +43,8 @@ struct ContentView: View {
                             InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Batterie et Performances")
                         case "InfiniteScrollView:Nouveautés":
                             InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Nouveautés")
-//                        case "Discussions":
-//                            ListTopicView(path: $path, globalDataModel: globalDataModel)
+                        case "Discussions":
+                            ListTopicView(path: $path, globalDataModel: globalDataModel)
 //                        case "ProfileView":
 //                            ProfileView()
                             //                    case "DiscussionView":

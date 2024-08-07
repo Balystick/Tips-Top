@@ -22,7 +22,7 @@ struct DecouverteView: View {
     }
     
     var body: some View {
-        VStack(spacing: 15) {
+        VStack {
             CarouselView(
                 scaleValue: 0.2,
                 imageWidth: 250,
@@ -50,8 +50,32 @@ struct DecouverteView: View {
             .padding(.top, 20)
             
             Spacer()
+            
+            Button(action: {
+                path.append("InfiniteScrollView:Nouveautés")
+            }) {
+                Image("Nouveautés")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 350)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                path.append("Discussions")
+            }) {
+                Image("Discussions")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 350)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+            }
+            
+            Spacer()
+            
         }
-        .navigationTitle("Découverte")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -74,27 +98,6 @@ struct DecouverteView: View {
                     activeID = carouselImages[middleIndex].id  // Définit l'image active à l'index du milieu
                 }
             }
-        }
-        VStack {
-            Button(action: {
-                path.append("InfiniteScrollView:Nouveautés")
-            }) {
-                Image("Nouveautés")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 350)
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
-            }
-
-        Button(action: {
-                path.append("Discussions")
-        }) {
-            Image("Discussions")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 350)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-        }
         }
     }
 }

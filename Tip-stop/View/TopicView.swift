@@ -33,7 +33,7 @@ struct TopicView: View {
     var categorieName = ""
     
     var body: some View {
-        NavigationStack
+        NavigationView
         {
            ZStack
             {
