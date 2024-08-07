@@ -256,14 +256,14 @@
 			isa = PBXGroup;
 			children = (
 				699DFD182C48FAD900044FB4 /* ContentView.swift */,
-				E1D28F162C57843E001B9766 /* Onboarding */,
+				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
+				699DFD572C49014800044FB4 /* ProfileView.swift */,
+				E1D28F162C57843E001B9766 /* Onboarding */,
 				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
 				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
-				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				69661A2C2C577DFE00B58B05 /* AstuceView.swift */,
 				6938F7522C57D51A00DC6523 /* StepsView.swift */,
-				699DFD572C49014800044FB4 /* ProfileView.swift */,
 				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 				E12943A42C62610700F8BB83 /* TopicView.swift */,
 				E129439A2C62605F00F8BB83 /* NewReponse.swift */,

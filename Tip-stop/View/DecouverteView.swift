@@ -11,9 +11,15 @@ import SwiftUI
 struct DecouverteView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
-    @StateObject private var viewModel = DecouverteViewModel()
+    @StateObject private var viewModel: DecouverteViewModel
     @State private var activeID: UUID?  // Identifiant de l'image active dans le carrousel
     @State private var carouselImages: [CarouselImage] = []
+    
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+        self._viewModel = StateObject(wrappedValue: DecouverteViewModel(globalDataModel: globalDataModel))
+    }
     
     var body: some View {
         VStack(spacing: 15) {

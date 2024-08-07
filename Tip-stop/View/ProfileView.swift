@@ -10,6 +10,8 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
     
     //viewModel Profile View Model
     @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))

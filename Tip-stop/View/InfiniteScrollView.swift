@@ -32,7 +32,7 @@ struct InfiniteScrollView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .ignoresSafeArea()
                 
-                // Navigation button
+                // Navigation buttons
                 Button(action: {
                     path.append("DecouverteView")
                 }) {
@@ -48,6 +48,21 @@ struct InfiniteScrollView: View {
                     }
                     .position(x: 50, y: 75)
                 }
+                
+                Button(action: {
+                    path.append("ProfileView")
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.black.opacity(0.001))
+                            .frame(width: 75, height: 75)
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 37, height: 37)
+                            .foregroundColor(.white)
+                    }
+                    .position(x: UIScreen.main.bounds.width - 50, y: 75)                }
             }
             
         }
