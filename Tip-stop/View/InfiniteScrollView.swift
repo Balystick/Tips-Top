@@ -15,7 +15,6 @@ struct InfiniteScrollView: View {
     
     var body: some View {
         ZStack {
-            
             GeometryReader { geometry in
                 TabView(selection: $currentIndex) {
                     ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
@@ -67,5 +66,7 @@ struct InfiniteScrollView: View {
             }
             
         }
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
     }
 }
