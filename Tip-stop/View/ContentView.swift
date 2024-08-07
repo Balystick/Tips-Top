@@ -14,28 +14,32 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Découverte")
-                .fullScreenCover(isPresented: $showOnboarding) {
-                    OnboardingPageView()
-                }
-                .navigationDestination(for: String.self) { value in
-                    switch value {
-                    case "DecouverteView":
-                        DecouverteView(path: $path, globalDataModel: globalDataModel)
-//                    case "DiscussionView":
-//                        DiscussionView(path: $path, globalDataModel: globalDataModel)
-//                    case "StepsView":
-//                        StepsView(path: $path, globalDataModel: globalDataModel)
-//                    case "CommentsView":
-//                        CommentsView(path: $path, globalDataModel: globalDataModel)
-//                    case "ProfileView":
-//                        ProfileView(path: $path, globalDataModel: globalDataModel)
-                    default:
-                        Text("Vue inconnue")
+            ZStack {
+                Color.white // Force le fullscreen de la zone d'affichage
+                    .ignoresSafeArea()
+                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Découverte")
+                    .fullScreenCover(isPresented: $showOnboarding) {
+                        OnboardingPageView()
                     }
-                }
+                    .navigationDestination(for: String.self) { value in
+                        switch value {
+                        case "DecouverteView":
+                            DecouverteView(path: $path, globalDataModel: globalDataModel)
+                            //                    case "DiscussionView":
+                            //                        DiscussionView(path: $path, globalDataModel: globalDataModel)
+                            //                    case "StepsView":
+                            //                        StepsView(path: $path, globalDataModel: globalDataModel)
+                            //                    case "CommentsView":
+                            //                        CommentsView(path: $path, globalDataModel: globalDataModel)
+                            //                    case "ProfileView":
+                            //                        ProfileView(path: $path, globalDataModel: globalDataModel)
+                        default:
+                            Text("Vue inconnue")
+                        }
+                    }
+            }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 

@@ -12,23 +12,44 @@ struct InfiniteScrollView: View {
     @StateObject private var viewModel = InfiniteScrollViewModel()
     @State var categoryTitre: String
     @State private var currentIndex: Int = 0
-
+    
     var body: some View {
-        GeometryReader { geometry in
-            TabView(selection: $currentIndex) {
-                ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
-                    AstuceView(astuce: astuce)
-                        .tag(index)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .onAppear {
-                            if index == viewModel.astuces.count - 1 {
-                                viewModel.loadMoreAstuces()
+        ZStack {
+            
+            GeometryReader { geometry in
+                TabView(selection: $currentIndex) {
+                    ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
+                        AstuceView(astuce: astuce)
+                            .tag(index)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .onAppear {
+                                if index == viewModel.astuces.count - 1 {
+                                    viewModel.loadMoreAstuces()
+                                }
                             }
-                        }
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .ignoresSafeArea()
+                
+                // Navigation button
+                Button(action: {
+                    path.append("DecouverteView")
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.black.opacity(0.001))
+                            .frame(width: 75, height: 75)
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.white)
+                    }
+                    .position(x: 50, y: 75)
                 }
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .ignoresSafeArea()
+            
         }
     }
 }
