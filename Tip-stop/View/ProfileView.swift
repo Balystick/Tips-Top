@@ -13,7 +13,7 @@ struct ProfileView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel: ProfileViewModel
-   
+    @StateObject private var viewModelInfinite = InfiniteScrollViewModel()
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Productivité"
 
@@ -23,7 +23,6 @@ struct ProfileView: View {
     @State private var image: UIImage?
    //Source de la photo de profil, ici photo library
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-
     //VAR recuperer lien image profil choisie
     private var url: URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -45,17 +44,7 @@ struct ProfileView: View {
     @State private var newName: String = ""
     
     //Tab de video pour grid favoris
-    let video = [
-        "Vid1",
-        "Vid2",
-        "Vid3",
-        "Vid4",
-        "Vid5",
-        "Vid6",
-        "Vid7",
-        "Vid8",
-        "Vid9",
-        "Vid10"]
+    let video = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
     
     //Grid de list favoris
     let columns = [
