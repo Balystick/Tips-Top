@@ -5,6 +5,7 @@
 //  Created by Apprenant 122 on 18/07/2024.
 //
 import Foundation
+import SwiftUI
 
 /// Une classe représentant le modèle de vue pour le profil de l'utilisateur.
 ///
@@ -12,6 +13,8 @@ import Foundation
 /// de l'utilisateur, incluant ses favoris et ses informations personnelles.
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
+    @ObservedObject var globalDataModel: GlobalDataModel
+
     /// La liste des favoris de l'utilisateur.
     @Published var favoris: [Favori]
     
@@ -23,7 +26,8 @@ class ProfileViewModel: ObservableObject {
     /// - Parameters:
     ///   - favoris: Une liste d'objets de type `Favori`.
     ///   - utilisateur: Un objet de type `Utilisateur` représentant l'utilisateur.
-    init(favoris: [Favori], utilisateur: Utilisateur) {
+    init(globalDataModel: GlobalDataModel, favoris: [Favori], utilisateur: Utilisateur) {
+        self.globalDataModel = globalDataModel
         self.favoris = favoris
         self.utilisateur = utilisateur
     }

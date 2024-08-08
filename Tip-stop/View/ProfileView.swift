@@ -10,80 +10,9 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
-// Aurélien - Ajout navigationPath & globalDataModel
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
-
-        
-    //viewModel Profile View Model
-    @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))
-    //viewModel Decouverte View Model
-    @StateObject private var viewModelDecouverte = ProfileViewModel2(categories: [
-//        Categorie(titre: "", description: "", icon: "", astuces: [], topics: [])
-        Categorie(
-            titre: "Toutes",
-            description: "",
-            icon: "",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Productivité",
-            description: "Maximiser votre efficacité au quotidien",
-            icon: "Productivité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Personnalisation",
-            description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
-            icon: "Personnalisation",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Utilisation Avancée",
-            description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
-            icon: "UtilisationAvancée",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Sécurité & Confidentialité",
-            description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
-            icon: "SécuritéConfidentialité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Connectivité et Communication",
-            description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
-            icon: "ConnectivitéCommunication",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Multimédia",
-            description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
-            icon: "Multimédia",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Accessibilité",
-            description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
-            icon: "Accessibilité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Batterie et Performances",
-            description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
-            icon: "BatteriePerformances",
-            astuces: [],
-            topics: []
-        )
-    ])
+    @StateObject private var viewModel: ProfileViewModel
    
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
@@ -111,84 +40,12 @@ struct ProfileView: View {
     @State private var showAlert = false
     //Clear button x in textfield
     
-// Aurélien - Déplacement init
-//    init() {
-//      UITextField.appearance().clearButtonMode = .whileEditing
-//    }
-    
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
   
     //Lire valeur user defaults nom
     @State var name : String = UserDefaults.standard.string(forKey: "name") ?? ""
-
-    //Liste tab catégories
-    @State private var categories: [Categorie] = [
-            Categorie(
-                titre: "Toutes",
-                description: "",
-                icon: "",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Productivité",
-                description: "Maximiser votre efficacité au quotidien",
-                icon: "Productivité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Personnalisation",
-                description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
-                icon: "Personnalisation",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Utilisation Avancée",
-                description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
-                icon: "UtilisationAvancée",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Sécurité & Confidentialité",
-                description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
-                icon: "SécuritéConfidentialité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Connectivité et Communication",
-                description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
-                icon: "ConnectivitéCommunication",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Multimédia",
-                description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
-                icon: "Multimédia",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Accessibilité",
-                description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
-                icon: "Accessibilité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Batterie et Performances",
-                description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
-                icon: "BatteriePerformances",
-                astuces: [],
-                topics: []
-            )
-        ]
     
     //Tab de video pour grid favoris
     let video = [
@@ -410,7 +267,7 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(viewModelDecouverte.categories) {category in
+                        ForEach(viewModel.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
