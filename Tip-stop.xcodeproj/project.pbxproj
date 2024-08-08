@@ -52,6 +52,7 @@
 		E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A22C62608F00F8BB83 /* ReponseView.swift */; };
 		E12943A52C62610700F8BB83 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A42C62610700F8BB83 /* TopicView.swift */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
+		E1BFC5292C64FE5500D62741 /* Onboarding_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1BFC5282C64FE5500D62741 /* Onboarding_1.mp4 */; };
 		E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1C568112C627577006C2B32 /* iPhone15.mp4 */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
@@ -128,6 +129,7 @@
 		E12943A22C62608F00F8BB83 /* ReponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReponseView.swift; sourceTree = "<group>"; };
 		E12943A42C62610700F8BB83 /* TopicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		E1BFC5282C64FE5500D62741 /* Onboarding_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Onboarding_1.mp4; path = ../../../../../../Desktop/Onboarding_1.mp4; sourceTree = "<group>"; };
 		E1C568112C627577006C2B32 /* iPhone15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iPhone15.mp4; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				696E7E172C5B7B940008BF25 /* Vid9.mp4 */,
 				696E7E182C5B7B940008BF25 /* Vid10.mp4 */,
 				E1C568112C627577006C2B32 /* iPhone15.mp4 */,
+				E1BFC5282C64FE5500D62741 /* Onboarding_1.mp4 */,
 				699DFD152C48FAD900044FB4 /* Tip-stop */,
 				699DFD262C48FADA00044FB4 /* Tip-stopTests */,
 				699DFD302C48FADA00044FB4 /* Tip-stopUITests */,
@@ -410,6 +413,7 @@
 			files = (
 				696E7E1D2C5B7B940008BF25 /* Vid1.mp4 in Resources */,
 				696E7E1E2C5B7B940008BF25 /* Vid6.mp4 in Resources */,
+				E1BFC5292C64FE5500D62741 /* Onboarding_1.mp4 in Resources */,
 				696E7E1F2C5B7B940008BF25 /* Vid2.mp4 in Resources */,
 				696E7E202C5B7B940008BF25 /* Vid4.mp4 in Resources */,
 				696E7E212C5B7B940008BF25 /* Vid9.mp4 in Resources */,
