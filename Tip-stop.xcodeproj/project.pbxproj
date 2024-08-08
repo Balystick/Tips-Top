@@ -52,7 +52,6 @@
 		E14F226A2C6227F800C68FC0 /* Onboarding_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */; };
 		E14F22702C6235E500C68FC0 /* Onboarding_6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */; };
 		E14F227E2C624E1000C68FC0 /* Onboarding_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */; };
-		E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16553552C63931F00554A98 /* ProfileViewModel2.swift */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
 		E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1C568112C627577006C2B32 /* iPhone15.mp4 */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
@@ -130,7 +129,6 @@
 		E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_1.mp4; sourceTree = "<group>"; };
 		E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_6.mp4; sourceTree = "<group>"; };
 		E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_4.mp4; sourceTree = "<group>"; };
-		E16553552C63931F00554A98 /* ProfileViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel2.swift; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		E1C568112C627577006C2B32 /* iPhone15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iPhone15.mp4; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
-				E16553552C63931F00554A98 /* ProfileViewModel2.swift */,
 				699DFD632C4904BF00044FB4 /* TopicViewModel.swift */,
 			);
 			path = ViewModel;
@@ -463,7 +460,6 @@
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				E12943A52C62610700F8BB83 /* TopicView.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
-				E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */,
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */,

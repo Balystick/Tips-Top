@@ -33,6 +33,32 @@ class ProfileViewModel: ObservableObject {
         self.utilisateur = Utilisateur(nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
     }
     
+    
+    private var imageURL: URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0].appendingPathComponent("image.jpg")
+    }
+
+    func saveImage(_ image: UIImage?) {
+        guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
+        do {
+            try data.write(to: imageURL)
+            utilisateur.photo = image
+        } catch {
+            print("Erreur lors de la sauvegarde de l'image: \(error)")
+        }
+    }
+
+    func loadImage() {
+        guard let data = try? Data(contentsOf: imageURL) else { return }
+        utilisateur.photo = UIImage(data: data)
+    }
+
+    func saveName(_ name: String) {
+        UserDefaults.standard.set(name, forKey: "name")
+        utilisateur.nom = name
+    }
+    
     /// Ajoute un nouvel utilisateur avec un nom vide et les mêmes informations de photo que l'utilisateur actuel.
     ///
     /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,

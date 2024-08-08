@@ -43,9 +43,6 @@ struct ProfileView: View {
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
-  
-    //Lire valeur user defaults nom
-    @State var name : String = UserDefaults.standard.string(forKey: "name") ?? ""
     
     //Tab de video pour grid favoris
     let video = [
@@ -117,8 +114,8 @@ struct ProfileView: View {
                     }.sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
-                    .onTapGesture {
-                        url.saveImage(image)
+                    .onChange(of: image) { oldValue, newValue in
+                        viewModel.saveImage(newValue)
                     }
                     Spacer()
                     Spacer()
@@ -133,7 +130,7 @@ struct ProfileView: View {
                                     .onSubmit {
                                         isValidate.toggle()
                                         viewModel.addUtilisateur()
-                                        saveName()
+                                        viewModel.saveName(viewModel.utilisateur.nom)
                                         isModify = false
                                     }
                                 HStack {
@@ -154,7 +151,7 @@ struct ProfileView: View {
                                     //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
                                         //Ajout contraintes texte avec alerte si pas respectées
-                                        self.saveName()
+//    Aurélien                                    self.saveName()
                                         self.failedEnterName = false
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
@@ -164,7 +161,7 @@ struct ProfileView: View {
                                             viewModel.addUtilisateur()
                                             //Fonction pour garder le nom dans les Userdefaults
                                             newName = viewModel.utilisateur.nom
-                                            saveName()
+                                            viewModel.saveName(newName)
                                             oldName = viewModel.utilisateur.nom
                                             isValidate.toggle()
                                             isModify = false
@@ -202,12 +199,13 @@ struct ProfileView: View {
                                         .font(.caption)
                                 } else {
                                     //Nom profil affiché
-                                    Text(name)
+                                    Text(viewModel.utilisateur.nom)
                                         .multilineTextAlignment(.leading)
-                                        .onAppear() {
-                                            let data = newName
-                                            UserDefaults.standard.set(data, forKey: "name")
-                                        }
+// Aurélien Fix
+//                                        .onAppear() {
+//                                            let data = newName
+//                                            UserDefaults.standard.set(data, forKey: "name")
+//                                        }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 5)
@@ -307,21 +305,6 @@ struct ProfileView: View {
                 }
             }
         }
-    }
-    
-    //Fonction pour garder le nom dans les Userdefaults
-    /// Enregistre le nom fourni dans les User Defaults et met à jour la propriété `name`.
-    ///
-    /// Cette méthode stocke la valeur de `newName` dans les User Defaults sous la clé `"name"`
-    /// et met à jour la propriété `name` avec la nouvelle valeur.
-    ///
-    /// - Note: Assurez-vous que `newName` est défini avant d'appeler cette méthode.
-    ///
-    /// - Important: Cette méthode ne vérifie pas si le nom est vide ou nul avant de le sauvegarder.
-    func saveName() {
-        let data = newName
-        UserDefaults.standard.set(data, forKey: "name")
-        name = newName
     }
 }
 
