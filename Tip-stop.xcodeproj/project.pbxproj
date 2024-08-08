@@ -51,6 +51,7 @@
 		E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E129439F2C62607400F8BB83 /* StoryboardReponseView.storyboard */; };
 		E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A22C62608F00F8BB83 /* ReponseView.swift */; };
 		E12943A52C62610700F8BB83 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A42C62610700F8BB83 /* TopicView.swift */; };
+		E13C7CA62C6533DC00A4A468 /* Onboarding_2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E13C7CA52C6533DC00A4A468 /* Onboarding_2.mp4 */; };
 		E13C7CB22C655BAA00A4A468 /* Onboarding2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E13C7CB12C655BAA00A4A468 /* Onboarding2.mp4 */; };
 		E13C7CB42C655BB200A4A468 /* Onboarding1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E13C7CB32C655BB200A4A468 /* Onboarding1.mp4 */; };
 		E1867FDF2C6564FD00A6AB6D /* Onboarding3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1867FDE2C6564FD00A6AB6D /* Onboarding3.mp4 */; };
@@ -439,6 +440,7 @@
 				E1867FE12C65672D00A6AB6D /* Onboarding4.mp4 in Resources */,
 				696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */,
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
+				E13C7CA62C6533DC00A4A468 /* Onboarding_2.mp4 in Resources */,
 				E13C7CB42C655BB200A4A468 /* Onboarding1.mp4 in Resources */,
 				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
 				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
