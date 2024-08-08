@@ -60,7 +60,7 @@ struct AstuceView: View {
                                     Image(systemName: isLiked ? "heart.fill" : "heart")
                                         .font(.title)
                                         .foregroundColor(.white)
-                                    Text("\(mutableAstuce.nombreDeLikes)")
+                                    Text("\(UserDefaults.standard.integer(forKey: "likeCount_\(astuce.video)"))")
                                         .foregroundColor(.white)
                                         .font(.caption)
                                 }
@@ -106,8 +106,8 @@ struct AstuceView: View {
                 StepsView()
             }
             .onAppear {
-                isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.titre)
-                isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.titre)
+                isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.video)
+                isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.video)
             }
         }
         .ignoresSafeArea()

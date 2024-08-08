@@ -16,7 +16,7 @@ struct ContentView: View {
             ZStack {
                 Color.white // Force le fullscreen de la zone d'affichage
                     .ignoresSafeArea()
-                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Découverte")
+                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "")
                     .fullScreenCover(isPresented: $showOnboarding) {
                         OnboardingPageView()
                     }
