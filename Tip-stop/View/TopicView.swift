@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UIKit
-var step1 = Step(titre: "", description: "")
+var step1 = Step(num: 0, titre: "", description: "", isSelected: false)
 
 
 var rep1 = Reponse(date: Date(), contenu: """

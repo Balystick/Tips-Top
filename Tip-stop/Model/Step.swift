@@ -17,9 +17,15 @@ struct Step: Identifiable {
     /// L'identifiant unique de l'étape.
     let id = UUID()
     
+    var num : Int
+    
     /// Le titre de l'étape.
     var titre: String
     
     /// La description de l'étape.
     var description: String
+    
+    /// Le sélection du step
+    var isSelected : Bool
+    
 }
