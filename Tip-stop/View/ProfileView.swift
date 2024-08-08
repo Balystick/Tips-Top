@@ -10,11 +10,80 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
-    
+// Aurélien - Ajout navigationPath & globalDataModel
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
+
+        
     //viewModel Profile View Model
     @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))
     //viewModel Decouverte View Model
-    @StateObject private var viewModelDecouverte = DecouverteViewModel(categories: [])
+    @StateObject private var viewModelDecouverte = ProfileViewModel2(categories: [
+//        Categorie(titre: "", description: "", icon: "", astuces: [], topics: [])
+        Categorie(
+            titre: "Toutes",
+            description: "",
+            icon: "",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Productivité",
+            description: "Maximiser votre efficacité au quotidien",
+            icon: "Productivité",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Personnalisation",
+            description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
+            icon: "Personnalisation",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Utilisation Avancée",
+            description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
+            icon: "UtilisationAvancée",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Sécurité & Confidentialité",
+            description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
+            icon: "SécuritéConfidentialité",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Connectivité et Communication",
+            description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
+            icon: "ConnectivitéCommunication",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Multimédia",
+            description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
+            icon: "Multimédia",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Accessibilité",
+            description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
+            icon: "Accessibilité",
+            astuces: [],
+            topics: []
+        ),
+        Categorie(
+            titre: "Batterie et Performances",
+            description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
+            icon: "BatteriePerformances",
+            astuces: [],
+            topics: []
+        )
+    ])
    
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
@@ -41,9 +110,12 @@ struct ProfileView: View {
     @State private var showingAlert = false
     @State private var showAlert = false
     //Clear button x in textfield
-    init() {
-      UITextField.appearance().clearButtonMode = .whileEditing
-    }
+    
+// Aurélien - Déplacement init
+//    init() {
+//      UITextField.appearance().clearButtonMode = .whileEditing
+//    }
+    
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
@@ -143,7 +215,14 @@ struct ProfileView: View {
     let columns = [
          GridItem(.adaptive(minimum: 100))
      ]
-
+    
+// Aurélien - Déplacement et complétion init
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+        UITextField.appearance().clearButtonMode = .whileEditing
+    }
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading){
@@ -362,8 +441,21 @@ struct ProfileView: View {
             }
         }
         .padding()
-        .containerRelativeFrame([.horizontal, .vertical])
-        .background(Color(.customLightGray))
+// Aurélien - Modification Back Button
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    path.removeLast()
+                }) {
+                    Image(systemName: "arrow.uturn.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(Color(white: 0.2))
+                }
+            }
+        }
     }
     
     //Fonction pour garder le nom dans les Userdefaults
@@ -382,6 +474,7 @@ struct ProfileView: View {
     }
 }
 
+// Aurélien - Modif preview
 #Preview {
-    ProfileView()
+    ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }

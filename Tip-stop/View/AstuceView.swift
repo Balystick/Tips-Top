@@ -43,7 +43,7 @@ struct AstuceView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        VStack {
+                        VStack {                            
                             Button(action: {
                                 print("Like button tapped")
                             }) {

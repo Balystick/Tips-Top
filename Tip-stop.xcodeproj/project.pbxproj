@@ -52,10 +52,13 @@
 		E14F226A2C6227F800C68FC0 /* Onboarding_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */; };
 		E14F22702C6235E500C68FC0 /* Onboarding_6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */; };
 		E14F227E2C624E1000C68FC0 /* Onboarding_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */; };
+		E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16553552C63931F00554A98 /* ProfileViewModel2.swift */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
+		E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1C568112C627577006C2B32 /* iPhone15.mp4 */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
+		E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,11 +130,14 @@
 		E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_1.mp4; sourceTree = "<group>"; };
 		E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_6.mp4; sourceTree = "<group>"; };
 		E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_4.mp4; sourceTree = "<group>"; };
+		E16553552C63931F00554A98 /* ProfileViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel2.swift; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		E1C568112C627577006C2B32 /* iPhone15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iPhone15.mp4; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +178,7 @@
 				696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */,
 				696E7E172C5B7B940008BF25 /* Vid9.mp4 */,
 				696E7E182C5B7B940008BF25 /* Vid10.mp4 */,
+				E1C568112C627577006C2B32 /* iPhone15.mp4 */,
 				E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */,
 				E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */,
 				E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */,
@@ -198,7 +205,6 @@
 			children = (
 				74E656FE2C58D81F00D438E0 /* Info.plist */,
 				699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */,
-				699DFD182C48FAD900044FB4 /* ContentView.swift */,
 				699DFD402C48FC0E00044FB4 /* Model */,
 				699DFD422C48FC3200044FB4 /* ViewModel */,
 				699DFD412C48FC1E00044FB4 /* View */,
@@ -252,20 +258,21 @@
 			isa = PBXGroup;
 			children = (
 				E1D28F162C57843E001B9766 /* Onboarding */,
-				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
-				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
-				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
+				699DFD182C48FAD900044FB4 /* ContentView.swift */,
+				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				69661A2C2C577DFE00B58B05 /* AstuceView.swift */,
-				6938F7522C57D51A00DC6523 /* StepsView.swift */,
+				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
+				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
-				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
-				E12943A42C62610700F8BB83 /* TopicView.swift */,
-				E129439A2C62605F00F8BB83 /* NewReponse.swift */,
+				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
 				E129439C2C62606500F8BB83 /* ListTopicView.swift */,
+				E12943A42C62610700F8BB83 /* TopicView.swift */,
 				E12943A22C62608F00F8BB83 /* ReponseView.swift */,
+				E129439A2C62605F00F8BB83 /* NewReponse.swift */,
 				E129439E2C62607400F8BB83 /* NewReponseController.swift */,
 				E129439F2C62607400F8BB83 /* StoryboardReponseView.storyboard */,
+				6938F7522C57D51A00DC6523 /* StepsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,9 +280,11 @@
 		699DFD422C48FC3200044FB4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */,
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
+				E16553552C63931F00554A98 /* ProfileViewModel2.swift */,
 				699DFD632C4904BF00044FB4 /* TopicViewModel.swift */,
 			);
 			path = ViewModel;
@@ -415,6 +424,7 @@
 				696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */,
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
 				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
+				E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */,
 				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
 				696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */,
 				E14F226A2C6227F800C68FC0 /* Onboarding_1.mp4 in Resources */,
@@ -453,6 +463,7 @@
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				E12943A52C62610700F8BB83 /* TopicView.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
+				E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */,
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */,
@@ -472,6 +483,7 @@
 				E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */,
 				699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */,
 				E12943A02C62607400F8BB83 /* NewReponseController.swift in Sources */,
+				E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,

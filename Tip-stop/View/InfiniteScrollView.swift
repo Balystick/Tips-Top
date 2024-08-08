@@ -1,32 +1,72 @@
-//
-//  InfiniteScroll.swift
-//  Tip-stop
-//
-//  Created by Apprenant 122 on 18/07/2024.
-//
 import SwiftUI
 
 struct InfiniteScrollView: View {
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel = InfiniteScrollViewModel()
     @State var categoryTitre: String
     @State private var currentIndex: Int = 0
-
+    
     var body: some View {
-        GeometryReader { geometry in
-            TabView(selection: $currentIndex) {
-                ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
-                    AstuceView(astuce: astuce)
-                        .tag(index)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .onAppear {
-                            if index == viewModel.astuces.count - 1 {
-                                viewModel.loadMoreAstuces()
+        ZStack {
+            GeometryReader { geometry in
+                TabView(selection: $currentIndex) {
+                    ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
+                        AstuceView(astuce: astuce)
+                            .tag(index)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .onAppear {
+                                if index == viewModel.astuces.count - 1 {
+                                    viewModel.loadMoreAstuces()
+                                }
                             }
-                        }
+                    }
                 }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .ignoresSafeArea()
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .ignoresSafeArea()
+            
+            VStack {
+                Spacer().frame(height: 40)
+                HStack {
+                    Button(action: {
+                        path.append("DecouverteView")
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.black.opacity(0.001))
+                                .frame(width: 75, height: 75)
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding(.leading, 15)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        path.append("ProfileView")
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color.black.opacity(0.001))
+                                .frame(width: 75, height: 75)
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding(.trailing, 15)
+                }
+                Spacer()
+            }
         }
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
     }
 }
