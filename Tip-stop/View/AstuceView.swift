@@ -85,7 +85,7 @@ struct AstuceView: View {
                     }
             )
             .sheet(isPresented: $showingSteps) {
-                StepsView(steps: astuce.steps)
+//                StepsView(steps: astuce.steps)
             }
         }
         .ignoresSafeArea()
