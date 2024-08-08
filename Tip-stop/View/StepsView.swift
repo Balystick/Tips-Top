@@ -12,16 +12,16 @@ struct StepsView: View {
     
     @State private var isValidate = false
     @State private var steps: [Step] = [
-        Step(num: 1, titre: "Ouvrir les réglages", description: "", isSelected: false),
-        Step(num: 2, titre: "Aller dans accessibilité", description: "", isSelected: false),
-        Step(num: 3, titre: "Sélectionner", description: "", isSelected: false),
-        Step(num: 4, titre: "Aller dans", description: "", isSelected: false),
-        Step(num: 5, titre: "Ouvir le lien", description: "", isSelected: false),
-        Step(num: 6, titre: "", description: "", isSelected: false),
-        Step(num: 7, titre: "", description: "", isSelected: false),
-        Step(num: 8, titre: "", description: "", isSelected: false),
-        Step(num: 9, titre: "", description: "", isSelected: false),
-        Step(num: 10, titre: "", description: "", isSelected: false)
+        Step(num: 1, titre: "Ouvrir Réglages", description: "", isSelected: false),
+        Step(num: 2, titre: "Accéder à Général", description: "", isSelected: false),
+        Step(num: 3, titre: "Sélectionner VPN", description: "", isSelected: false),
+        Step(num: 4, titre: "Ajouter Configuration", description: "", isSelected: false),
+        Step(num: 5, titre: "Choisir Type VPN", description: "", isSelected: false),
+        Step(num: 6, titre: "Entrer Détails Serveur", description: "", isSelected: false),
+        Step(num: 7, titre: "Entrer Identifiants", description: "", isSelected: false),
+        Step(num: 8, titre: "Enregistrer Configuration", description: "", isSelected: false),
+        Step(num: 9, titre: "Activer VPN", description: "", isSelected: false),
+        Step(num: 10, titre: "Vérifier Connexion", description: "", isSelected: false)
     ]
     
     var body: some View {
