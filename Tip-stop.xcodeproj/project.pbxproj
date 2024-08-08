@@ -20,6 +20,8 @@
 		696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */; };
 		696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */; };
 		696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */; };
+		6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */; };
+		6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B8A12C64A70900FD4905 /* CommentaireView.swift */; };
 		699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */; };
 		699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD182C48FAD900044FB4 /* ContentView.swift */; };
 		699DFD1B2C48FADA00044FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699DFD1A2C48FADA00044FB4 /* Assets.xcassets */; };
@@ -49,10 +51,6 @@
 		E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E129439F2C62607400F8BB83 /* StoryboardReponseView.storyboard */; };
 		E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A22C62608F00F8BB83 /* ReponseView.swift */; };
 		E12943A52C62610700F8BB83 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12943A42C62610700F8BB83 /* TopicView.swift */; };
-		E12E7CB72C649E7C001E09A2 /* Onboarding_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E12E7CB62C649E7C001E09A2 /* Onboarding_4.mp4 */; };
-		E12E7CB92C64A028001E09A2 /* Onboarding_1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E12E7CB82C64A028001E09A2 /* Onboarding_1.mp4 */; };
-		E12E7CBB2C64A491001E09A2 /* Onboarding_6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E12E7CBA2C64A491001E09A2 /* Onboarding_6.mp4 */; };
-		E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16553552C63931F00554A98 /* ProfileViewModel2.swift */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
 		E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1C568112C627577006C2B32 /* iPhone15.mp4 */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
@@ -92,6 +90,8 @@
 		696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid3.mp4; sourceTree = "<group>"; };
 		696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid8.mp4; sourceTree = "<group>"; };
 		696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid7.mp4; sourceTree = "<group>"; };
+		6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireViewController.swift; sourceTree = "<group>"; };
+		6993B8A12C64A70900FD4905 /* CommentaireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireView.swift; sourceTree = "<group>"; };
 		699DFD132C48FAD900044FB4 /* Tip-stop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip-stop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip_stopApp.swift; sourceTree = "<group>"; };
 		699DFD182C48FAD900044FB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,10 +127,6 @@
 		E129439F2C62607400F8BB83 /* StoryboardReponseView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardReponseView.storyboard; sourceTree = "<group>"; };
 		E12943A22C62608F00F8BB83 /* ReponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReponseView.swift; sourceTree = "<group>"; };
 		E12943A42C62610700F8BB83 /* TopicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
-		E12E7CB62C649E7C001E09A2 /* Onboarding_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_4.mp4; sourceTree = "<group>"; };
-		E12E7CB82C64A028001E09A2 /* Onboarding_1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_1.mp4; sourceTree = "<group>"; };
-		E12E7CBA2C64A491001E09A2 /* Onboarding_6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_6.mp4; sourceTree = "<group>"; };
-		E16553552C63931F00554A98 /* ProfileViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel2.swift; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		E1C568112C627577006C2B32 /* iPhone15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iPhone15.mp4; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -179,9 +175,6 @@
 				696E7E172C5B7B940008BF25 /* Vid9.mp4 */,
 				696E7E182C5B7B940008BF25 /* Vid10.mp4 */,
 				E1C568112C627577006C2B32 /* iPhone15.mp4 */,
-				E12E7CB82C64A028001E09A2 /* Onboarding_1.mp4 */,
-				E12E7CB62C649E7C001E09A2 /* Onboarding_4.mp4 */,
-				E12E7CBA2C64A491001E09A2 /* Onboarding_6.mp4 */,
 				699DFD152C48FAD900044FB4 /* Tip-stop */,
 				699DFD262C48FADA00044FB4 /* Tip-stopTests */,
 				699DFD302C48FADA00044FB4 /* Tip-stopUITests */,
@@ -259,6 +252,8 @@
 			children = (
 				E1D28F162C57843E001B9766 /* Onboarding */,
 				699DFD182C48FAD900044FB4 /* ContentView.swift */,
+				6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */,
+				6993B8A12C64A70900FD4905 /* CommentaireView.swift */,
 				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				69661A2C2C577DFE00B58B05 /* AstuceView.swift */,
@@ -284,7 +279,6 @@
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
-				E16553552C63931F00554A98 /* ProfileViewModel2.swift */,
 				699DFD632C4904BF00044FB4 /* TopicViewModel.swift */,
 			);
 			path = ViewModel;
@@ -417,8 +411,6 @@
 				696E7E1D2C5B7B940008BF25 /* Vid1.mp4 in Resources */,
 				696E7E1E2C5B7B940008BF25 /* Vid6.mp4 in Resources */,
 				696E7E1F2C5B7B940008BF25 /* Vid2.mp4 in Resources */,
-				E12E7CBB2C64A491001E09A2 /* Onboarding_6.mp4 in Resources */,
-				E12E7CB72C649E7C001E09A2 /* Onboarding_4.mp4 in Resources */,
 				696E7E202C5B7B940008BF25 /* Vid4.mp4 in Resources */,
 				696E7E212C5B7B940008BF25 /* Vid9.mp4 in Resources */,
 				696E7E222C5B7B940008BF25 /* Vid10.mp4 in Resources */,
@@ -427,7 +419,6 @@
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
 				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
 				E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */,
-				E12E7CB92C64A028001E09A2 /* Onboarding_1.mp4 in Resources */,
 				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
 				696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */,
 				699DFD1E2C48FADA00044FB4 /* Preview Assets.xcassets in Resources */,
@@ -463,7 +454,6 @@
 				699DFD5C2C49018900044FB4 /* DecouverteViewModel.swift in Sources */,
 				E12943A52C62610700F8BB83 /* TopicView.swift in Sources */,
 				699DFD462C48FD4700044FB4 /* Astuce.swift in Sources */,
-				E16553562C63931F00554A98 /* ProfileViewModel2.swift in Sources */,
 				699DFD582C49014F00044FB4 /* ProfileView.swift in Sources */,
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */,
@@ -473,10 +463,12 @@
 				6938F7532C57D51E00DC6523 /* StepsView.swift in Sources */,
 				696DEB6D2C611A51003176EB /* ImagePicker.swift in Sources */,
 				699DFD502C48FF8B00044FB4 /* Reponse.swift in Sources */,
+				6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */,
 				699DFD482C48FDD000044FB4 /* Commentaire.swift in Sources */,
 				E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */,
 				69661A2D2C577E0A00B58B05 /* AstuceView.swift in Sources */,
 				699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */,
+				6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */,
 				699DFD4A2C48FE6000044FB4 /* Step.swift in Sources */,
 				E129439D2C62606500F8BB83 /* ListTopicView.swift in Sources */,
 				699DFD5E2C4902BF00044FB4 /* InfiniteScrollViewModel.swift in Sources */,

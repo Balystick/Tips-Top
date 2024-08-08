@@ -10,80 +10,9 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
-// Aurélien - Ajout navigationPath & globalDataModel
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
-
-        
-    //viewModel Profile View Model
-    @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))
-    //viewModel Decouverte View Model
-    @StateObject private var viewModelDecouverte = ProfileViewModel2(categories: [
-//        Categorie(titre: "", description: "", icon: "", astuces: [], topics: [])
-        Categorie(
-            titre: "Toutes",
-            description: "",
-            icon: "",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Productivité",
-            description: "Maximiser votre efficacité au quotidien",
-            icon: "Productivité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Personnalisation",
-            description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
-            icon: "Personnalisation",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Utilisation Avancée",
-            description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
-            icon: "UtilisationAvancée",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Sécurité & Confidentialité",
-            description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
-            icon: "SécuritéConfidentialité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Connectivité et Communication",
-            description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
-            icon: "ConnectivitéCommunication",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Multimédia",
-            description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
-            icon: "Multimédia",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Accessibilité",
-            description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
-            icon: "Accessibilité",
-            astuces: [],
-            topics: []
-        ),
-        Categorie(
-            titre: "Batterie et Performances",
-            description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
-            icon: "BatteriePerformances",
-            astuces: [],
-            topics: []
-        )
-    ])
+    @StateObject private var viewModel: ProfileViewModel
    
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
@@ -97,10 +26,9 @@ struct ProfileView: View {
 
     //VAR recuperer lien image profil choisie
     private var url: URL {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            return paths[0].appendingPathComponent("image.jpg")
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0].appendingPathComponent("image.jpg")
     }
-
 
     //Booleens boutons textfield
     @State private var isModify = false
@@ -109,84 +37,12 @@ struct ProfileView: View {
     //Booleens alert textield
     @State private var failedEnterName = false
     @State private var showingAlert = false
+    @State private var showAlert = false
     //Clear button x in textfield
-    
-// Aurélien - Déplacement init
-//    init() {
-//      UITextField.appearance().clearButtonMode = .whileEditing
-//    }
     
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
-  
-    
-    //Liste tab catégories
-    @State private var categories: [Categorie] = [
-            Categorie(
-                titre: "Toutes",
-                description: "",
-                icon: "",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Productivité",
-                description: "Maximiser votre efficacité au quotidien",
-                icon: "Productivité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Personnalisation",
-                description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
-                icon: "Personnalisation",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Utilisation Avancée",
-                description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
-                icon: "UtilisationAvancée",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Sécurité & Confidentialité",
-                description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
-                icon: "SécuritéConfidentialité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Connectivité et Communication",
-                description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
-                icon: "ConnectivitéCommunication",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Multimédia",
-                description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
-                icon: "Multimédia",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Accessibilité",
-                description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
-                icon: "Accessibilité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Batterie et Performances",
-                description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
-                icon: "BatteriePerformances",
-                astuces: [],
-                topics: []
-            )
-        ]
     
     //Tab de video pour grid favoris
     let video = [
@@ -214,115 +70,113 @@ struct ProfileView: View {
          GridItem(.adaptive(minimum: 100))
      ]
     
-// Aurélien - Déplacement et complétion init
     init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
         self._path = path
         self.globalDataModel = globalDataModel
+        let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
     var body: some View {
         VStack {
             VStack(alignment: .leading){
-                HStack {
-                    Image(systemName: "arrow.left")
-                        .onAppear {
-                            url.loadImage(&image)
-                        }
-                        .onTapGesture {
-                            url.saveImage(image)
-                        }
-                    Text("Profil")
-                        .multilineTextAlignment(.center)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .offset(x: 120)
-                }
                 
                 HStack{
                     VStack{
                         // Photo image profile ou vide avec icone
                         if let uiImage = image {
-                            //viewModel.addUtilisateur()
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .frame(width: 150, height: 150)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                 .shadow(radius: 5)
+                                .onTapGesture {
+                                    showImagePicker = true
+                                }
                         }else {
                             ZStack{
                                 Circle()
                                     .frame(width: 150, height: 150)
-                                    .foregroundColor(Color(red: 229, green: 229, blue: 234, opacity: 1.0))
-                                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                                    .shadow(radius: 5)
+                                    .foregroundColor(Color(.customLightGray))
+                                    .overlay(Circle().stroke(Color(.customMediumGray), lineWidth: 0.1))
+                                    .shadow(radius: 2)
                                     .onTapGesture {
                                         showImagePicker = true
                                     }
                                     Image(systemName: "photo")
                                         .resizable()
                                         .frame(width: 30, height: 30)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(Color(.customMediumGray))
                             }
                         }
                     }.sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
+                    .onChange(of: image) { oldValue, newValue in
+                        viewModel.saveImage(newValue)
+                    }
                     Spacer()
                     Spacer()
-                    Section{
+                    HStack{
                         VStack {
                             // Textfield pour modifier nom profil
                             if isModify {
                                 TextField("Entrer votre nom", text: $viewModel.utilisateur.nom)
                                     .textFieldStyle(.roundedBorder)
-                                    .frame(width: 180, height: 30)
+                                    .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                     .textContentType(.username)
                                     .onSubmit {
                                         isValidate.toggle()
                                         viewModel.addUtilisateur()
-                                        saveName(data: viewModel.utilisateur.nom)
+                                        viewModel.saveName(viewModel.utilisateur.nom)
                                         isModify = false
                                     }
                                 HStack {
                                     Spacer()
                                     //Bouton annuler et retour au text
                                     Button(action: {
-                                        viewModel.utilisateur.nom = oldName
-
+                                        oldName =  viewModel.utilisateur.nom
                                         isCancel = true
                                         isModify = false
                                     }, label: {
                                         Text("Annuler")
                                             .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
-                                            .scaleEffect(isModify ? 1.2 : 1)
                                             .animation(.easeOut(duration: 0.2), value: isModify)
+                                            .foregroundColor(.gray)
                                     })
-                                    Spacer()
+                                    
                                     //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
                                         //Ajout contraintes texte avec alerte si pas respectées
-                                        self.saveName(data: viewModel.utilisateur.nom)
+//    Aurélien                                    self.saveName()
                                         self.failedEnterName = false
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
                                             self.failedEnterName.toggle()
-                                        }else {
-                                            isValidate.toggle()
-                                            //Fonction pour garder le nom dans les model utilisateur
+                                        } else {
+                                            //Fonction pour garder le nom dans le model utilisateur
                                             viewModel.addUtilisateur()
                                             //Fonction pour garder le nom dans les Userdefaults
-                                            oldName = viewModel.utilisateur.nom
-                                            saveName(data: viewModel.utilisateur.nom)
                                             newName = viewModel.utilisateur.nom
+                                            viewModel.saveName(newName)
+                                            oldName = viewModel.utilisateur.nom
+                                            isValidate.toggle()
                                             isModify = false
+                                        
+                                            if oldName != newName{
+                                                showAlert.toggle()
+                                                isValidate.toggle()
+                                                isModify = false
+                                            }
                                         }
                                     }, label: {
                                         Text("Valider")
-                                            .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
+                                            .font(.footnote)
                                             .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                            .foregroundColor(Color(.customBlue))
                                     })
                                     //Affiche alerte si contraintes pas respectées
                                     .alert(isPresented: $showingAlert) {
@@ -337,23 +191,29 @@ struct ProfileView: View {
                                     .scaleEffect(isModify ? 1.2 : 1)
                                     .animation(.easeOut(duration: 0.2), value: isModify)
                                 }
+                                .padding(.horizontal, 15)
                             } else {
                                 if viewModel.utilisateur.nom.isEmpty{
                                     Text("Veuillez entrer voter nom")
                                         .foregroundColor(Color.gray)
                                         .font(.caption)
-                                        
-                                }else {
-                                
-                                
-                                //Nom profil affiché
+                                } else {
+                                    //Nom profil affiché
                                     Text(viewModel.utilisateur.nom)
+                                        .multilineTextAlignment(.leading)
+// Aurélien Fix
+//                                        .onAppear() {
+//                                            let data = newName
+//                                            UserDefaults.standard.set(data, forKey: "name")
+//                                        }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
-                                               Rectangle()
-                                                   .stroke(.gray, lineWidth: 1)
-                                           )
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .stroke(.gray, lineWidth: 0.2)
+                                                .shadow(radius: 20)
+                                        )
                                         .shadow(radius: 10)
+                                }
                                 HStack {
                                     Spacer()
                                     //Bouton Modifier pour modifier nom de profil
@@ -363,38 +223,57 @@ struct ProfileView: View {
                                     .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
                                     .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
                                     .padding(.horizontal, 5)
-                                }
+                                    .foregroundColor(.gray)
+                                    .padding(.horizontal, 5)
+                                
                                 
                             }
                         }
                     }
                 }
             }
-            .padding()
+                .onAppear {
+                    url.loadImage(&image)
+                }
         }
-            Section{
+            
+            Section {
                 HStack {
-                    Text("Favoris")
-                        .font(.title2)
-                    .fontWeight(.semibold)
+                    HStack{
+                        Text("Favoris")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color(.customYellow))
+                    }
+                    .padding(.top, 20)
                     Spacer()
                 }
                 .padding(.horizontal)
                 Spacer()
                 HStack {
                     Text("Catégories:")
+                        .font(.headline)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
-                    Picker("Choisir une catégorie", selection: $selectedCategory) {
-                        ForEach(viewModelDecouverte.categories) {category in
+                    Picker("Choisir une catégorie", selection: $selectedCategory){
+                        ForEach(globalDataModel.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
+                                .font(.footnote)
                         }
                     }
+                    .font(.footnote)
                     .pickerStyle(.menu)
+                    .colorScheme(.dark)
+                    .foregroundColor(Color(.customMediumGray))
+                    .accentColor(Color(.customMediumGray))
+      
                     Spacer()
+                    
                 }
                 .padding(.horizontal)
-                .font(.headline)
             }
             
                 VStack {
@@ -406,13 +285,13 @@ struct ProfileView: View {
                                     .frame(height: 160)
                             }
                         }
-                        .padding(.horizontal)
                 }
             }
         }
         .padding()
 // Aurélien - Modification Back Button
         .navigationBarBackButtonHidden(true)
+        .navigationTitle("Profil")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
@@ -427,21 +306,8 @@ struct ProfileView: View {
             }
         }
     }
-    
-    //Fonction pour garder le nom dans les Userdefaults
-    func saveName(data: String) {
-        UserDefaults.standard.set(data, forKey: "name")
-
-        print("saved name string:" + data.description)
-//        print(savedName)
-        print(viewModel.utilisateur.nom)
-//        print(url)
-        print("oldName is: \(oldName)")
-        print("newName is: \(newName)")
-    }
 }
 
-// Aurélien - Modif preview
 #Preview {
     ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }
