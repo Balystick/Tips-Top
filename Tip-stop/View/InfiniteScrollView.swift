@@ -13,7 +13,7 @@ struct InfiniteScrollView: View {
         ZStack {
             GeometryReader { geometry in
                 TabView(selection: $currentIndex) {
-                    ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
+                    ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty}), id: \.element.id) { index, astuce in
                         AstuceView(astuce: astuce)
                             .tag(index)
                             .frame(width: geometry.size.width, height: geometry.size.height)

@@ -32,9 +32,9 @@ class InfiniteScrollViewModel: ObservableObject {
                 pourcentageVue: 75,
                 nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
                 categorie: Categorie(
-                    titre: "Productivité",
+                    titre: "Découverte",
                     description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
+                    icon: "Découverte",
                     astuces: [],
                     topics: []
                 ),
@@ -56,6 +56,68 @@ class InfiniteScrollViewModel: ObservableObject {
                     )
                 ]
             ),
+            Astuce(
+                titre: "How to Use SwiftUI",
+                video: "Vid2",
+                dateDeCreation: Date(),
+                pourcentageVue: 75,
+                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                categorie: Categorie(
+                    titre: "Personnalisation",
+                    description: "Maximiser votre efficacité au quotidien",
+                    icon: "Personnalisation",
+                    astuces: [],
+                    topics: []
+                ),
+                steps: [
+                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
+                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
+                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
+                ],
+                commentaires: [
+                    Commentaire(
+                        contenu: "Great tutorial!",
+                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
+                        nombreDeLikes: 15,
+                        utilisateur: Utilisateur(
+                            nom: "John Doe",
+                            photo: UIImage(named: "user_photo_1"),
+                            favoris: []
+                        )
+                    )
+                ]
+            ),
+            Astuce(
+                titre: "How to Use SwiftUI",
+                video: "Vid3",
+                dateDeCreation: Date(),
+                pourcentageVue: 75,
+                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                categorie: Categorie(
+                    titre: "Productivité",
+                    description: "Maximiser votre efficacité au quotidien",
+                    icon: "Productivité",
+                    astuces: [],
+                    topics: []
+                ),
+                steps: [
+                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
+                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
+                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
+                ],
+                commentaires: [
+                    Commentaire(
+                        contenu: "Great tutorial!",
+                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
+                        nombreDeLikes: 15,
+                        utilisateur: Utilisateur(
+                            nom: "John Doe",
+                            photo: UIImage(named: "user_photo_1"),
+                            favoris: []
+                        )
+                    )
+                ]
+            )
             // Add more predefined Astuce objects here
         ]
     }
