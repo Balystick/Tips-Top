@@ -17,12 +17,12 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
     var isOnLastPage = false
 
     let pageData = [
-        ["videoName": "Onboarding_1", "titleText": "Bienvenue !", "text": "Optimisez votre expérience\nen découvrant de nouvelles\nfonctionnalités de votre iPhone"],
-        ["videoName": "Onboarding_2", "titleText": "Suggestions", "text": "Tips Top fera tout son possible pour vous suggérer les fonctionnalités et les astuces dont vous avez besoin"],
-        ["videoName": "Onboarding_1", "titleText": "Étape par étape", "text": "Une description étape par étape\nvous permet de mettre en oeuvre\nchacune des fonctionnalités !"],
-        ["videoName": "Onboarding_1", "titleText": "Découverte", "text": "Recherchez de nouvelles fonctionnalités regroupées par catégories et sujets de discussion"],
-        ["videoName": "Onboarding_1", "titleText": "Profil", "text": "Retrouvez toutes vos vidéos favorites, et pour une fois bien classées !"],
-        ["videoName": "Onboarding_1", "titleText": "Ready ?", "text": ""]
+        ["videoName": "Onboarding1", "titleText": "Bienvenue !", "text": "Optimisez votre expérience\nen découvrant de nouvelles\nfonctionnalités de votre iPhone"],
+        ["videoName": "Onboarding2", "titleText": "Suggestions", "text": "Tips Top fera tout son possible pour vous suggérer les fonctionnalités et les astuces dont vous avez besoin !"],
+        ["videoName": "Onboarding3", "titleText": "Étape par étape", "text": "Une description étape par étape\nvous permet de mettre en oeuvre\nchacune des fonctionnalités !"],
+        ["videoName": "Onboarding4", "titleText": "Découverte", "text": "Recherchez de nouvelles fonctionnalités regroupées par catégories et sujets de discussion"],
+        ["videoName": "Onboarding5", "titleText": "Profil", "text": "Retrouvez toutes vos vidéos favorites, et pour une fois bien classées !"],
+        ["videoName": "Onboarding6", "titleText": "Go !", "text": ""]
     ]
     
     override func viewDidLoad() {
@@ -84,10 +84,10 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         }
     }
     
-    // Appelée après la transition vers un nouveau view controller et appelle completeOnboarding après 3.5 secondes si l'utilisateur est sur la dernière page de l'onboarding
+    // Appelée après la transition vers un nouveau view controller et appelle completeOnboarding après 1,5 secondes si l'utilisateur est sur la dernière page de l'onboarding
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed && isOnLastPage {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
                 self?.completeOnboarding()
             }
         }
