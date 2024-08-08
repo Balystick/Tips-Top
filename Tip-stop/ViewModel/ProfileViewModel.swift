@@ -29,7 +29,8 @@ class ProfileViewModel: ObservableObject {
     init(globalDataModel: GlobalDataModel, favoris: [Favori], utilisateur: Utilisateur) {
         self.globalDataModel = globalDataModel
         self.favoris = favoris
-        self.utilisateur = utilisateur
+        let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
+        self.utilisateur = Utilisateur(nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
     }
     
     /// Ajoute un nouvel utilisateur avec un nom vide et les mêmes informations de photo que l'utilisateur actuel.

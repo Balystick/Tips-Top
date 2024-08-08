@@ -85,18 +85,6 @@ struct ProfileView: View {
         VStack {
             VStack(alignment: .leading){
                 
-                HStack {
-                    Image(systemName: "arrow.left")
-                        .onAppear {
-                            url.loadImage(&image)
-                        }
-                    Text("Profil")
-                        .multilineTextAlignment(.center)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .offset(x: 120)
-                }
-                
                 HStack{
                     VStack{
                         // Photo image profile ou vide avec icone
@@ -246,6 +234,9 @@ struct ProfileView: View {
                     }
                 }
             }
+                .onAppear {
+                    url.loadImage(&image)
+                }
         }
             
             Section {
@@ -302,6 +293,7 @@ struct ProfileView: View {
         .padding()
 // Aurélien - Modification Back Button
         .navigationBarBackButtonHidden(true)
+        .navigationTitle("Profil")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(action: {
