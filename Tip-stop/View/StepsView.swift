@@ -8,73 +8,108 @@ import SwiftUI
 
 struct StepsView: View {
     
-    @State private var isValidate = false
+    @Environment(\.dismiss) var dismiss
     
+    @State private var isValidate = false
     @State private var steps: [Step] = [
-        Step(titre: "Ouvrir les réglages", description: ""),
-        Step(titre: "Aller dans accessibilité", description: ""),
-        Step(titre: "Sélectionner", description: ""),
-        Step(titre: "Aller dans", description: ""),
-        Step(titre: "Ouvir le lien", description: ""),
-        Step(titre: "", description: ""),
-        Step(titre: "", description: ""),
-        Step(titre: "", description: ""),
-        Step(titre: "", description: ""),
-        Step(titre: "", description: "")
+        Step(num: 1, titre: "Ouvrir les réglages", description: "", isSelected: false),
+        Step(num: 2, titre: "Aller dans accessibilité", description: "", isSelected: false),
+        Step(num: 3, titre: "Sélectionner", description: "", isSelected: false),
+        Step(num: 4, titre: "Aller dans", description: "", isSelected: false),
+        Step(num: 5, titre: "Ouvir le lien", description: "", isSelected: false),
+        Step(num: 6, titre: "", description: "", isSelected: false),
+        Step(num: 7, titre: "", description: "", isSelected: false),
+        Step(num: 8, titre: "", description: "", isSelected: false),
+        Step(num: 9, titre: "", description: "", isSelected: false),
+        Step(num: 10, titre: "", description: "", isSelected: false)
     ]
     
-    var nb = 1
-    
     var body: some View {
-        NavigationView {
-            List(steps) { step in
-//                let index = steps.firstIndex(where: {$0.id == step.id})
+        VStack {
+            HStack{
+                Text("Steps")
+                    .font(.title)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Spacer()
+                Button(action: {dismiss() },
+                       label: {Image(systemName: "multiply")
+                })
+                .font(.title)
+                .padding()
+            }
+            .padding(.horizontal, 10)
+            
+            ForEach(steps.indices, id: \.self) { index in
                 VStack {
                     HStack {
-                        if isValidate {
-                            ZStack{
-                                Circle()
-                                    .frame(width: 60)
-                                    .foregroundColor(.customBlue)
-                                    .onTapGesture {
-                                        isValidate.toggle()
+                        ZStack{
+                            Circle()
+                                .frame(width: 50)
+                                .foregroundColor(steps[index].isSelected ? .customBlue : .white)
+                                .overlay(
+                                    Circle().stroke(Color.customBlue, lineWidth: 3)
+                                )
+                                .onTapGesture {
+                                    if steps[index].isSelected {
+                                        if steps[index + 1].isSelected == false {
+                                            for i in 0..<steps.count {
+                                                steps[i].isSelected = false
+                                            }
+                                        } else{
+                                            for i in index + 1..<steps.count {
+                                                if steps[i].isSelected == true {
+                                                    steps[i].isSelected.toggle()
+                                                }
+                                            }
+                                        }
+                                    }else {
+                                        for i in 0...index {
+                                            if steps[i].isSelected == false {
+                                                steps[i].isSelected.toggle()
+                                            }
+                                        }
                                     }
+//                                    steps[index].isSelected.toggle()
+                                }
+                            
+                            if steps[index].isSelected {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(Color(.customLightGray))
+                                    .foregroundColor(.customLightGray)
+                                
+                            } else if steps[index].isSelected {
+                                
+                            }else {
+                                Text("\(steps[index].num)")
+                                    .foregroundColor(.customBlue)
+                            }
+                        }
+                        .padding(.horizontal, 10)
+                        
+                        if steps[index].isSelected {
+                            VStack(alignment: .leading) {
+                                Text(steps[index].titre)
+                                    .foregroundColor(.customMediumGray)
+                                Text(steps[index].description)
+                                    .foregroundColor(.customMediumGray)
                             }
                         }else {
-                            ZStack{
-                                Circle()
-                                    .stroke(Color(.customBlue), lineWidth: 3)
-                                    .frame(width: 60)
-                                    .font(.title)
-                                    .foregroundColor(Color(.white))
-                                    .onTapGesture {
-                                        isValidate.toggle()
-                                    }
-                                Text("")
-                                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                        .foregroundColor(Color("customBlue"))
+                            VStack(alignment: .leading) {
+                                Text(steps[index].titre)
+                                    .foregroundColor(.black)
+                                Text(steps[index].description)
+                                    .foregroundColor(.black)
                             }
                         }
-                        VStack(alignment: .leading){
-                            Text(step.titre)
-                            Text(step.description)
-                        }
+                        Spacer()
                     }
+                    .padding(.vertical, 5)
                 }
             }
-            .containerRelativeFrame([.horizontal, .vertical])
-            .background(Color(.white))
-            .navigationTitle("Steps")
-            .navigationBarItems(trailing: Button(action: {
-                
-            }, label: {
-                Image(systemName: "multiply")
-            }))
         }
+        .padding()
     }
 }
+
 #Preview {
     StepsView()
 }

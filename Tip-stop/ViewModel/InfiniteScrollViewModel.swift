@@ -39,9 +39,9 @@ class InfiniteScrollViewModel: ObservableObject {
                     topics: []
                 ),
                 steps: [
-                    Step(titre: "Setup", description: "Set up your Xcode project for SwiftUI."),
-                    Step(titre: "Basic Views", description: "Learn about basic SwiftUI views."),
-                    Step(titre: "State Management", description: "Understand state management in SwiftUI.")
+                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
+                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
+                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
                 ],
                 commentaires: [
                     Commentaire(

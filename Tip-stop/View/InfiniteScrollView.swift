@@ -7,6 +7,8 @@ struct InfiniteScrollView: View {
     @State var categoryTitre: String
     @State private var currentIndex: Int = 0
     
+    @State private var showingSheet = false
+    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -65,8 +67,14 @@ struct InfiniteScrollView: View {
                 }
                 Spacer()
             }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .ignoresSafeArea()
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
     }
 }
+
+//#Preview {
+//    InfiniteScrollView(categoryTitre: "Catégorie")
+//}
