@@ -15,7 +15,7 @@ struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
    
     // Catégorie sélectionnée automatiquement dans picker
-    @State private var selectedCategory = "Toutes"
+    @State private var selectedCategory = "Productivité"
 
     // Booleen afficher ImagePicker
     @State private var showImagePicker = false
@@ -46,24 +46,16 @@ struct ProfileView: View {
     
     //Tab de video pour grid favoris
     let video = [
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=7qHGDyFkoH0",
-        "https://www.youtube.com/watch?v=U_iuF4Hdjag",
-        "https://www.youtube.com/watch?v=lrdh_eydNGo",
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=7qHGDyFkoH0",
-        "https://www.youtube.com/watch?v=U_iuF4Hdjag",
-        "https://www.youtube.com/watch?v=lrdh_eydNGo",
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=7qHGDyFkoH0",
-        "https://www.youtube.com/watch?v=U_iuF4Hdjag",
-        "https://www.youtube.com/watch?v=lrdh_eydNGo",
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=kpodxkjLN0o",
-        "https://www.youtube.com/watch?v=7qHGDyFkoH0",
-        "https://www.youtube.com/watch?v=U_iuF4Hdjag",
-        "https://www.youtube.com/watch?v=lrdh_eydNGo"]
+        "Vid1",
+        "Vid2",
+        "Vid3",
+        "Vid4",
+        "Vid5",
+        "Vid6",
+        "Vid7",
+        "Vid8",
+        "Vid9",
+        "Vid10"]
     
     //Grid de list favoris
     let columns = [
@@ -280,9 +272,21 @@ struct ProfileView: View {
                     // Scroll pour afficher liste video en grid
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(video, id: \.self) { item in
-                                VideoPlayer(player: AVPlayer(url:  URL(string: item)!))
-                                    .frame(height: 160)
+                            ForEach(video, id: \.self) { fileName in
+                                if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                    let player = AVPlayer(url: url)
+                                                VideoPlayer(player: player)
+                                        .aspectRatio(9/16, contentMode: .fill)
+                                        .frame(height: 180)
+                                        .padding(.horizontal, 10)
+                                        .onAppear {
+                                            player.pause()
+                                        }
+                                } else {
+                                    Text("Video not found")
+                                        .frame(height: 160)
+                                        .background(Color.red)
+                                }
                             }
                         }
                 }
