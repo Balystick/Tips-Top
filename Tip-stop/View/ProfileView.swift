@@ -10,11 +10,9 @@ import AVKit
 import PhotosUI
 
 struct ProfileView: View {
-    
-    //viewModel Profile View Model
-    @StateObject private var viewModel = ProfileViewModel(favoris: [], utilisateur: Utilisateur(nom: " ", photo: UIImage(named: ""), favoris: []))
-    //viewModel Decouverte View Model
-    @StateObject private var viewModelDecouverte = DecouverteViewModel(categories: [])
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
+    @StateObject private var viewModel: ProfileViewModel
    
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
@@ -41,82 +39,10 @@ struct ProfileView: View {
     @State private var showingAlert = false
     @State private var showAlert = false
     //Clear button x in textfield
-    init() {
-      UITextField.appearance().clearButtonMode = .whileEditing
-    }
+    
     //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
-  
-    //Lire valeur user defaults nom
-    @State var name : String = UserDefaults.standard.string(forKey: "name") ?? ""
-
-    //Liste tab catégories
-    @State private var categories: [Categorie] = [
-            Categorie(
-                titre: "Toutes",
-                description: "",
-                icon: "",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Productivité",
-                description: "Maximiser votre efficacité au quotidien",
-                icon: "Productivité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Personnalisation",
-                description: "Personnaliser votre iPhone pour une expérience utilisateur unique. Comme vous",
-                icon: "Personnalisation",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Utilisation Avancée",
-                description: "Explorez les fonctionnalités avancées de votre iPhone, vous n'en reviendrez pas",
-                icon: "UtilisationAvancée",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Sécurité & Confidentialité",
-                description: "Assurez la sécurité et la confidentialité de vos données grâce à des outils et des paramètres robustes",
-                icon: "SécuritéConfidentialité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Connectivité et Communication",
-                description: "Optimisez vos communications avec des astuces pour FaceTime, Messages, AirDrop et réseaux sociaux",
-                icon: "ConnectivitéCommunication",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Multimédia",
-                description: "Maîtrisez l’utilisation des app Photos, Musique, Podcasts et Livres pour une expérience multimédia sans pareil",
-                icon: "Multimédia",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Accessibilité",
-                description: "Rendez votre iPhone hyper accessible avec des fonctionnalités comme VoiceOver, AssistiveTouch et autres réglages",
-                icon: "Accessibilité",
-                astuces: [],
-                topics: []
-            ),
-            Categorie(
-                titre: "Batterie et Performances",
-                description: "Prolongez votre batterie et maintenez les performances optimales de votre iPhone",
-                icon: "BatteriePerformances",
-                astuces: [],
-                topics: []
-            )
-        ]
     
     //Tab de video pour grid favoris
     let video = [
@@ -138,27 +64,22 @@ struct ProfileView: View {
         "https://www.youtube.com/watch?v=7qHGDyFkoH0",
         "https://www.youtube.com/watch?v=U_iuF4Hdjag",
         "https://www.youtube.com/watch?v=lrdh_eydNGo"]
-    
     //Grid de list favoris
     let columns = [
          GridItem(.adaptive(minimum: 100))
      ]
-
+    
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+        let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
+        UITextField.appearance().clearButtonMode = .whileEditing
+    }
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading){
-                
-                HStack {
-                    Image(systemName: "arrow.left")
-                        .onAppear {
-                            url.loadImage(&image)
-                        }
-                    Text("Profil")
-                        .multilineTextAlignment(.center)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .offset(x: 120)
-                }
                 
                 HStack{
                     VStack{
@@ -192,8 +113,8 @@ struct ProfileView: View {
                     }.sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
-                    .onTapGesture {
-                        url.saveImage(image)
+                    .onChange(of: image) { oldValue, newValue in
+                        viewModel.saveImage(newValue)
                     }
                     Spacer()
                     Spacer()
@@ -208,7 +129,7 @@ struct ProfileView: View {
                                     .onSubmit {
                                         isValidate.toggle()
                                         viewModel.addUtilisateur()
-                                        saveName()
+                                        viewModel.saveName(viewModel.utilisateur.nom)
                                         isModify = false
                                     }
                                 HStack {
@@ -229,17 +150,17 @@ struct ProfileView: View {
                                     //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
                                         //Ajout contraintes texte avec alerte si pas respectées
-                                        self.saveName()
+//    Aurélien                                    self.saveName()
                                         self.failedEnterName = false
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
                                             self.failedEnterName.toggle()
-                                        }else {
+                                        } else {
                                             //Fonction pour garder le nom dans le model utilisateur
                                             viewModel.addUtilisateur()
                                             //Fonction pour garder le nom dans les Userdefaults
                                             newName = viewModel.utilisateur.nom
-                                            saveName()
+                                            viewModel.saveName(newName)
                                             oldName = viewModel.utilisateur.nom
                                             isValidate.toggle()
                                             isModify = false
@@ -275,21 +196,23 @@ struct ProfileView: View {
                                     Text("Veuillez entrer voter nom")
                                         .foregroundColor(Color.gray)
                                         .font(.caption)
-                                }else {
-                                //Nom profil affiché
-                                    Text(name)
+                                } else {
+                                    //Nom profil affiché
+                                    Text(viewModel.utilisateur.nom)
                                         .multilineTextAlignment(.leading)
-                                        .onAppear() {
-                                            let data = newName
-                                            UserDefaults.standard.set(data, forKey: "name")
-                                        }
+// Aurélien Fix
+//                                        .onAppear() {
+//                                            let data = newName
+//                                            UserDefaults.standard.set(data, forKey: "name")
+//                                        }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
-                                               RoundedRectangle(cornerRadius: 5)
+                                            RoundedRectangle(cornerRadius: 5)
                                                 .stroke(.gray, lineWidth: 0.2)
                                                 .shadow(radius: 20)
-                                           )
+                                        )
                                         .shadow(radius: 10)
+                                }
                                 HStack {
                                     Spacer()
                                     //Bouton Modifier pour modifier nom de profil
@@ -301,16 +224,19 @@ struct ProfileView: View {
                                     .padding(.horizontal, 5)
                                     .foregroundColor(.gray)
                                     .padding(.horizontal, 5)
-                                }
+                                
                                 
                             }
                         }
                     }
                 }
             }
+                .onAppear {
+                    url.loadImage(&image)
+                }
         }
             
-            Section{
+            Section {
                 HStack {
                     HStack{
                         Text("Favoris")
@@ -331,7 +257,7 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(viewModelDecouverte.categories) {category in
+                        ForEach(globalDataModel.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
@@ -362,26 +288,25 @@ struct ProfileView: View {
             }
         }
         .padding()
-        .containerRelativeFrame([.horizontal, .vertical])
-        .background(Color(.customLightGray))
-    }
-    
-    //Fonction pour garder le nom dans les Userdefaults
-    /// Enregistre le nom fourni dans les User Defaults et met à jour la propriété `name`.
-    ///
-    /// Cette méthode stocke la valeur de `newName` dans les User Defaults sous la clé `"name"`
-    /// et met à jour la propriété `name` avec la nouvelle valeur.
-    ///
-    /// - Note: Assurez-vous que `newName` est défini avant d'appeler cette méthode.
-    ///
-    /// - Important: Cette méthode ne vérifie pas si le nom est vide ou nul avant de le sauvegarder.
-    func saveName() {
-        let data = newName
-        UserDefaults.standard.set(data, forKey: "name")
-        name = newName
+// Aurélien - Modification Back Button
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("Profil")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: {
+                    path.removeLast()
+                }) {
+                    Image(systemName: "arrow.uturn.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(Color(white: 0.2))
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }

@@ -20,6 +20,8 @@
 		696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */; };
 		696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */; };
 		696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */; };
+		6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */; };
+		6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B8A12C64A70900FD4905 /* CommentaireView.swift */; };
 		699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */; };
 		699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD182C48FAD900044FB4 /* ContentView.swift */; };
 		699DFD1B2C48FADA00044FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699DFD1A2C48FADA00044FB4 /* Assets.xcassets */; };
@@ -53,9 +55,11 @@
 		E14F22702C6235E500C68FC0 /* Onboarding_6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */; };
 		E14F227E2C624E1000C68FC0 /* Onboarding_4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
+		E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1C568112C627577006C2B32 /* iPhone15.mp4 */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
+		E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +93,8 @@
 		696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid3.mp4; sourceTree = "<group>"; };
 		696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid8.mp4; sourceTree = "<group>"; };
 		696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid7.mp4; sourceTree = "<group>"; };
+		6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireViewController.swift; sourceTree = "<group>"; };
+		6993B8A12C64A70900FD4905 /* CommentaireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireView.swift; sourceTree = "<group>"; };
 		699DFD132C48FAD900044FB4 /* Tip-stop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip-stop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip_stopApp.swift; sourceTree = "<group>"; };
 		699DFD182C48FAD900044FB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,10 +134,12 @@
 		E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_6.mp4; sourceTree = "<group>"; };
 		E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding_4.mp4; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		E1C568112C627577006C2B32 /* iPhone15.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iPhone15.mp4; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +180,7 @@
 				696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */,
 				696E7E172C5B7B940008BF25 /* Vid9.mp4 */,
 				696E7E182C5B7B940008BF25 /* Vid10.mp4 */,
+				E1C568112C627577006C2B32 /* iPhone15.mp4 */,
 				E14F22692C6227F800C68FC0 /* Onboarding_1.mp4 */,
 				E14F227D2C624E1000C68FC0 /* Onboarding_4.mp4 */,
 				E14F226F2C6235E500C68FC0 /* Onboarding_6.mp4 */,
@@ -198,7 +207,6 @@
 			children = (
 				74E656FE2C58D81F00D438E0 /* Info.plist */,
 				699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */,
-				699DFD182C48FAD900044FB4 /* ContentView.swift */,
 				699DFD402C48FC0E00044FB4 /* Model */,
 				699DFD422C48FC3200044FB4 /* ViewModel */,
 				699DFD412C48FC1E00044FB4 /* View */,
@@ -252,20 +260,23 @@
 			isa = PBXGroup;
 			children = (
 				E1D28F162C57843E001B9766 /* Onboarding */,
-				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
-				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
-				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
+				699DFD182C48FAD900044FB4 /* ContentView.swift */,
+				6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */,
+				6993B8A12C64A70900FD4905 /* CommentaireView.swift */,
+				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				69661A2C2C577DFE00B58B05 /* AstuceView.swift */,
-				6938F7522C57D51A00DC6523 /* StepsView.swift */,
+				699DFD532C4900D400044FB4 /* DecouverteView.swift */,
+				E191F2D22C58E63D000481C3 /* CarouselView.swift */,
 				699DFD572C49014800044FB4 /* ProfileView.swift */,
-				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
-				E12943A42C62610700F8BB83 /* TopicView.swift */,
-				E129439A2C62605F00F8BB83 /* NewReponse.swift */,
+				696DEB6C2C611A51003176EB /* ImagePicker.swift */,
 				E129439C2C62606500F8BB83 /* ListTopicView.swift */,
+				E12943A42C62610700F8BB83 /* TopicView.swift */,
 				E12943A22C62608F00F8BB83 /* ReponseView.swift */,
+				E129439A2C62605F00F8BB83 /* NewReponse.swift */,
 				E129439E2C62607400F8BB83 /* NewReponseController.swift */,
 				E129439F2C62607400F8BB83 /* StoryboardReponseView.storyboard */,
+				6938F7522C57D51A00DC6523 /* StepsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,6 +284,7 @@
 		699DFD422C48FC3200044FB4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */,
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
@@ -415,6 +427,7 @@
 				696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */,
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
 				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
+				E1C568122C627577006C2B32 /* iPhone15.mp4 in Resources */,
 				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
 				696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */,
 				E14F226A2C6227F800C68FC0 /* Onboarding_1.mp4 in Resources */,
@@ -462,16 +475,19 @@
 				6938F7532C57D51E00DC6523 /* StepsView.swift in Sources */,
 				696DEB6D2C611A51003176EB /* ImagePicker.swift in Sources */,
 				699DFD502C48FF8B00044FB4 /* Reponse.swift in Sources */,
+				6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */,
 				699DFD482C48FDD000044FB4 /* Commentaire.swift in Sources */,
 				E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */,
 				69661A2D2C577E0A00B58B05 /* AstuceView.swift in Sources */,
 				699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */,
+				6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */,
 				699DFD4A2C48FE6000044FB4 /* Step.swift in Sources */,
 				E129439D2C62606500F8BB83 /* ListTopicView.swift in Sources */,
 				699DFD5E2C4902BF00044FB4 /* InfiniteScrollViewModel.swift in Sources */,
 				E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */,
 				699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */,
 				E12943A02C62607400F8BB83 /* NewReponseController.swift in Sources */,
+				E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,
@@ -638,7 +654,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Tip-stop/Preview Content\"";
-				DEVELOPMENT_TEAM = 746GA298QV;
+				DEVELOPMENT_TEAM = K33SV66CH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Tip-stop/Info.plist";
@@ -672,7 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Tip-stop/Preview Content\"";
-				DEVELOPMENT_TEAM = 746GA298QV;
+				DEVELOPMENT_TEAM = K33SV66CH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Tip-stop/Info.plist";

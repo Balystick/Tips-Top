@@ -10,6 +10,15 @@ import UIKit
 
 struct ListTopicView: View {
     
+    // Ajout navigation path & globalDataModel
+    @Binding var path: NavigationPath
+    @ObservedObject var globalDataModel: GlobalDataModel
+    
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+        self._path = path
+        self.globalDataModel = globalDataModel
+    }
+    
     var allTopic:[Topic] = [
         Topic(dateDebut: Date(), sujet: "Les androïdes rêvent-ils de moutons électriques ?", reponse: [rep1], categorie: categorie1),
         Topic(dateDebut: Date(), sujet: "Les dauphins volent-ils dans l'eau", reponse: [rep1], categorie: categorie1),
@@ -17,7 +26,7 @@ struct ListTopicView: View {
         
         var body: some View
         {
-            NavigationStack
+            NavigationView
             {
                 List(allTopic)
                 {
@@ -28,6 +37,20 @@ struct ListTopicView: View {
                     }
                 }
     
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        path.removeLast()
+                    }) {
+                        Image(systemName: "arrow.uturn.left")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(Color(white: 0.2))
+                    }
+                }
             }
            
         }
@@ -43,6 +66,8 @@ struct ListTopicView: View {
 
 
 
+
 #Preview {
-    ListTopicView()
+    ListTopicView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }
+
