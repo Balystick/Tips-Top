@@ -11,7 +11,6 @@ struct ContentView: View {
     @StateObject private var globalDataModel = GlobalDataModel()
     @State private var path = NavigationPath()
     @State private var showOnboarding = !UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
-    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {

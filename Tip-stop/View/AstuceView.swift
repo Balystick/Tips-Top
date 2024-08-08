@@ -10,13 +10,22 @@ import AVKit
 struct AstuceView: View {
     let astuce: Astuce
     @State private var showingSteps = false
+    @State private var showingComments = false
     @State private var player: AVPlayer?
     @State private var playerItem: AVPlayerItem?
+    @EnvironmentObject var viewModel: InfiniteScrollViewModel
+    @State private var isLiked: Bool = false
+    @State private var isFavorited: Bool = false
+    @State private var mutableAstuce: Astuce
+    
+    init(astuce: Astuce) {
+        self.astuce = astuce
+        _mutableAstuce = State(initialValue: astuce)
+    }
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Video Player
                 if let player = player {
                     VideoPlayer(player: player)
                         .onAppear {
@@ -43,18 +52,23 @@ struct AstuceView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        VStack {                            
+                        VStack {
                             Button(action: {
-                                print("Like button tapped")
+                                toggleLike()
                             }) {
-                                Image(systemName: "heart")
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                                    .padding()
+                                VStack {
+                                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                    Text("\(mutableAstuce.nombreDeLikes)")
+                                        .foregroundColor(.white)
+                                        .font(.caption)
+                                }
+                                .padding()
                             }
 
                             Button(action: {
-                                print("Comment button tapped")
+                                showingComments = true
                             }) {
                                 Image(systemName: "message")
                                     .font(.title)
@@ -62,9 +76,10 @@ struct AstuceView: View {
                             }
 
                             Button(action: {
-                                print("Favorite button tapped")
+                                isFavorited.toggle()
+                                viewModel.toggleFavorite(for: mutableAstuce)
                             }) {
-                                Image(systemName: "star")
+                                Image(systemName: isFavorited ? "star.fill" : "star")
                                     .font(.title)
                                     .foregroundColor(.white)
                                     .padding()
@@ -84,21 +99,39 @@ struct AstuceView: View {
                         showingSteps.toggle()
                     }
             )
+            .sheet(isPresented: $showingComments) {
+                            CommentaireView(commentaires: astuce.commentaires)
+                        }
             .sheet(isPresented: $showingSteps) {
-                StepsView(steps: astuce.steps)
+                StepsView(steps: mutableAstuce.steps)
+            }
+            .onAppear {
+                isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.titre)
+                isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.titre)
             }
         }
         .ignoresSafeArea()
     }
 
     private func loadVideo() {
-        let videoName = astuce.video
+        let videoName = mutableAstuce.video
         if let videoURL = Bundle.main.url(forResource: videoName, withExtension: "mp4") {
             playerItem = AVPlayerItem(url: videoURL)
             player = AVPlayer(playerItem: playerItem)
             player?.volume = 1.0
         } else {
             print("Failed to find video: \(videoName).mp4")
+        }
+    }
+
+    private func toggleLike() {
+        isLiked.toggle()
+        viewModel.toggleLike(for: mutableAstuce)
+        
+        if isLiked {
+            mutableAstuce.nombreDeLikes += 1
+        } else {
+            mutableAstuce.nombreDeLikes -= 1
         }
     }
 }
