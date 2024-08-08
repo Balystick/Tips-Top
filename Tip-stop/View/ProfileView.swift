@@ -212,8 +212,8 @@ struct ProfileView: View {
                                     Text("Veuillez entrer voter nom")
                                         .foregroundColor(Color.gray)
                                         .font(.caption)
-                                }else {
-                                //Nom profil affiché
+                                } else {
+                                    //Nom profil affiché
                                     Text(name)
                                         .multilineTextAlignment(.leading)
                                         .onAppear() {
@@ -222,11 +222,12 @@ struct ProfileView: View {
                                         }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
-                                               RoundedRectangle(cornerRadius: 5)
+                                            RoundedRectangle(cornerRadius: 5)
                                                 .stroke(.gray, lineWidth: 0.2)
                                                 .shadow(radius: 20)
-                                           )
+                                        )
                                         .shadow(radius: 10)
+                                }
                                 HStack {
                                     Spacer()
                                     //Bouton Modifier pour modifier nom de profil
@@ -238,7 +239,7 @@ struct ProfileView: View {
                                     .padding(.horizontal, 5)
                                     .foregroundColor(.gray)
                                     .padding(.horizontal, 5)
-                                }
+                                
                                 
                             }
                         }
