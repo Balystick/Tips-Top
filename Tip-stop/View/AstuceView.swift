@@ -106,8 +106,8 @@ struct AstuceView: View {
                 StepsView()
             }
             .onAppear {
-                isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.titre)
-                isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.titre)
+                isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.video)
+                isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.video)
             }
         }
         .ignoresSafeArea()

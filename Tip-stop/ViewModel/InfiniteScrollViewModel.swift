@@ -134,7 +134,7 @@ class InfiniteScrollViewModel: ObservableObject {
         } else {
             // Add like
             updatedAstuce.nombreDeLikes += 1
-            saveLikeStatus(for: astuce.titre)
+            saveLikeStatus(for: astuce.video)
             updateStoredLikeCount(for: astuce.video, count: updatedAstuce.nombreDeLikes)
         }
 
