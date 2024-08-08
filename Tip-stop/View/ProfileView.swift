@@ -73,10 +73,11 @@ struct ProfileView: View {
          GridItem(.adaptive(minimum: 100))
      ]
     
-// Aurélien - Déplacement et complétion init
     init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
         self._path = path
         self.globalDataModel = globalDataModel
+        let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
@@ -170,7 +171,7 @@ struct ProfileView: View {
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
                                             self.failedEnterName.toggle()
-                                        }else {
+                                        } else {
                                             //Fonction pour garder le nom dans le model utilisateur
                                             viewModel.addUtilisateur()
                                             //Fonction pour garder le nom dans les Userdefaults
@@ -246,7 +247,7 @@ struct ProfileView: View {
             }
         }
             
-            Section{
+            Section {
                 HStack {
                     HStack{
                         Text("Favoris")
@@ -267,7 +268,7 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(viewModel.categories) {category in
+                        ForEach(globalDataModel.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
@@ -331,7 +332,6 @@ struct ProfileView: View {
     }
 }
 
-// Aurélien - Modif preview
 #Preview {
     ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }
