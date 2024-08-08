@@ -103,7 +103,7 @@ struct AstuceView: View {
                             CommentaireView(commentaires: astuce.commentaires)
                         }
             .sheet(isPresented: $showingSteps) {
-                StepsView(steps: mutableAstuce.steps)
+                StepsView()
             }
             .onAppear {
                 isLiked = viewModel.getStoredLikeStatus(for: mutableAstuce.titre)
