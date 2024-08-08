@@ -20,6 +20,8 @@
 		696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */; };
 		696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */; };
 		696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */; };
+		6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */; };
+		6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B8A12C64A70900FD4905 /* CommentaireView.swift */; };
 		699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */; };
 		699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD182C48FAD900044FB4 /* ContentView.swift */; };
 		699DFD1B2C48FADA00044FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 699DFD1A2C48FADA00044FB4 /* Assets.xcassets */; };
@@ -91,6 +93,8 @@
 		696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid3.mp4; sourceTree = "<group>"; };
 		696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid8.mp4; sourceTree = "<group>"; };
 		696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid7.mp4; sourceTree = "<group>"; };
+		6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireViewController.swift; sourceTree = "<group>"; };
+		6993B8A12C64A70900FD4905 /* CommentaireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireView.swift; sourceTree = "<group>"; };
 		699DFD132C48FAD900044FB4 /* Tip-stop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip-stop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip_stopApp.swift; sourceTree = "<group>"; };
 		699DFD182C48FAD900044FB4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -257,6 +261,8 @@
 			children = (
 				E1D28F162C57843E001B9766 /* Onboarding */,
 				699DFD182C48FAD900044FB4 /* ContentView.swift */,
+				6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */,
+				6993B8A12C64A70900FD4905 /* CommentaireView.swift */,
 				E1D28F252C57A378001B9766 /* OnboardingPageView.swift */,
 				699DFD552C49011600044FB4 /* InfiniteScrollView.swift */,
 				69661A2C2C577DFE00B58B05 /* AstuceView.swift */,
@@ -469,10 +475,12 @@
 				6938F7532C57D51E00DC6523 /* StepsView.swift in Sources */,
 				696DEB6D2C611A51003176EB /* ImagePicker.swift in Sources */,
 				699DFD502C48FF8B00044FB4 /* Reponse.swift in Sources */,
+				6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */,
 				699DFD482C48FDD000044FB4 /* Commentaire.swift in Sources */,
 				E12943A32C62608F00F8BB83 /* ReponseView.swift in Sources */,
 				69661A2D2C577E0A00B58B05 /* AstuceView.swift in Sources */,
 				699DFD642C4904C600044FB4 /* TopicViewModel.swift in Sources */,
+				6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */,
 				699DFD4A2C48FE6000044FB4 /* Step.swift in Sources */,
 				E129439D2C62606500F8BB83 /* ListTopicView.swift in Sources */,
 				699DFD5E2C4902BF00044FB4 /* InfiniteScrollViewModel.swift in Sources */,
@@ -646,7 +654,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Tip-stop/Preview Content\"";
-				DEVELOPMENT_TEAM = 746GA298QV;
+				DEVELOPMENT_TEAM = K33SV66CH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Tip-stop/Info.plist";
@@ -680,7 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Tip-stop/Preview Content\"";
-				DEVELOPMENT_TEAM = 746GA298QV;
+				DEVELOPMENT_TEAM = K33SV66CH8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Tip-stop/Info.plist";

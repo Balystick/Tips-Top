@@ -29,3 +29,4 @@ struct Commentaire: Identifiable {
     /// L'utilisateur qui a posté le commentaire.
     var utilisateur: Utilisateur
 }
+
