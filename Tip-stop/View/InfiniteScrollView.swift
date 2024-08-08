@@ -51,6 +51,7 @@ struct InfiniteScrollView: View {
                     
                     Button(action: {
                         path.append("ProfileView")
+                        print(UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? [])
                     }) {
                         ZStack {
                             Circle()
