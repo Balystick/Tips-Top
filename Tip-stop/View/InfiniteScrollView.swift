@@ -13,7 +13,7 @@ struct InfiniteScrollView: View {
         ZStack {
             GeometryReader { geometry in
                 TabView(selection: $currentIndex) {
-                    // categoryTitre == "Nouveautés" not implemented yet
+                    // La recommandation des vidéos par suivi des intéractions utilisateur - recommendVideos() - et la suggestion par nouveautés ne sont pas implémentées pour le moment
                     ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
                         AstuceView(astuce: astuce)
                             .tag(index)
