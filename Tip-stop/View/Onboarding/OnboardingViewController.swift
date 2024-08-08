@@ -18,11 +18,11 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
 
     let pageData = [
         ["videoName": "Onboarding_1", "titleText": "Bienvenue !", "text": "Optimisez votre expérience\nen découvrant de nouvelles\nfonctionnalités de votre iPhone"],
-        ["videoName": "iPhone15", "titleText": "Suggestions", "text": "Tips Top fera tout son possible pour vous suggérer les fonctionnalités et les astuces dont vous avez besoin"],
-        ["videoName": "iPhone15", "titleText": "Étape par étape", "text": "Une description étape par étape\nvous permet de mettre en oeuvre\nchacune des fonctionnalités !"],
-        ["videoName": "Onboarding_4", "titleText": "Découverte", "text": "Recherchez de nouvelles fonctionnalités regroupées par catégories et sujets de discussion"],
-        ["videoName": "iPhone15", "titleText": "Profil", "text": "Retrouvez toutes vos vidéos favorites, et pour une fois bien classées !"],
-        ["videoName": "Onboarding_6", "titleText": "Ready ?", "text": ""]
+        ["videoName": "Onboarding_2", "titleText": "Suggestions", "text": "Tips Top fera tout son possible pour vous suggérer les fonctionnalités et les astuces dont vous avez besoin"],
+        ["videoName": "Onboarding_1", "titleText": "Étape par étape", "text": "Une description étape par étape\nvous permet de mettre en oeuvre\nchacune des fonctionnalités !"],
+        ["videoName": "Onboarding_1", "titleText": "Découverte", "text": "Recherchez de nouvelles fonctionnalités regroupées par catégories et sujets de discussion"],
+        ["videoName": "Onboarding_1", "titleText": "Profil", "text": "Retrouvez toutes vos vidéos favorites, et pour une fois bien classées !"],
+        ["videoName": "Onboarding_1", "titleText": "Ready ?", "text": ""]
     ]
     
     override func viewDidLoad() {
