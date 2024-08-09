@@ -105,6 +105,8 @@ struct ProfileView: View {
                             // Textfield pour modifier nom profil
                             if isModify {
                                 TextField("Entrer votre nom", text: $viewModel.utilisateur.nom)
+                                    .font(.caption)
+                                    .foregroundColor(Color(.customMediumGray))
                                     .textFieldStyle(.roundedBorder)
                                     .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                     .textContentType(.username)
@@ -175,8 +177,8 @@ struct ProfileView: View {
                                 .padding(.horizontal, 15)
                             } else {
                                 if viewModel.utilisateur.nom.isEmpty{
-                                    Text("Veuillez entrer voter nom")
-                                        .foregroundColor(Color.gray)
+                                    Text("Veuillez entrer votre nom")
+                                        .foregroundColor(Color(.customMediumGray))
                                         .font(.caption)
                                 } else {
                                     //Nom profil affiché
