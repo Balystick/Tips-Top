@@ -138,6 +138,16 @@ struct AstuceView: View {
             player = AVPlayer(playerItem: playerItem)
             player?.volume = 1.0
             players[currentIndex] = player
+            // Lecture en boucle des vidéos
+            player?.actionAtItemEnd = .none
+            NotificationCenter.default.addObserver(
+                forName: .AVPlayerItemDidPlayToEndTime,
+                object: playerItem,
+                queue: .main
+            ) { [weak player] _ in
+                player?.seek(to: .zero)
+                player?.play()
+            }
         } else {
             print("Failed to find video: \(videoName).mp4")
         }
