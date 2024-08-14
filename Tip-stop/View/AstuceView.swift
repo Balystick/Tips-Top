@@ -18,10 +18,14 @@ struct AstuceView: View {
     @State private var isFavorited: Bool = false
     @State private var mutableAstuce: Astuce
     @Binding var hasSeenOnboarding: Bool
+    @Binding var currentIndex: Int
+    @Binding var players: [Int: AVPlayer]
 
-    init(astuce: Astuce, hasSeenOnboarding: Binding<Bool>) {
+    init(astuce: Astuce, currentIndex: Binding<Int>, players: Binding<[Int: AVPlayer]>, hasSeenOnboarding: Binding<Bool>) {
         self.astuce = astuce
         _mutableAstuce = State(initialValue: astuce)
+        self._currentIndex = currentIndex
+        self._players = players
         self._hasSeenOnboarding = hasSeenOnboarding
     }
 
@@ -133,6 +137,7 @@ struct AstuceView: View {
             playerItem = AVPlayerItem(url: videoURL)
             player = AVPlayer(playerItem: playerItem)
             player?.volume = 1.0
+            players[currentIndex] = player
         } else {
             print("Failed to find video: \(videoName).mp4")
         }

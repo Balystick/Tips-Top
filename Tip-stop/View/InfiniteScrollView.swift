@@ -1,4 +1,5 @@
 import SwiftUI
+import AVKit
 
 struct InfiniteScrollView: View {
     @Binding var path: NavigationPath
@@ -8,6 +9,7 @@ struct InfiniteScrollView: View {
     @State private var currentIndex: Int = 0
     @State private var showingSheet = false
     @Binding var hasSeenOnboarding: Bool
+    @State private var players: [Int: AVPlayer] = [:]
     
     var body: some View {
         ZStack {
@@ -15,7 +17,7 @@ struct InfiniteScrollView: View {
                 TabView(selection: $currentIndex) {
                     // La recommandation des vidéos par suivi des intéractions utilisateur - recommendVideos() - et la suggestion par nouveautés ne sont pas implémentées pour le moment
                     ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
-                        AstuceView(astuce: astuce, hasSeenOnboarding: $hasSeenOnboarding)
+                        AstuceView(astuce: astuce, currentIndex: $currentIndex, players: $players, hasSeenOnboarding: $hasSeenOnboarding)
                             .tag(index)
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .onAppear {
