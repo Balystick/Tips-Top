@@ -84,6 +84,17 @@ struct AstuceView: View {
                                     .foregroundColor(.white)
                                     .padding()
                             }
+                            
+                            // Ajout bouton showingSteps
+                            Button(action: {
+                                showingSteps.toggle()
+                            }) {
+                                Image(systemName: "list.bullet.rectangle")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .padding(.bottom, 40)
+                                    .padding(.top, 3)
+                            }
                         }
                     }
                 }
@@ -93,12 +104,13 @@ struct AstuceView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .clipped()
-            .gesture(
-                LongPressGesture()
-                    .onEnded { _ in
-                        showingSteps.toggle()
-                    }
-            )
+// In conflict with TabView swipe
+//            .gesture(
+//                LongPressGesture()
+//                    .onEnded { _ in
+//                        showingSteps.toggle()
+//                    }
+//            )
             .sheet(isPresented: $showingComments) {
                             CommentaireView(commentaires: astuce.commentaires)
                         }
