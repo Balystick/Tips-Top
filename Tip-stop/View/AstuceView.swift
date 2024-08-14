@@ -17,10 +17,12 @@ struct AstuceView: View {
     @State private var isLiked: Bool = false
     @State private var isFavorited: Bool = false
     @State private var mutableAstuce: Astuce
-    
-    init(astuce: Astuce) {
+    @Binding var hasSeenOnboarding: Bool
+
+    init(astuce: Astuce, hasSeenOnboarding: Binding<Bool>) {
         self.astuce = astuce
         _mutableAstuce = State(initialValue: astuce)
+        self._hasSeenOnboarding = hasSeenOnboarding
     }
 
     var body: some View {
@@ -29,8 +31,9 @@ struct AstuceView: View {
                 if let player = player {
                     VideoPlayer(player: player)
                         .onAppear {
-                            player.play()
-                        }
+                            if hasSeenOnboarding {
+                                player.play()
+                            }                        }
                         .onDisappear {
                             player.pause()
                         }
@@ -84,7 +87,6 @@ struct AstuceView: View {
                                     .foregroundColor(.white)
                                     .padding()
                             }
-                            
                             // Ajout bouton showingSteps
                             Button(action: {
                                 showingSteps.toggle()
