@@ -84,7 +84,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         }
     }
     
-    // Appelée après la transition vers un nouveau view controller et appelle completeOnboarding après 1,5 secondes si l'utilisateur est sur la dernière page de l'onboarding
+    // Appelée après la transition vers un nouveau view controller et appelle completeOnboarding après 2 secondes si l'utilisateur est sur la dernière page de l'onboarding
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed && isOnLastPage {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in

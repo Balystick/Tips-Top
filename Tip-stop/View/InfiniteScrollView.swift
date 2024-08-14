@@ -13,13 +13,13 @@ struct InfiniteScrollView: View {
     
     var body: some View {
         ZStack {
-            GeometryReader { geometry in
+            Color.white // Force le fullscreen de la zone d'affichage
+                .ignoresSafeArea()
                 TabView(selection: $currentIndex) {
                     // La recommandation des vidéos par suivi des intéractions utilisateur - recommendVideos() - et la suggestion par nouveautés ne sont pas implémentées pour le moment
                     ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
-                        AstuceView(astuce: astuce, currentIndex: $currentIndex, players: $players, hasSeenOnboarding: $hasSeenOnboarding)
+                        AstuceView(astuce: astuce, currentIndex: $currentIndex, index: index, players: $players, hasSeenOnboarding: $hasSeenOnboarding)
                             .tag(index)
-                            .frame(width: geometry.size.width, height: geometry.size.height)
                             .onAppear {
                                 if index == viewModel.astuces.count - 1 {
                                     viewModel.loadMoreAstuces()
@@ -29,7 +29,9 @@ struct InfiniteScrollView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .ignoresSafeArea()
-            }
+                .onChange(of: currentIndex) { oldIndex, newIndex in
+                    playCurrentVideo(at: newIndex)
+                }
             
             VStack {
                 Spacer().frame(height: 40)
@@ -72,13 +74,18 @@ struct InfiniteScrollView: View {
                 Spacer()
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .ignoresSafeArea()
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
     }
+    private func playCurrentVideo(at index: Int) {
+        for (i, player) in players {
+            if i == index {
+                player.play()
+            } else {
+                player.pause()
+            }
+        }
+    }
 }
 
-//#Preview {
-//    InfiniteScrollView(categoryTitre: "Catégorie")
-//}

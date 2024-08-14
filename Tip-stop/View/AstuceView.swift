@@ -19,31 +19,35 @@ struct AstuceView: View {
     @State private var mutableAstuce: Astuce
     @Binding var hasSeenOnboarding: Bool
     @Binding var currentIndex: Int
+    var index: Int
     @Binding var players: [Int: AVPlayer]
-
-    init(astuce: Astuce, currentIndex: Binding<Int>, players: Binding<[Int: AVPlayer]>, hasSeenOnboarding: Binding<Bool>) {
+    
+    init(astuce: Astuce, currentIndex: Binding<Int>, index: Int, players: Binding<[Int: AVPlayer]>, hasSeenOnboarding: Binding<Bool>) {
         self.astuce = astuce
         _mutableAstuce = State(initialValue: astuce)
         self._currentIndex = currentIndex
+        self.index = index
         self._players = players
         self._hasSeenOnboarding = hasSeenOnboarding
     }
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 if let player = player {
                     VideoPlayer(player: player)
                         .onAppear {
-                            if hasSeenOnboarding {
+                            if currentIndex == index && hasSeenOnboarding {
                                 player.play()
-                            }                        }
+                            }
+                            setupLooping()
+                        }
                         .onDisappear {
                             player.pause()
                         }
                         .aspectRatio(9/16, contentMode: .fill)
                         .frame(width: geometry.size.width, height: geometry.size.height)
-                        .ignoresSafeArea()
+//                        .ignoresSafeArea()
                 } else {
                     Text("Loading video...")
                         .onAppear {
@@ -73,7 +77,7 @@ struct AstuceView: View {
                                 }
                                 .padding()
                             }
-
+                            
                             Button(action: {
                                 showingComments = true
                             }) {
@@ -81,7 +85,7 @@ struct AstuceView: View {
                                     .font(.title)
                                     .foregroundColor(.white)
                             }
-
+                            
                             Button(action: {
                                 isFavorited.toggle()
                                 viewModel.toggleFavorite(for: mutableAstuce)
@@ -106,20 +110,13 @@ struct AstuceView: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .ignoresSafeArea()
+//                .ignoresSafeArea()
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .clipped()
-// In conflict with TabView swipe
-//            .gesture(
-//                LongPressGesture()
-//                    .onEnded { _ in
-//                        showingSteps.toggle()
-//                    }
-//            )
             .sheet(isPresented: $showingComments) {
-                            CommentaireView(commentaires: astuce.commentaires)
-                        }
+                CommentaireView(commentaires: astuce.commentaires)
+            }
             .sheet(isPresented: $showingSteps) {
                 StepsView()
             }
@@ -130,29 +127,32 @@ struct AstuceView: View {
         }
         .ignoresSafeArea()
     }
-
+    
     private func loadVideo() {
         let videoName = mutableAstuce.video
         if let videoURL = Bundle.main.url(forResource: videoName, withExtension: "mp4") {
             playerItem = AVPlayerItem(url: videoURL)
             player = AVPlayer(playerItem: playerItem)
             player?.volume = 1.0
-            players[currentIndex] = player
-            // Lecture en boucle des vidéos
-            player?.actionAtItemEnd = .none
-            NotificationCenter.default.addObserver(
-                forName: .AVPlayerItemDidPlayToEndTime,
-                object: playerItem,
-                queue: .main
-            ) { [weak player] _ in
-                player?.seek(to: .zero)
-                player?.play()
-            }
+            players[index] = player
+            setupLooping()
         } else {
             print("Failed to find video: \(videoName).mp4")
         }
     }
-
+    
+    private func setupLooping() {
+        player?.actionAtItemEnd = .none
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: player?.currentItem,
+            queue: .main
+        ) { [weak player] _ in
+            player?.seek(to: .zero)
+            player?.play()
+        }
+    }
+    
     private func toggleLike() {
         isLiked.toggle()
         viewModel.toggleLike(for: mutableAstuce)
