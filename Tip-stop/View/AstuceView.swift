@@ -34,30 +34,29 @@ struct AstuceView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if let player = player {
-                    VideoPlayer(player: player)
-                        .onAppear {
-                            if currentIndex == index && hasSeenOnboarding {
-                                player.play()
+                    if let player = player {
+                        VideoPlayer(player: player)
+                            .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                            .onAppear {
+                                if currentIndex == index && hasSeenOnboarding {
+                                    player.play()
+                                }
+                                setupLooping()
                             }
-                            setupLooping()
-                        }
-                        .onDisappear {
-                            player.pause()
-                        }
-                        .aspectRatio(9/16, contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-//                        .ignoresSafeArea()
-                } else {
-                    Text("Loading video...")
-                        .onAppear {
-                            loadVideo()
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.black)
-                        .foregroundColor(.white)
-                        .font(.title)
-                }
+                            .onDisappear {
+                                player.pause()
+                            }
+                        
+                    } else {
+                        Text("Loading video...")
+                            .onAppear {
+                                loadVideo()
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.black)
+                            .foregroundColor(.white)
+                            .font(.title)
+                    }
                 
                 VStack {
                     Spacer()
@@ -95,7 +94,7 @@ struct AstuceView: View {
                                     .foregroundColor(.white)
                                     .padding()
                             }
-                            // Ajout bouton showingSteps
+
                             Button(action: {
                                 showingSteps.toggle()
                             }) {
@@ -109,8 +108,7 @@ struct AstuceView: View {
                     }
                 }
                 .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-//                .ignoresSafeArea()
+                .frame(width: geometry.size.width, height: geometry.size.height)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .clipped()
@@ -125,7 +123,7 @@ struct AstuceView: View {
                 isFavorited = viewModel.getStoredFavorite(for: mutableAstuce.video)
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.all)
     }
     
     private func loadVideo() {
