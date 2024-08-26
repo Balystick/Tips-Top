@@ -2,7 +2,8 @@
 //  Profile.swift
 //  Tip-stop
 //
-//  Created by Apprenant 122 on 18/07/2024.
+//  Created by Apprenant 122 on 18/07/2024
+//  Modified by Aurélien
 //
 
 import SwiftUI
@@ -50,6 +51,12 @@ struct ProfileView: View {
     let columns = [
          GridItem(.adaptive(minimum: 100))
      ]
+    //
+    @State private var showingVideoModal = false
+    //
+    @State private var selectedVideo: String? = nil
+    //
+    @State private var player: AVPlayer? = nil
     
     init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
         self._path = path
@@ -76,7 +83,7 @@ struct ProfileView: View {
                                 .onTapGesture {
                                     showImagePicker = true
                                 }
-                        }else {
+                        } else {
                             ZStack{
                                 Circle()
                                     .frame(width: 150, height: 150)
@@ -264,19 +271,25 @@ struct ProfileView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(video, id: \.self) { fileName in
-                                if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                    let player = AVPlayer(url: url)
-                                                VideoPlayer(player: player)
-                                        .aspectRatio(9/16, contentMode: .fill)
-                                        .frame(height: 180)
-                                        .padding(.horizontal, 10)
-                                        .onAppear {
-                                            player.pause()
-                                        }
-                                } else {
-                                    Text("Video not found")
-                                        .frame(height: 160)
-                                        .background(Color.red)
+                                Button(action: {
+                                    // In progress
+//                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+//                                        let player = AVPlayer(url: url)
+//                                        self.selectedVideo = fileName
+//                                        self.player = player
+//                                        self.showingVideoModal = true
+//                                    }
+                                }) {
+                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                        VideoPlayer(player: AVPlayer(url: url))
+                                            .aspectRatio(9/16, contentMode: .fill)
+                                            .frame(height: 180)
+                                            .padding(.horizontal, 10)
+                                    } else {
+                                        Text("Video not found")
+                                            .frame(height: 160)
+                                            .background(Color.red)
+                                    }
                                 }
                             }
                         }
@@ -284,7 +297,6 @@ struct ProfileView: View {
             }
         }
         .padding()
-// Aurélien - Modification Back Button
         .navigationBarBackButtonHidden(true)
         .navigationTitle("Profil")
         .toolbar {
@@ -300,9 +312,35 @@ struct ProfileView: View {
                 }
             }
         }
+        .sheet(isPresented: $showingVideoModal) {
+            if let player = self.player {
+                VideoModalView(player: player)
+            }
+        }
+    }
+}
+
+struct VideoModalView: View {
+    var player: AVPlayer
+
+    var body: some View {
+        GeometryReader { geometry in
+            VideoPlayer(player: player)
+                .aspectRatio(contentMode: .fill)
+                .onAppear {
+                    player.play()
+                }
+                .onDisappear {
+                    player.pause()
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 #Preview {
     ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
 }
+
