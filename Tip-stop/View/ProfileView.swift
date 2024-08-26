@@ -285,6 +285,9 @@ struct ProfileView: View {
                                             .aspectRatio(9/16, contentMode: .fill)
                                             .frame(height: 180)
                                             .padding(.horizontal, 10)
+                                            .onAppear {
+                                                // On supprime le pause ici pour laisser la vidéo se charger
+                                            }
                                     } else {
                                         Text("Video not found")
                                             .frame(height: 160)
