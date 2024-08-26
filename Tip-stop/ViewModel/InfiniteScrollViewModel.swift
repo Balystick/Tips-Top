@@ -2,35 +2,61 @@
 //  InfiniteScrollViewModel.swift
 //  Tip-stop
 //
-//  Created by Apprenant 122 on 18/07/2024.
-//
+
 import SwiftUI
 import Foundation
 import Combine
 
 class InfiniteScrollViewModel: ObservableObject {
+    // Liste des astuces actuellement chargées
     @Published var astuces: [Astuce] = []
+    // Dictionnaire stockant l'état de "like" des astuces par leur index
+    @Published var isLiked: [Int: Bool] = [:]
+    // Dictionnaire stockant l'état de "favori" des astuces par leur index
+    @Published var isFavorited: [Int: Bool] = [:]
+    // Index utilisé pour savoir où reprendre le chargement des prochaines astuces
     private var currentAstuceIndex = 0
 
     init() {
-        loadLikesFromStorage()
         loadMoreAstuces()
+        loadInitialState()  // Précharge les états des "likes" et "favoris"
     }
 
     func loadMoreAstuces() {
         let newAstuces = getPredefinedAstuces().dropFirst(currentAstuceIndex).prefix(10)
         astuces.append(contentsOf: newAstuces)
         currentAstuceIndex += newAstuces.count
+        loadInitialState()
+    }
+    
+    /// Charge l'état initial des "likes" et "favoris" pour les astuces chargées
+    func loadInitialState() {
+        for index in astuces.indices {
+            let video = astuces[index].video
+            
+            // Initialise l'état des likes à partir de UserDefaults (si l'utilisateur a déjà liké)
+            isLiked[index] = getStoredLikeStatus(for: video)
+            
+            // Initialise l'état des favoris à partir de UserDefaults
+            isFavorited[index] = getStoredFavorite(for: video)
+            
+            // Charge le nombre de likes stocké dans UserDefaults
+            if let storedLikes = UserDefaults.standard.value(forKey: "likeCount_\(video)") as? Int {
+                astuces[index].nombreDeLikes = storedLikes
+            }
+        }
     }
 
+    /// Renvoie une liste d'astuces pré-définies pour la simulation du chargement
+    /// - Returns: Un tableau d'objets `Astuce`
     private func getPredefinedAstuces() -> [Astuce] {
         return [
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 1",
                 video: "Vid1",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 302,
                 categorie: Categorie(
                     titre: "Découverte",
                     description: "Maximiser votre efficacité au quotidien",
@@ -57,11 +83,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 2",
                 video: "Vid2",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 275,
                 categorie: Categorie(
                     titre: "Personnalisation",
                     description: "Maximiser votre efficacité au quotidien",
@@ -88,11 +114,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 3",
                 video: "Vid3",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 627,
                 categorie: Categorie(
                     titre: "Productivité",
                     description: "Maximiser votre efficacité au quotidien",
@@ -119,11 +145,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 5",
                 video: "Vid5",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 940,
                 categorie: Categorie(
                     titre: "Productivité",
                     description: "Maximiser votre efficacité au quotidien",
@@ -150,11 +176,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 7",
                 video: "Vid7",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 36,
                 categorie: Categorie(
                     titre: "Productivité",
                     description: "Maximiser votre efficacité au quotidien",
@@ -181,11 +207,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 8",
                 video: "Vid8",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 618,
                 categorie: Categorie(
                     titre: "Productivité",
                     description: "Maximiser votre efficacité au quotidien",
@@ -212,11 +238,11 @@ class InfiniteScrollViewModel: ObservableObject {
                 ]
             ),
             Astuce(
-                titre: "How to Use SwiftUI",
+                titre: "How to Use SwiftUI 9",
                 video: "Vid9",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
-                nombreDeLikes: getStoredLikeCount(for: "How to Use SwiftUI"),
+                nombreDeLikes: 274,
                 categorie: Categorie(
                     titre: "Productivité",
                     description: "Maximiser votre efficacité au quotidien",
@@ -245,29 +271,56 @@ class InfiniteScrollViewModel: ObservableObject {
             // Add more predefined Astuce objects here
         ]
     }
+    
+    // MARK: - Gestion des likes
 
+    /// Alterne l'état "like" d'une astuce
     func toggleLike(for astuce: Astuce) {
+        guard let index = astuces.firstIndex(where: { $0.video == astuce.video }) else { return }
+
         var updatedAstuce = astuce
-        let isLiked = getStoredLikeStatus(for: astuce.video)
+        var likedVideos = UserDefaults.standard.stringArray(forKey: "likedVideos") ?? []
 
-        if isLiked {
-            // Remove like
+        if likedVideos.contains(astuce.video) {
+            // Supprime le like
             updatedAstuce.nombreDeLikes -= 1
-            removeLikeStatus(for: astuce.video)
-            updateStoredLikeCount(for: astuce.video, count: updatedAstuce.nombreDeLikes)
+            if let likedIndex = likedVideos.firstIndex(of: astuce.video) {
+                likedVideos.remove(at: likedIndex)
+            }
         } else {
-            // Add like
+            // Ajoute le like
             updatedAstuce.nombreDeLikes += 1
-            saveLikeStatus(for: astuce.video)
-            updateStoredLikeCount(for: astuce.video, count: updatedAstuce.nombreDeLikes)
+            likedVideos.append(astuce.video)
         }
 
-        // Update the list
-        if let index = astuces.firstIndex(where: { $0.video == astuce.video }) {
-            astuces[index] = updatedAstuce
-        }
+        // Mise à jour du UserDefaults
+        UserDefaults.standard.set(likedVideos, forKey: "likedVideos")
+        UserDefaults.standard.set(updatedAstuce.nombreDeLikes, forKey: "likeCount_\(astuce.video)")
+
+        // Mise à jour de l'astuce dans la liste
+        astuces[index] = updatedAstuce
+        objectWillChange.send()
     }
 
+    /// Récupère le nombre de likes stocké pour une vidéo spécifique
+    /// - Parameter video: Le nom de la vidéo
+    /// - Returns: Le nombre de likes
+    func getStoredLikeCount(for video: String) -> Int {
+        return UserDefaults.standard.integer(forKey: "likeCount_\(video)")
+    }
+
+    /// Récupère l'état "like" stocké pour une vidéo spécifique
+    /// - Parameter video: Le nom de la vidéo
+    /// - Returns: `true` si la vidéo est likée, `false` sinon
+    func getStoredLikeStatus(for video: String) -> Bool {
+        let likedVideos = UserDefaults.standard.stringArray(forKey: "likedVideos") ?? []
+        return likedVideos.contains(video)
+    }
+
+    // MARK: - Gestion des favoris
+
+    /// Alterne l'état "favori" d'une astuce donnée
+    /// - Parameter astuce: L'astuce pour laquelle l'état "favori" doit être alterné
     func toggleFavorite(for astuce: Astuce) {
         let isFavorited = getStoredFavorite(for: astuce.video)
         
@@ -278,47 +331,8 @@ class InfiniteScrollViewModel: ObservableObject {
         }
     }
 
-    private func loadLikesFromStorage() {
-        // This method should ideally be used to update the likes of each Astuce based on stored data
-        for index in astuces.indices {
-            let video = astuces[index].video
-            let storedLikes = getStoredLikeCount(for: video)
-            astuces[index].nombreDeLikes = storedLikes
-        }
-    }
-
-    // MARK: - Storage Handling
-
-    private func saveLikeStatus(for video: String) {
-        var likedTitles = UserDefaults.standard.stringArray(forKey: "likedTitles") ?? []
-        if !likedTitles.contains(video) {
-            likedTitles.append(video)
-            UserDefaults.standard.set(likedTitles, forKey: "likedTitles")
-        }
-    }
-
-    private func removeLikeStatus(for video: String) {
-        var likedTitles = UserDefaults.standard.stringArray(forKey: "likedTitles") ?? []
-        if let index = likedTitles.firstIndex(of: video) {
-            likedTitles.remove(at: index)
-            UserDefaults.standard.set(likedTitles, forKey: "likedTitles")
-        }
-    }
-
-    func getStoredLikeStatus(for video: String) -> Bool {
-        let likedTitles = UserDefaults.standard.stringArray(forKey: "likedTitles") ?? []
-        return likedTitles.contains(video)
-    }
-
-    func getStoredLikeCount(for video: String) -> Int {
-        let storedLikes = UserDefaults.standard.integer(forKey: "likeCount_\(video)")
-        return storedLikes
-    }
-
-    private func updateStoredLikeCount(for video: String, count: Int) {
-        UserDefaults.standard.set(count, forKey: "likeCount_\(video)")
-    }
-
+    /// Sauvegarde une vidéo comme favori
+    /// - Parameter video: Le nom de la vidéo
     private func saveFavorite(for video: String) {
         var favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
         if !favoritedTitles.contains(video) {
@@ -327,6 +341,8 @@ class InfiniteScrollViewModel: ObservableObject {
         }
     }
 
+    /// Supprime une vidéo des favoris
+    /// - Parameter video: Le nom de la vidéo
     private func removeFavorite(for video: String) {
         var favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
         if let index = favoritedTitles.firstIndex(of: video) {
@@ -335,6 +351,9 @@ class InfiniteScrollViewModel: ObservableObject {
         }
     }
 
+    /// Récupère l'état "favori" stocké pour une vidéo spécifique
+    /// - Parameter video: Le nom de la vidéo
+    /// - Returns: `true` si la vidéo est favorite, `false` sinon
     func getStoredFavorite(for video: String) -> Bool {
         let favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
         return favoritedTitles.contains(video)
