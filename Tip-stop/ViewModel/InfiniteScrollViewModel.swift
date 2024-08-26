@@ -2,6 +2,9 @@
 //  InfiniteScrollViewModel.swift
 //  Tip-stop
 //
+//  Created by Apprenant 122 on 18/07/2024
+//  Modified by Aurélien
+//
 
 import SwiftUI
 import Foundation

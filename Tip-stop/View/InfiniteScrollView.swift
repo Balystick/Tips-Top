@@ -2,6 +2,9 @@
 //  InfiniteScrollView.swift
 //  Tip-stop
 //
+//  Created by Apprenant 122 on 18/07/2024
+//  Modified by Aurélien
+//
 
 import SwiftUI
 import AVKit
@@ -43,6 +46,8 @@ struct InfiniteScrollView: View {
                         }
                         // Initialise l'état des likes pour chaque astuce
                         isLiked[index] = viewModel.getStoredLikeStatus(for: astuce.video)
+                        // Initialise l'état des favoris pour chaque astuce
+                        isFavorited[index] = viewModel.getStoredFavorite(for: astuce.video)
                     }
                 }
             }
@@ -76,7 +81,6 @@ struct InfiniteScrollView: View {
                     
                     Button(action: {
                         path.append("ProfileView")
-                        print(UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? [])
                     }) {
                         ZStack {
                             Circle()
@@ -205,4 +209,5 @@ struct InfiniteScrollView: View {
 
         isFavorited[index] = viewModel.getStoredFavorite(for: astuce.video)
     }
+    
 }

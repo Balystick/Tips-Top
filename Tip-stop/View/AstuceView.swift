@@ -2,6 +2,9 @@
 //  AstuceView.swift
 //  Tip-stop
 //
+//  Created by Apprenant 122 on 29/07/2024
+//  Modified by Aurélien
+//
 
 import SwiftUI
 import AVKit
