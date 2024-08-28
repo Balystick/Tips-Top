@@ -9,6 +9,7 @@
 import SwiftUI
 import AVKit
 import PhotosUI
+import AVFoundation
 
 struct ProfileView: View {
     @Binding var path: NavigationPath
@@ -272,22 +273,16 @@ struct ProfileView: View {
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(video, id: \.self) { fileName in
                                 Button(action: {
-                                    // In progress
-//                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-//                                        let player = AVPlayer(url: url)
-//                                        self.selectedVideo = fileName
-//                                        self.player = player
-//                                        self.showingVideoModal = true
-//                                    }
+                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                        let player = AVPlayer(url: url)
+                                        self.selectedVideo = fileName
+                                        self.player = player
+                                        self.showingVideoModal = true
+                                    }
                                 }) {
                                     if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                        VideoPlayer(player: AVPlayer(url: url))
-                                            .aspectRatio(9/16, contentMode: .fill)
+                                        VideoThumbnailView(url: url)
                                             .frame(height: 180)
-                                            .padding(.horizontal, 10)
-                                            .onAppear {
-                                                // On supprime le pause ici pour laisser la vidéo se charger
-                                            }
                                     } else {
                                         Text("Video not found")
                                             .frame(height: 160)
@@ -319,6 +314,39 @@ struct ProfileView: View {
             if let player = self.player {
                 VideoModalView(player: player)
             }
+        }
+    }
+}
+
+struct VideoThumbnailView: View {
+    let url: URL
+    @State private var thumbnail: UIImage? = nil
+
+    var body: some View {
+        if let thumbnail = thumbnail {
+            Image(uiImage: thumbnail)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        } else {
+            Text("Chargement de l'aperçu...")
+                .onAppear {
+                    generateThumbnail(from: url)
+                }
+        }
+    }
+
+    func generateThumbnail(from url: URL) {
+        let asset = AVAsset(url: url)
+        let assetImageGenerator = AVAssetImageGenerator(asset: asset)
+        assetImageGenerator.appliesPreferredTrackTransform = true
+        
+        let time = CMTime(seconds: 0.0, preferredTimescale: 600)
+        do {
+            let cgImage = try assetImageGenerator.copyCGImage(at: time, actualTime: nil)
+            let uiImage = UIImage(cgImage: cgImage)
+            thumbnail = uiImage
+        } catch {
+            print("Erreur lors de la génération de l'aperçu: \(error.localizedDescription)")
         }
     }
 }
