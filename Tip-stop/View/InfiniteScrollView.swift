@@ -19,6 +19,8 @@ struct InfiniteScrollView: View {
     @State var categoryTitre: String
     // Index actuel du TabView pour savoir quelle vidéo est en cours de lecture
     @State private var currentIndex: Int = 0
+    // Index actuel du TabView pour sauvegarde/restauration lors de la navigation vers/depuis ProfileView
+    @State private var lastPlayedIndex: Int?
     @Binding var hasSeenOnboarding: Bool
     @State private var players: [Int: AVPlayer] = [:]
     @State private var isLiked: [Int: Bool] = [:]
@@ -48,6 +50,10 @@ struct InfiniteScrollView: View {
                         isLiked[index] = viewModel.getStoredLikeStatus(for: astuce.video)
                         // Initialise l'état des favoris pour chaque astuce
                         isFavorited[index] = viewModel.getStoredFavorite(for: astuce.video)
+                        // Reprendre la vidéo si l'index correspond
+                        if index == currentIndex {
+                            playCurrentVideo(at: index)
+                        }
                     }
                 }
             }
@@ -80,6 +86,7 @@ struct InfiniteScrollView: View {
                     Spacer()
                     
                     Button(action: {
+                        lastPlayedIndex = currentIndex // Sauvegarde de l'index actuel
                         path.append("ProfileView")
                     }) {
                         ZStack {
@@ -165,6 +172,14 @@ struct InfiniteScrollView: View {
                 }
             }
             .padding(.trailing, 15)
+        }
+        .onAppear {
+            if let index = lastPlayedIndex {
+                currentIndex = index // Restaure l'index précédent
+                DispatchQueue.main.async {
+                    playCurrentVideo(at: index) // Relance la lecture de la vidéo à cet index
+                }
+            }
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()

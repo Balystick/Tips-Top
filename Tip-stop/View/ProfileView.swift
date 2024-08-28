@@ -9,27 +9,26 @@
 import SwiftUI
 import AVKit
 import PhotosUI
+import AVFoundation
 
 struct ProfileView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel: ProfileViewModel
-    @StateObject private var viewModelInfinite = InfiniteScrollViewModel()
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Productivité"
-
     // Booleen afficher ImagePicker
     @State private var showImagePicker = false
     //VAR qui stocke image de profil via l'Image Picker
     @State private var image: UIImage?
-   //Source de la photo de profil, ici photo library
+    //Source de la photo de profil, ici photo library
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
     //VAR recuperer lien image profil choisie
     private var url: URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
-
+    
     //Booleens boutons textfield
     @State private var isModify = false
     @State private var isCancel = false
@@ -49,15 +48,11 @@ struct ProfileView: View {
     
     //Grid de list favoris
     let columns = [
-         GridItem(.adaptive(minimum: 100))
-     ]
+        GridItem(.adaptive(minimum: 100))
+    ]
     //
-    @State private var showingVideoModal = false
-    //
-    @State private var selectedVideo: String? = nil
-    //
-    @State private var player: AVPlayer? = nil
-    
+    @State private var currentPlayingURL: URL? = nil
+
     init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
         self._path = path
         self.globalDataModel = globalDataModel
@@ -93,10 +88,10 @@ struct ProfileView: View {
                                     .onTapGesture {
                                         showImagePicker = true
                                     }
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(Color(.customMediumGray))
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(Color(.customMediumGray))
                             }
                         }
                     }.sheet(isPresented: $showImagePicker) {
@@ -141,7 +136,7 @@ struct ProfileView: View {
                                     //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
                                         //Ajout contraintes texte avec alerte si pas respectées
-//    Aurélien                                    self.saveName()
+                                        //    Aurélien                                    self.saveName()
                                         self.failedEnterName = false
                                         if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
                                             showingAlert.toggle()
@@ -155,7 +150,7 @@ struct ProfileView: View {
                                             oldName = viewModel.utilisateur.nom
                                             isValidate.toggle()
                                             isModify = false
-                                        
+                                            
                                             if oldName != newName{
                                                 showAlert.toggle()
                                                 isValidate.toggle()
@@ -191,11 +186,6 @@ struct ProfileView: View {
                                     //Nom profil affiché
                                     Text(viewModel.utilisateur.nom)
                                         .multilineTextAlignment(.leading)
-// Aurélien Fix
-//                                        .onAppear() {
-//                                            let data = newName
-//                                            UserDefaults.standard.set(data, forKey: "name")
-//                                        }
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 5)
@@ -215,17 +205,17 @@ struct ProfileView: View {
                                     .padding(.horizontal, 5)
                                     .foregroundColor(.gray)
                                     .padding(.horizontal, 5)
-                                
-                                
+                                    
+                                    
+                                }
                             }
                         }
                     }
                 }
-            }
                 .onAppear {
                     url.loadImage(&image)
                 }
-        }
+            }
             
             Section {
                 HStack {
@@ -259,44 +249,27 @@ struct ProfileView: View {
                     .colorScheme(.dark)
                     .foregroundColor(Color(.customMediumGray))
                     .accentColor(Color(.customMediumGray))
-      
+                    
                     Spacer()
                     
                 }
                 .padding(.horizontal)
             }
             
-                VStack {
-                    // Scroll pour afficher liste video en grid
-                    ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(video, id: \.self) { fileName in
-                                Button(action: {
-                                    // In progress
-//                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-//                                        let player = AVPlayer(url: url)
-//                                        self.selectedVideo = fileName
-//                                        self.player = player
-//                                        self.showingVideoModal = true
-//                                    }
-                                }) {
-                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                        VideoPlayer(player: AVPlayer(url: url))
-                                            .aspectRatio(9/16, contentMode: .fill)
-                                            .frame(height: 180)
-                                            .padding(.horizontal, 10)
-                                            .onAppear {
-                                                // On supprime le pause ici pour laisser la vidéo se charger
-                                            }
-                                    } else {
-                                        Text("Video not found")
-                                            .frame(height: 160)
-                                            .background(Color.red)
-                                    }
-                                }
+            VStack {
+                // Scroll pour afficher liste video en grid
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(video, id: \.self) { fileName in
+                            if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                VideoThumbnailView(url: url, currentPlayingURL: $currentPlayingURL)
+                            } else {
+                                Text("Vidéo non trouvée")
+                                    .frame(height: 180)
+                                    .background(Color.red)
                             }
                         }
-                }
+                    }                }
             }
         }
         .padding()
@@ -315,31 +288,96 @@ struct ProfileView: View {
                 }
             }
         }
-        .sheet(isPresented: $showingVideoModal) {
-            if let player = self.player {
-                VideoModalView(player: player)
-            }
+    }
+}
+
+struct CustomVideoPlayerView: UIViewRepresentable {
+    let player: AVPlayer
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.videoGravity = .resizeAspectFill
+
+        view.layer.addSublayer(playerLayer)
+
+        DispatchQueue.main.async {
+            playerLayer.frame = view.bounds
+        }
+
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        if let playerLayer = uiView.layer.sublayers?.first as? AVPlayerLayer {
+            playerLayer.frame = uiView.bounds
         }
     }
 }
 
-struct VideoModalView: View {
-    var player: AVPlayer
+struct VideoThumbnailView: View {
+    let url: URL
+    @Binding var currentPlayingURL: URL?
+    @State private var player: AVPlayer?
 
     var body: some View {
-        GeometryReader { geometry in
-            VideoPlayer(player: player)
-                .aspectRatio(contentMode: .fill)
-                .onAppear {
-                    player.play()
-                }
-                .onDisappear {
-                    player.pause()
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .clipped()
+        ZStack {
+            if let player = player {
+                CustomVideoPlayerView(player: player)
+                    .aspectRatio(contentMode: .fill)
+                    .onAppear {
+                        if currentPlayingURL == url {
+                            player.play()
+                        } else {
+                            player.pause()
+                        }
+                    }
+                    .onChange(of: currentPlayingURL) {
+                        if currentPlayingURL == url {
+                            player.play()
+                        } else {
+                            player.pause()
+                        }
+                    }
+                    .onTapGesture {
+                        if currentPlayingURL == url {
+                            currentPlayingURL = nil
+                        } else {
+                            currentPlayingURL = url
+                        }
+                    }
+                    .onDisappear {
+                        stopAndCleanupPlayer()
+                    }
+            } else {
+                Text("Chargement de la vidéo...")
+                    .onAppear {
+                        setupPlayer(with: url)
+                    }
+                    .frame(height: 180)
+            }
         }
-        .edgesIgnoringSafeArea(.all)
+    }
+
+    private func setupPlayer(with url: URL) {
+        let playerItem = AVPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
+        
+        // Observer la fin de la lecture, revenir au début de la vidéo et rejouer
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: .main) { _ in
+            player?.seek(to: .zero)
+            player?.play()
+        }
+    }
+    
+    private func stopAndCleanupPlayer() {
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)  // Libére la vidéo actuelle
+        player = nil
+        currentPlayingURL = nil
+        // retire l'observateur de notification lorsque le player est libéré
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
 }
 
