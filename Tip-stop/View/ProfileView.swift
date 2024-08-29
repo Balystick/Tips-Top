@@ -364,7 +364,7 @@ struct VideoThumbnailView: View {
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: playerItem)
         
-        // Observer la fin de la lecture, revenir au début de la vidéo et rejouer
+        // Observe la fin de la lecture, revenir au début de la vidéo et rejouer
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: .main) { _ in
             player?.seek(to: .zero)
             player?.play()
