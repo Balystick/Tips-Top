@@ -263,7 +263,6 @@ struct ProfileView: View {
                         ForEach(video, id: \.self) { fileName in
                             if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
                                 VideoThumbnailView(url: url, currentPlayingURL: $currentPlayingURL)
-                                //                                    .frame(width: 90, height: 180)
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
