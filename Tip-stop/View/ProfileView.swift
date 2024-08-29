@@ -256,17 +256,28 @@ struct ProfileView: View {
                 .padding(.horizontal)
             }
             
-            VStack {
-                // Scroll pour afficher liste video en grid
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(video, id: \.self) { fileName in
-                            if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                VideoThumbnailView(url: url, currentPlayingURL: $currentPlayingURL)
-                            } else {
-                                Text("Vidéo non trouvée")
-                                    .frame(height: 180)
-                                    .background(Color.red)
+                VStack {
+                    // Scroll pour afficher liste video en grid
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(video, id: \.self) { fileName in
+                                Button(action: {
+                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                        let player = AVPlayer(url: url)
+                                        self.selectedVideo = fileName
+                                        self.player = player
+                                        self.showingVideoModal = true
+                                    }
+                                }) {
+                                    if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
+                                        VideoThumbnailView(url: url)
+                                            .frame(height: 180)
+                                    } else {
+                                        Text("Video not found")
+                                            .frame(height: 160)
+                                            .background(Color.red)
+                                    }
+                                }
                             }
                         }
                     }                }
