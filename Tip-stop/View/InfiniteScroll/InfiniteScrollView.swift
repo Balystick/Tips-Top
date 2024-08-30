@@ -21,6 +21,7 @@ struct InfiniteScrollView: View {
     @State private var currentIndex: Int = 0
     // Index actuel du TabView pour sauvegarde/restauration lors de la navigation vers/depuis ProfileView
     @State private var lastPlayedIndex: Int?
+    @Binding var favoriteVideoSelected: String?
     @Binding var hasSeenOnboarding: Bool
     @State private var players: [Int: AVPlayer] = [:]
     @State private var isLiked: [Int: Bool] = [:]
@@ -60,7 +61,14 @@ struct InfiniteScrollView: View {
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .ignoresSafeArea()
             .onChange(of: currentIndex) { oldIndex, newIndex in
-                playCurrentVideo(at: newIndex)
+                // Si on revient en arrière, relancer la vidéo précédente
+                if newIndex < oldIndex {
+                    playCurrentVideo(at: newIndex)
+                } else {
+                    // Arrêter la vidéo à l'ancien index et jouer la nouvelle
+                    stopAllVideos()
+                    playCurrentVideo(at: newIndex)
+                }
             }
             
             VStack {
@@ -174,10 +182,14 @@ struct InfiniteScrollView: View {
             .padding(.trailing, 15)
         }
         .onAppear {
-            if let index = lastPlayedIndex {
-                currentIndex = index // Restaure l'index précédent
+            if favoriteVideoSelected != nil {
+                // Si une vidéo favorite est sélectionnée, on l'insère et on la joue
+                insertAndPlayFavoriteVideo()
+            } else if let index = lastPlayedIndex {
+                // Sinon, on restaure la vidéo précédemment jouée
+                currentIndex = index
                 DispatchQueue.main.async {
-                    playCurrentVideo(at: index) // Relance la lecture de la vidéo à cet index
+                    playCurrentVideo(at: index)
                 }
             }
         }
@@ -191,15 +203,71 @@ struct InfiniteScrollView: View {
         }
     }
     
-    /// Lit la vidéo actuellement sélectionnée dans le TabView
-    /// - Parameter index: L'index de la vidéo à lire
-    private func playCurrentVideo(at index: Int) {
-        for (i, player) in players {
-            if i == index {
-                player.play()
-            } else {
-                player.pause()
+    private func insertAndPlayFavoriteVideo() {
+        guard let favoriteVideoString = favoriteVideoSelected else { return }
+
+        let favoriteVideoFileName = URL(string: favoriteVideoString)?.lastPathComponent.replacingOccurrences(of: ".mp4", with: "")
+
+        // Trouve l'astuce correspondante dans la liste actuelle
+        if let favoriteAstuce = viewModel.astuces.first(where: { $0.video == favoriteVideoFileName }) {
+            
+            // Retire l'astuce si elle existe déjà
+            if let existingIndex = viewModel.astuces.firstIndex(where: { $0.video == favoriteAstuce.video }) {
+                viewModel.astuces.remove(at: existingIndex)
+                // Ajuste currentIndex si nécessaire
+                if existingIndex <= currentIndex {
+                    currentIndex = max(currentIndex - 1, 0)
+                }
             }
+
+            // Insére l'astuce à l'index calculé
+            let insertIndex = min(currentIndex + 1, viewModel.astuces.count)
+            viewModel.astuces.insert(favoriteAstuce, at: insertIndex)
+
+            // Met à jour currentIndex pour pointer vers la nouvelle vidéo insérée
+            currentIndex = insertIndex
+
+            // Réinitialise les players pour la synchro
+            resetPlayers()
+
+            // Lit la vidéo à l'index courant après insertion
+            DispatchQueue.main.async {
+                playCurrentVideo(at: currentIndex)
+            }
+
+            // Réinitialise favoriteVideoSelected
+            favoriteVideoSelected = nil
+        }
+    }
+
+    private func resetPlayers() {
+        // Réinitialise tous les players
+        players.removeAll()
+
+        // Réinitialise les players pour chaque vidéo
+        for (index, astuce) in viewModel.astuces.enumerated() {
+            let player = AVPlayer(url: URL(fileURLWithPath: astuce.video))
+            players[index] = player
+        }
+    }
+
+    private func playCurrentVideo(at index: Int) {
+        // Vérifier que l'index est valide
+        guard index >= 0 && index < viewModel.astuces.count else { return }
+
+        // Stopp toutes les vidéos avant de lire celle à l'index donné
+        stopAllVideos()
+
+        // Joue la vidéo à l'index spécifié
+        if let player = players[index] {
+            player.play()
+        }
+    }
+
+    private func stopAllVideos() {
+        for (_, player) in players {
+            player.pause()
+            player.seek(to: .zero) // Remet à zéro les vidéos non lues
         }
     }
     

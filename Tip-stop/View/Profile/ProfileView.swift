@@ -50,12 +50,14 @@ struct ProfileView: View {
     let columns = [
         GridItem(.adaptive(minimum: 100))
     ]
-    //
-    @State private var currentPlayingURL: URL? = nil
+    // gestion de la lecture des vidéos
+    @State private var currentPlayingVideo: String? = nil
+    @Binding var favoriteVideoSelected: String?
     
-    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
+    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel, favoriteVideoSelected: Binding<String?>) {
         self._path = path
         self.globalDataModel = globalDataModel
+        self._favoriteVideoSelected = favoriteVideoSelected
         let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
         UITextField.appearance().clearButtonMode = .whileEditing
@@ -262,7 +264,7 @@ struct ProfileView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(video, id: \.self) { fileName in
                             if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                VideoThumbnailView(url: url, currentPlayingURL: $currentPlayingURL)
+                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: url.absoluteString, currentPlayingVideo: $currentPlayingVideo)
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
@@ -291,97 +293,4 @@ struct ProfileView: View {
     }
 }
 
-struct CustomVideoPlayerView: UIViewRepresentable {
-    let player: AVPlayer
-
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-
-        view.layer.addSublayer(playerLayer)
-
-        DispatchQueue.main.async {
-            playerLayer.frame = view.bounds
-        }
-
-        return view
-    }
-
-    func updateUIView(_ uiView: UIView, context: Context) {
-        if let playerLayer = uiView.layer.sublayers?.first as? AVPlayerLayer {
-            playerLayer.frame = uiView.bounds
-        }
-    }
-}
-
-struct VideoThumbnailView: View {
-    let url: URL
-    @Binding var currentPlayingURL: URL?
-    @State private var player: AVPlayer?
-
-    var body: some View {
-        ZStack {
-            if let player = player {
-                CustomVideoPlayerView(player: player)
-                    .aspectRatio(contentMode: .fill)
-                    .onAppear {
-                        if currentPlayingURL == url {
-                            player.play()
-                        } else {
-                            player.pause()
-                        }
-                    }
-                    .onChange(of: currentPlayingURL) {
-                        if currentPlayingURL == url {
-                            player.play()
-                        } else {
-                            player.pause()
-                        }
-                    }
-                    .onTapGesture {
-                        if currentPlayingURL == url {
-                            currentPlayingURL = nil
-                        } else {
-                            currentPlayingURL = url
-                        }
-                    }
-                    .onDisappear {
-                        stopAndCleanupPlayer()
-                    }
-            } else {
-                Text("Chargement de la vidéo...")
-                    .onAppear {
-                        setupPlayer(with: url)
-                    }
-                    .frame(height: 180)
-            }
-        }
-    }
-
-    private func setupPlayer(with url: URL) {
-        let playerItem = AVPlayerItem(url: url)
-        player = AVPlayer(playerItem: playerItem)
-        
-        // Observe la fin de la lecture, revenir au début de la vidéo et rejouer
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: playerItem, queue: .main) { _ in
-            player?.seek(to: .zero)
-            player?.play()
-        }
-    }
-    
-    private func stopAndCleanupPlayer() {
-        player?.pause()
-        player?.replaceCurrentItem(with: nil)  // Libére la vidéo actuelle
-        player = nil
-        currentPlayingURL = nil
-        // retire l'observateur de notification lorsque le player est libéré
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
-    }
-}
-
-#Preview {
-    ProfileView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
-}
 
