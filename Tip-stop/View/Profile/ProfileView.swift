@@ -125,7 +125,7 @@ struct ProfileView: View {
                                     Spacer()
                                     //Bouton annuler et retour au text
                                     Button(action: {
-                                        oldName =  viewModel.utilisateur.nom
+                                        viewModel.utilisateur.nom = oldName
                                         isCancel = true
                                         isModify = false
                                     }, label: {
@@ -201,6 +201,7 @@ struct ProfileView: View {
                                     Spacer()
                                     //Bouton Modifier pour modifier nom de profil
                                     Button("Modifier") {
+                                        oldName = viewModel.utilisateur.nom
                                         isModify = true
                                     }
                                     .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
