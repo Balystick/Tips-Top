@@ -24,7 +24,7 @@ struct InfiniteScrollView: View {
     @State private var lastPlayedIndex: Int?
     // Utilisée pour insérer et jouer la vidéo favorite
     @Binding var favoriteVideoSelected: String?
-    @Binding var hasSeenOnboarding: Bool
+//    @Binding var hasSeenOnboarding: Bool
     // stocke les instances d’AVPlayer pour chaque vidéo
     @State private var players: [Int: AVPlayer] = [:]
     // suit l'état des likes pour chaque vidéo
