@@ -42,7 +42,9 @@ struct InfiniteScrollView: View {
                 .ignoresSafeArea()
             
             TabView(selection: $currentIndex) {
-                ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
+                // Pas assez de contenu pour activer les filtres pour le moment
+                // ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
+                ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
                     AstuceView(
                         index: index,
                         players: $players
