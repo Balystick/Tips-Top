@@ -57,12 +57,12 @@
 		E17067152C81FA2500072F7D /* VideoThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17067142C81FA2500072F7D /* VideoThumbnailView.swift */; };
 		E1867FDF2C6564FD00A6AB6D /* Onboarding3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1867FDE2C6564FD00A6AB6D /* Onboarding3.mp4 */; };
 		E1867FE12C65672D00A6AB6D /* Onboarding4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1867FE02C65672D00A6AB6D /* Onboarding4.mp4 */; };
-		E1867FE32C65709500A6AB6D /* Onboarding5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1867FE22C65709500A6AB6D /* Onboarding5.mp4 */; };
 		E1867FE52C65749200A6AB6D /* Onboarding6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1867FE42C65749200A6AB6D /* Onboarding6.mp4 */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
+		E1D55D932C88C64A00EA9E72 /* Onboarding5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E1D55D922C88C64A00EA9E72 /* Onboarding5.mp4 */; };
 		E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,13 +141,13 @@
 		E17067142C81FA2500072F7D /* VideoThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailView.swift; sourceTree = "<group>"; };
 		E1867FDE2C6564FD00A6AB6D /* Onboarding3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding3.mp4; sourceTree = "<group>"; };
 		E1867FE02C65672D00A6AB6D /* Onboarding4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding4.mp4; sourceTree = "<group>"; };
-		E1867FE22C65709500A6AB6D /* Onboarding5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding5.mp4; sourceTree = "<group>"; };
 		E1867FE42C65749200A6AB6D /* Onboarding6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding6.mp4; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		E1D55D922C88C64A00EA9E72 /* Onboarding5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Onboarding5.mp4; sourceTree = "<group>"; };
 		E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,7 @@
 				E13C7CB12C655BAA00A4A468 /* Onboarding2.mp4 */,
 				E1867FDE2C6564FD00A6AB6D /* Onboarding3.mp4 */,
 				E1867FE02C65672D00A6AB6D /* Onboarding4.mp4 */,
-				E1867FE22C65709500A6AB6D /* Onboarding5.mp4 */,
+				E1D55D922C88C64A00EA9E72 /* Onboarding5.mp4 */,
 				E1867FE42C65749200A6AB6D /* Onboarding6.mp4 */,
 				699DFD152C48FAD900044FB4 /* Tip-stop */,
 				699DFD262C48FADA00044FB4 /* Tip-stopTests */,
@@ -463,7 +463,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1867FE32C65709500A6AB6D /* Onboarding5.mp4 in Resources */,
 				696E7E1D2C5B7B940008BF25 /* Vid1.mp4 in Resources */,
 				696E7E1E2C5B7B940008BF25 /* Vid6.mp4 in Resources */,
 				E1867FE52C65749200A6AB6D /* Onboarding6.mp4 in Resources */,
@@ -478,6 +477,7 @@
 				696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */,
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
 				E13C7CB42C655BB200A4A468 /* Onboarding1.mp4 in Resources */,
+				E1D55D932C88C64A00EA9E72 /* Onboarding5.mp4 in Resources */,
 				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
 				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
 				696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */,
