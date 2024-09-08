@@ -11,7 +11,7 @@ Fonctionnalités principales :
 - Recherche à thème et discussion autours des fonctionnalités
 
 Approche technique :
-- Crossover SwiftUI & UIkit
+- Crossover SwiftUI & UIKit
 - UML & MVVM
 - Stack navigation
 
