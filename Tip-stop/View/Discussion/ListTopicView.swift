@@ -12,12 +12,6 @@ struct ListTopicView: View {
     
     // Ajout navigation path & globalDataModel
     @Binding var path: NavigationPath
-    @ObservedObject var globalDataModel: GlobalDataModel
-    
-    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
-        self._path = path
-        self.globalDataModel = globalDataModel
-    }
     
     var allTopic:[Topic] = [
         Topic(id: UUID(), dateDebut: Date(), sujet: "Les androïdes rêvent-ils de moutons électriques ?", reponse: [rep1], categorie: categorie1),
@@ -68,6 +62,6 @@ struct ListTopicView: View {
 
 
 #Preview {
-    ListTopicView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
+    ListTopicView(path: .constant(NavigationPath()))
 }
 

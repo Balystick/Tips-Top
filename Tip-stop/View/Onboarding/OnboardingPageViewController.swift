@@ -11,13 +11,8 @@ import AVFoundation
 
 /// Extension de UIView pour la lecture en boucle des vidéos
 extension UIView {
-    func playVideoInLoop(fileName: String, fileType: String) -> AVPlayer? {
-        guard let path = Bundle.main.path(forResource: fileName, ofType: fileType) else {
-            debugPrint("\(fileName).\(fileType) not found")
-            return nil
-        }
-        
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
+    func playVideoInLoop(url: URL) -> AVPlayer? {
+        let player = AVPlayer(url: url)
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.bounds
         playerLayer.videoGravity = .resizeAspectFill
@@ -40,7 +35,7 @@ class OnboardingPageViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     
-    var videoName: String?
+    var videoURL: URL?
     var titleText: String?
     var descriptionText: String?
     var player: AVPlayer?
@@ -53,8 +48,8 @@ class OnboardingPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let videoName = videoName {
-            player = videoContainerView.playVideoInLoop(fileName: videoName, fileType: "mp4")
+        if let videoURL = videoURL {
+            player = videoContainerView.playVideoInLoop(url: videoURL)
         }
     }
     
