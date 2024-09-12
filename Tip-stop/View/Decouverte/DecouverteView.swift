@@ -84,7 +84,7 @@ struct DecouverteView: View {
             }
         }
         .onAppear {
-            GlobalDataModel.shared.fetchCategories()
+            GlobalViewModel.shared.fetchCategories()
             carouselImages = viewModel.getCarouselImages() // Récupère les images du carrousel à l'apparition de la vue
             DispatchQueue.main.async { // Prévient une erreur de mise à jour de l'interface
                 if !carouselImages.isEmpty {

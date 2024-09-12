@@ -1,25 +1,13 @@
 //
-//  GlobalDataModel.swift
+//  SuggestionsManager.swift
 //  Tip-stop
 //
-//  Created by Aurélien on 07/08/2024.
+//  Created by Aurélien on 12/09/2024.
 //
 
-import SwiftUI
-import Combine
+import Foundation
 
-/// `GlobalDataModel`  gère les catégories de l'application, les profils des utilisateurs, et recommande des vidéos en fonction des interactions des utilisateurs.
-///
-/// Cette classe utilise `UserDefaults` pour stocker et récupérer le profil utilisateur et l'historique des vidéos vues.
-class GlobalDataModel: ObservableObject {
-    static let shared = GlobalDataModel()
-
-    let baseURL = "http://localhost:3000/"
-    let baseVideoURL = "https://www.balystick.fr/tipstop/"
-
-    // Les catégories de fonctionnalités disponibles dans l'application.
-    var categories: [Categorie] = []
-    
+class SuggestionsManager: ObservableObject {
     // Les astuces recommandées pour l'utilisateur.
     @Published var recommendedAstuces: [Astuce] = []
     
@@ -62,27 +50,6 @@ class GlobalDataModel: ObservableObject {
     
     // Possibilité d'ajouter ici une gestion des références croisées pour assurer la cohérence des données (Categorie/Astuce, Categorie/Topic)
     
-    func fetchCategories() {
-        guard let url = URL(string: baseURL + "categories") else {
-            print("Invalid URL")
-            return
-        }
-
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let decodedCategories = try JSONDecoder().decode([Categorie].self, from: data)
-                    DispatchQueue.main.async {
-                        self.categories = decodedCategories
-                    }
-                } catch {
-                    print("Error decoding data: \(error)")
-                }
-            } else if let error = error {
-                print("Error fetching data: \(error)")
-            }
-        }.resume()
-    }
     
     /// Met à jour le profil utilisateur en fonction de ses interactions avec l'app
     ///
@@ -126,7 +93,7 @@ class GlobalDataModel: ObservableObject {
         var recommendedAstuces: [Astuce] = []
         
         for (categoryTitle, _) in sortedCategories {
-            if let category = categories.first(where: { $0.titre == categoryTitle }) {
+            if let category = GlobalViewModel.shared.categories.first(where: { $0.titre == categoryTitle }) {
                 let newAstuces = category.astuces.filter { !viewedVideos.contains($0.titre) }
                 recommendedAstuces.append(contentsOf: newAstuces)
             }
@@ -135,4 +102,3 @@ class GlobalDataModel: ObservableObject {
         self.recommendedAstuces = recommendedAstuces
     }
 }
-

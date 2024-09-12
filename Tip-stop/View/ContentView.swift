@@ -62,7 +62,7 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            GlobalDataModel.shared.fetchCategories()
+            GlobalViewModel.shared.fetchCategories()
             onboardingViewModel.fetchOnboardingPages()
         }
     }

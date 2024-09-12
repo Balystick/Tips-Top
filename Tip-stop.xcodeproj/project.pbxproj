@@ -56,10 +56,11 @@
 		E17067132C81F9D000072F7D /* CustomVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17067122C81F9D000072F7D /* CustomVideoPlayerView.swift */; };
 		E17067152C81FA2500072F7D /* VideoThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17067142C81FA2500072F7D /* VideoThumbnailView.swift */; };
 		E191F2D32C58E63D000481C3 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191F2D22C58E63D000481C3 /* CarouselView.swift */; };
+		E1A4B1902C93938E00BA4A5B /* SuggestionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A4B18F2C93938E00BA4A5B /* SuggestionsManager.swift */; };
 		E1D28F222C579D8F001B9766 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */; };
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
-		E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */; };
+		E1E9B4922C6351C90043A2BD /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,11 +137,12 @@
 		E17067122C81F9D000072F7D /* CustomVideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayerView.swift; sourceTree = "<group>"; };
 		E17067142C81FA2500072F7D /* VideoThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailView.swift; sourceTree = "<group>"; };
 		E191F2D22C58E63D000481C3 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		E1A4B18F2C93938E00BA4A5B /* SuggestionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsManager.swift; sourceTree = "<group>"; };
 		E1D28F1F2C5792D4001B9766 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		E1D28F212C579D8F001B9766 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
-		E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataModel.swift; sourceTree = "<group>"; };
+		E1E9B4912C6351C90043A2BD /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +272,8 @@
 		699DFD422C48FC3200044FB4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E1E9B4912C6351C90043A2BD /* GlobalDataModel.swift */,
+				E1E9B4912C6351C90043A2BD /* GlobalViewModel.swift */,
+				E1A4B18F2C93938E00BA4A5B /* SuggestionsManager.swift */,
 				E11748742C931475007895FD /* OnboardingViewModel.swift */,
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
@@ -501,6 +504,7 @@
 				699DFD442C48FC5A00044FB4 /* Categorie.swift in Sources */,
 				E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */,
 				E129439B2C62605F00F8BB83 /* NewReponse.swift in Sources */,
+				E1A4B1902C93938E00BA4A5B /* SuggestionsManager.swift in Sources */,
 				699DFD562C49012700044FB4 /* InfiniteScrollView.swift in Sources */,
 				699DFD542C4900F400044FB4 /* DecouverteView.swift in Sources */,
 				6938F7532C57D51E00DC6523 /* StepsView.swift in Sources */,
@@ -521,7 +525,7 @@
 				699DFD192C48FAD900044FB4 /* ContentView.swift in Sources */,
 				E12943A02C62607400F8BB83 /* NewReponseController.swift in Sources */,
 				E11748752C931475007895FD /* OnboardingViewModel.swift in Sources */,
-				E1E9B4922C6351C90043A2BD /* GlobalDataModel.swift in Sources */,
+				E1E9B4922C6351C90043A2BD /* GlobalViewModel.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,
