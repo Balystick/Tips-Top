@@ -10,16 +10,6 @@
 		6938F7532C57D51E00DC6523 /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6938F7522C57D51A00DC6523 /* StepsView.swift */; };
 		69661A2D2C577E0A00B58B05 /* AstuceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69661A2C2C577DFE00B58B05 /* AstuceView.swift */; };
 		696DEB6D2C611A51003176EB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696DEB6C2C611A51003176EB /* ImagePicker.swift */; };
-		696E7E1D2C5B7B940008BF25 /* Vid1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E132C5B7B940008BF25 /* Vid1.mp4 */; };
-		696E7E1E2C5B7B940008BF25 /* Vid6.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E142C5B7B940008BF25 /* Vid6.mp4 */; };
-		696E7E1F2C5B7B940008BF25 /* Vid2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E152C5B7B940008BF25 /* Vid2.mp4 */; };
-		696E7E202C5B7B940008BF25 /* Vid4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E162C5B7B940008BF25 /* Vid4.mp4 */; };
-		696E7E212C5B7B940008BF25 /* Vid9.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E172C5B7B940008BF25 /* Vid9.mp4 */; };
-		696E7E222C5B7B940008BF25 /* Vid10.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E182C5B7B940008BF25 /* Vid10.mp4 */; };
-		696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E192C5B7B940008BF25 /* Vid5.mp4 */; };
-		696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */; };
-		696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */; };
-		696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */; };
 		6993B8A02C64A6ED00FD4905 /* CommentaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */; };
 		6993B8A22C64A71200FD4905 /* CommentaireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6993B8A12C64A70900FD4905 /* CommentaireView.swift */; };
 		699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699DFD162C48FAD900044FB4 /* Tip_stopApp.swift */; };
@@ -87,16 +77,6 @@
 		6938F7522C57D51A00DC6523 /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
 		69661A2C2C577DFE00B58B05 /* AstuceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstuceView.swift; sourceTree = "<group>"; };
 		696DEB6C2C611A51003176EB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		696E7E132C5B7B940008BF25 /* Vid1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid1.mp4; sourceTree = "<group>"; };
-		696E7E142C5B7B940008BF25 /* Vid6.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid6.mp4; sourceTree = "<group>"; };
-		696E7E152C5B7B940008BF25 /* Vid2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid2.mp4; sourceTree = "<group>"; };
-		696E7E162C5B7B940008BF25 /* Vid4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid4.mp4; sourceTree = "<group>"; };
-		696E7E172C5B7B940008BF25 /* Vid9.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid9.mp4; sourceTree = "<group>"; };
-		696E7E182C5B7B940008BF25 /* Vid10.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid10.mp4; sourceTree = "<group>"; };
-		696E7E192C5B7B940008BF25 /* Vid5.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid5.mp4; sourceTree = "<group>"; };
-		696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid3.mp4; sourceTree = "<group>"; };
-		696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid8.mp4; sourceTree = "<group>"; };
-		696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vid7.mp4; sourceTree = "<group>"; };
 		6993B89F2C64A6DD00FD4905 /* CommentaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireViewController.swift; sourceTree = "<group>"; };
 		6993B8A12C64A70900FD4905 /* CommentaireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentaireView.swift; sourceTree = "<group>"; };
 		699DFD132C48FAD900044FB4 /* Tip-stop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip-stop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,16 +159,6 @@
 		699DFD0A2C48FAD900044FB4 = {
 			isa = PBXGroup;
 			children = (
-				696E7E132C5B7B940008BF25 /* Vid1.mp4 */,
-				696E7E152C5B7B940008BF25 /* Vid2.mp4 */,
-				696E7E1A2C5B7B940008BF25 /* Vid3.mp4 */,
-				696E7E162C5B7B940008BF25 /* Vid4.mp4 */,
-				696E7E192C5B7B940008BF25 /* Vid5.mp4 */,
-				696E7E142C5B7B940008BF25 /* Vid6.mp4 */,
-				696E7E1C2C5B7B940008BF25 /* Vid7.mp4 */,
-				696E7E1B2C5B7B940008BF25 /* Vid8.mp4 */,
-				696E7E172C5B7B940008BF25 /* Vid9.mp4 */,
-				696E7E182C5B7B940008BF25 /* Vid10.mp4 */,
 				E13C7CB32C655BB200A4A468 /* Onboarding1.mp4 */,
 				E13C7CB12C655BAA00A4A468 /* Onboarding2.mp4 */,
 				E1867FDE2C6564FD00A6AB6D /* Onboarding3.mp4 */,
@@ -463,24 +433,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				696E7E1D2C5B7B940008BF25 /* Vid1.mp4 in Resources */,
-				696E7E1E2C5B7B940008BF25 /* Vid6.mp4 in Resources */,
 				E1867FE52C65749200A6AB6D /* Onboarding6.mp4 in Resources */,
-				696E7E1F2C5B7B940008BF25 /* Vid2.mp4 in Resources */,
 				E13C7CB22C655BAA00A4A468 /* Onboarding2.mp4 in Resources */,
-				696E7E202C5B7B940008BF25 /* Vid4.mp4 in Resources */,
-				696E7E212C5B7B940008BF25 /* Vid9.mp4 in Resources */,
-				696E7E222C5B7B940008BF25 /* Vid10.mp4 in Resources */,
 				69F63E4D2C610FB8003467CC /* Onboarding.storyboard in Resources */,
 				E1867FDF2C6564FD00A6AB6D /* Onboarding3.mp4 in Resources */,
 				E1867FE12C65672D00A6AB6D /* Onboarding4.mp4 in Resources */,
-				696E7E232C5B7B940008BF25 /* Vid5.mp4 in Resources */,
 				E12943A12C62607400F8BB83 /* StoryboardReponseView.storyboard in Resources */,
 				E13C7CB42C655BB200A4A468 /* Onboarding1.mp4 in Resources */,
 				E1D55D932C88C64A00EA9E72 /* Onboarding5.mp4 in Resources */,
-				696E7E242C5B7B940008BF25 /* Vid3.mp4 in Resources */,
-				696E7E252C5B7B940008BF25 /* Vid8.mp4 in Resources */,
-				696E7E262C5B7B940008BF25 /* Vid7.mp4 in Resources */,
 				699DFD1E2C48FADA00044FB4 /* Preview Assets.xcassets in Resources */,
 				699DFD1B2C48FADA00044FB4 /* Assets.xcassets in Resources */,
 			);

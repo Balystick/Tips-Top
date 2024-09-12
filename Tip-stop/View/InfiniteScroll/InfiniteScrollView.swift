@@ -9,31 +9,18 @@
 import SwiftUI
 import AVKit
 
-/// `InfiniteScrollView` est une vue qui permet de parcourir une liste infinie d'astuces.
-/// Elle affiche une liste de vidéos qui se chargent dynamiquement au fur et à mesure que l'utilisateur fait défiler.
 struct InfiniteScrollView: View {
     @Binding var path: NavigationPath
-    // Injecté mais pas encore utilisé
     @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel = InfiniteScrollViewModel()
-    // Utilisée pour filtrer les astuces par catégorie
     @State var categoryTitre: String
-    // Index actuel du TabView pour savoir quelle vidéo est en cours de lecture
     @State private var currentIndex: Int = 0
-    // Index actuel du TabView pour sauvegarde/restauration de la dernière vidéo jouée lors de la navigation vers/depuis ProfileView
     @State private var lastPlayedIndex: Int?
-    // Utilisée pour insérer et jouer la vidéo favorite
     @Binding var favoriteVideoSelected: String?
-//    @Binding var hasSeenOnboarding: Bool
-    // stocke les instances d’AVPlayer pour chaque vidéo
     @State private var players: [Int: AVPlayer] = [:]
-    // suit l'état des likes pour chaque vidéo
     @State private var isLiked: [Int: Bool] = [:]
-    // suit l’état des favoris pour chaque vidéo
     @State private var isFavorited: [Int: Bool] = [:]
-    // utilisé pour l'affichage des commentaires
     @State private var showingComments = false
-    // Utilisé pour l'affichage du step by step
     @State private var showingSteps = false
     
     var body: some View {
@@ -42,8 +29,6 @@ struct InfiniteScrollView: View {
                 .ignoresSafeArea()
             
             TabView(selection: $currentIndex) {
-                // Pas assez de contenu pour activer les filtres pour le moment
-                // ForEach(Array(viewModel.astuces.enumerated().filter {$0.element.categorie.titre == categoryTitre || categoryTitre.isEmpty || categoryTitre == "Nouveautés"}), id: \.element.id) { index, astuce in
                 ForEach(Array(viewModel.astuces.enumerated()), id: \.element.id) { index, astuce in
                     AstuceView(
                         index: index,
@@ -52,9 +37,7 @@ struct InfiniteScrollView: View {
                     .tag(index)
                     .onAppear {
                         playCurrentVideo(at: index)
-                        // Initialise l'état des likes pour chaque astuce
                         isLiked[index] = viewModel.getStoredLikeStatus(for: astuce.video)
-                        // Initialise l'état des favoris pour chaque astuce
                         isFavorited[index] = viewModel.getStoredFavorite(for: astuce.video)
                     }
                     .onDisappear {
@@ -93,7 +76,7 @@ struct InfiniteScrollView: View {
                     Spacer()
                     
                     Button(action: {
-                        lastPlayedIndex = currentIndex // Sauvegarde de l'index actuel
+                        lastPlayedIndex = currentIndex
                         path.append("ProfileView")
                     }) {
                         ZStack {
@@ -124,11 +107,11 @@ struct InfiniteScrollView: View {
                                     .frame(width: 75, height: 75)
                                 VStack {
                                     Image(systemName: isLiked[currentIndex] == true ? "heart.fill" : "heart")
-                                                                            .font(.title)
-                                                                            .foregroundColor(.white)
+                                        .font(.title)
+                                        .foregroundColor(.white)
                                     Text(getLikesCount())
-                                                                            .foregroundColor(.white)
-                                                                            .font(.caption)
+                                        .foregroundColor(.white)
+                                        .font(.caption)
                                 }
                                 .padding()
                             }
@@ -182,10 +165,8 @@ struct InfiniteScrollView: View {
         }
         .onAppear {
             if favoriteVideoSelected != nil {
-                // Si une vidéo favorite est sélectionnée, on l'insère et on la joue
                 insertAndPlayFavoriteVideo()
             } else if let index = lastPlayedIndex {
-                // Sinon, on restaure la vidéo précédemment jouée
                 currentIndex = index
                 DispatchQueue.main.async {
                     playCurrentVideo(at: index)
@@ -202,7 +183,6 @@ struct InfiniteScrollView: View {
         }
     }
     
-    /// Insère une vidéo sélectionnée dans les favoris dans la liste et la joue
     private func insertAndPlayFavoriteVideo() {
         guard let favoriteVideoString = favoriteVideoSelected else {
             print("No favorite video selected")
@@ -212,8 +192,6 @@ struct InfiniteScrollView: View {
         let favoriteVideoFileName = URL(string: favoriteVideoString)?.lastPathComponent.replacingOccurrences(of: ".mp4", with: "")
         
         if let favoriteAstuce = viewModel.astuces.first(where: { $0.video == favoriteVideoFileName }) {
-            
-            // Suppression de la vidéo si elle existe déjà dans la liste
             if let existingIndex = viewModel.astuces.firstIndex(where: { $0.video == favoriteAstuce.video }) {
                 viewModel.astuces.remove(at: existingIndex)
                 if existingIndex <= currentIndex {
@@ -221,13 +199,10 @@ struct InfiniteScrollView: View {
                 }
             }
             
-            // Insertion de la vidéo
             let insertIndex: Int
             if currentIndex == 0 {
-                // Si on est sur la première vidéo : on l'insère avant la première vidéo
                 insertIndex = 0
             } else {
-                // Sinon : on l'insère après la dernière vidéo jouée
                 insertIndex = min(currentIndex + 1, viewModel.astuces.count)
             }
             
@@ -241,63 +216,52 @@ struct InfiniteScrollView: View {
                 playCurrentVideo(at: currentIndex)
             }
             
-            // Réinitialisation de favoriteVideoSelected
             favoriteVideoSelected = nil
         }
     }
     
-    /// Réinitialise les lecteurs vidéo (`AVPlayer`) pour toutes les vidéos présentes dans `viewModel.astuces`
     private func resetPlayers() {
         players.removeAll()
         for (index, astuce) in viewModel.astuces.enumerated() {
-            if let videoURL = Bundle.main.url(forResource: astuce.video, withExtension: "mp4") {
-                let player = AVPlayer(url: videoURL)
-                players[index] = player
-            }
+            loadVideo(for: index)
         }
     }
     
-    /// Joue la vidéo à l'index spécifié dans le `TabView`
-    /// - Parameter index: L'index de la vidéo à jouer
-    private func playCurrentVideo(at index: Int) {
-        guard index >= 0 && index < viewModel.astuces.count else { return }
-        
-        stopAllVideos() // Arrête toutes les autres vidéos
-        if let player = players[index] {
-            player.play() // Joue la vidéo à l'index spécifié
-        } else {
-            loadVideo(for: index) // Charge et joue la vidéo si elle n'est pas déjà chargée
-            players[index]?.play()
-        }
-    }
-    
-    /// Arrête toutes les vidéos en cours de lecture
-    private func stopAllVideos() {
-        for player in players.values {
-            player.pause()
-            player.seek(to: .zero) // Remet à zéro les vidéos non lues
-        }
-    }
-    
-    /// Charge la vidéo pour un index donné et initialise le lecteur vidéo (`AVPlayer`)
-    /// - Parameter index: L'index de la vidéo à charger
     private func loadVideo(for index: Int) {
         let astuce = viewModel.astuces[index]
-        let videoName = astuce.video
-        if let videoURL = Bundle.main.url(forResource: videoName, withExtension: "mp4") {
+        let videoURLString = "https://www.balystick.fr/tipstop/\(astuce.video).mp4"
+        
+        if let videoURL = URL(string: videoURLString) {
             let playerItem = AVPlayerItem(url: videoURL)
             let player = AVPlayer(playerItem: playerItem)
             player.volume = 1.0
             players[index] = player
             setupLooping(for: player)
         } else {
-            // Gestion de l'erreur : la vidéo n'a pas pu être chargée
-            print("Error: Video file \(videoName).mp4 not found in bundle.")
+            // Gestion de l'erreur : l'URL de la vidéo est invalide
+            print("Error: Invalid video URL \(videoURLString).")
         }
     }
     
-    /// Configure la lecture en boucle pour un lecteur vidéo (`AVPlayer`)
-    /// - Parameter player: Le lecteur vidéo à configurer pour la lecture en boucle
+    private func playCurrentVideo(at index: Int) {
+        guard index >= 0 && index < viewModel.astuces.count else { return }
+        
+        stopAllVideos()
+        if let player = players[index] {
+            player.play()
+        } else {
+            loadVideo(for: index)
+            players[index]?.play()
+        }
+    }
+    
+    private func stopAllVideos() {
+        for player in players.values {
+            player.pause()
+            player.seek(to: .zero)
+        }
+    }
+    
     private func setupLooping(for player: AVPlayer) {
         player.actionAtItemEnd = .none
         NotificationCenter.default.addObserver(
@@ -310,8 +274,6 @@ struct InfiniteScrollView: View {
         }
     }
     
-    /// Alterne l'état du like de l'astuce à un index donné
-    /// - Parameter index: L'index de l'astuce à liker ou dé-liker
     private func toggleLike(at index: Int) {
         guard index >= 0 && index < viewModel.astuces.count else { return }
         
@@ -328,8 +290,6 @@ struct InfiniteScrollView: View {
         return "\(viewModel.astuces[currentIndex].nombreDeLikes)"
     }
     
-    /// Alterne l'état de favori de l'astuce à un index donné
-    /// - Parameter index: L'index de l'astuce à ajouter ou retirer des favoris
     private func toggleFavorite(at index: Int) {
         guard index >= 0 && index < viewModel.astuces.count else { return }
         
@@ -338,5 +298,4 @@ struct InfiniteScrollView: View {
         
         isFavorited[index] = viewModel.getStoredFavorite(for: astuce.video)
     }
-    
 }
