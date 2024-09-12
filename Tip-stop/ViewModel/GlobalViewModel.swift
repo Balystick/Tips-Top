@@ -11,7 +11,7 @@ import Combine
 /// `GlobalDataModel`  gère les catégories de l'application, les profils des utilisateurs, et recommande des vidéos en fonction des interactions des utilisateurs.
 ///
 /// Cette classe utilise `UserDefaults` pour stocker et récupérer le profil utilisateur et l'historique des vidéos vues.
-class GlobalViewModel: ObservableObject {
+class GlobalViewModel {
     static let shared = GlobalViewModel()
 
     let baseURL = "http://localhost:3000/"
