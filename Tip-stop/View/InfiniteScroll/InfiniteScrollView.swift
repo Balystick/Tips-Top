@@ -124,11 +124,11 @@ struct InfiniteScrollView: View {
                                     .frame(width: 75, height: 75)
                                 VStack {
                                     Image(systemName: isLiked[currentIndex] == true ? "heart.fill" : "heart")
-                                        .font(.title)
-                                        .foregroundColor(.white)
-                                    Text("\(viewModel.astuces[currentIndex].nombreDeLikes)")
-                                        .foregroundColor(.white)
-                                        .font(.caption)
+                                                                            .font(.title)
+                                                                            .foregroundColor(.white)
+                                    Text(getLikesCount())
+                                                                            .foregroundColor(.white)
+                                                                            .font(.caption)
                                 }
                                 .padding()
                             }
@@ -319,6 +319,13 @@ struct InfiniteScrollView: View {
         viewModel.toggleLike(for: astuce)
         
         isLiked[index] = viewModel.getStoredLikeStatus(for: astuce.video)
+    }
+    
+    private func getLikesCount() -> String {
+        guard currentIndex >= 0 && currentIndex < viewModel.astuces.count else {
+            return "0"
+        }
+        return "\(viewModel.astuces[currentIndex].nombreDeLikes)"
     }
     
     /// Alterne l'état de favori de l'astuce à un index donné
