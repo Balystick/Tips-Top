@@ -12,19 +12,12 @@ import UIKit
 /// - Lorsque l'utilisateur a atteint la dernière page, l'onboarding se termine automatiquement après 3 secondes
 class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
+    var onboardingPages: [OnboardingPage]?
+    
     var pages: [UIViewController] = []
     
     var isOnLastPage = false
-
-    let pageData = [
-        ["videoName": "Onboarding1", "titleText": "Bienvenue !", "text": "Optimisez votre expérience\nen découvrant de nouvelles\nfonctionnalités de votre iPhone"],
-        ["videoName": "Onboarding2", "titleText": "Suggestions", "text": "Tips Top fera tout son possible pour vous suggérer les fonctionnalités et les astuces dont vous avez besoin !"],
-        ["videoName": "Onboarding3", "titleText": "Étape par étape", "text": "Une description étape par étape\nvous permet de mettre en oeuvre\nchacune des fonctionnalités !"],
-        ["videoName": "Onboarding4", "titleText": "Découverte", "text": "Recherchez de nouvelles fonctionnalités regroupées par catégories et sujets de discussion"],
-        ["videoName": "Onboarding5", "titleText": "Profil", "text": "Retrouvez toutes vos vidéos favorites, et pour une fois bien classées !"],
-        ["videoName": "Onboarding6", "titleText": "Go !", "text": ""]
-    ]
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,11 +26,15 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
         
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         
-        for page in pageData {
+        guard let onboardingPages = onboardingPages else { return }
+                
+        for page in onboardingPages {
             if let pageVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as? OnboardingPageViewController {
-                pageVC.videoName = page["videoName"]
-                pageVC.titleText = page["titleText"]
-                pageVC.descriptionText = page["text"]
+                if let videoURL = URL(string: GlobalDataModel.shared.baseVideoURL + page.videoName) {
+                    pageVC.videoURL = videoURL
+                }
+                pageVC.titleText = page.titleText
+                pageVC.descriptionText = page.text
                 pages.append(pageVC)
             }
         }

@@ -12,11 +12,13 @@ import Combine
 ///
 /// Cette classe utilise `UserDefaults` pour stocker et récupérer le profil utilisateur et l'historique des vidéos vues.
 class GlobalDataModel: ObservableObject {
-    private let baseURL = "http://localhost:3000/"
-    private let baseVideoURL = "https://www.balystick.fr/tipstop/"
+    static let shared = GlobalDataModel()
+
+    let baseURL = "http://localhost:3000/"
+    let baseVideoURL = "https://www.balystick.fr/tipstop/"
 
     // Les catégories de fonctionnalités disponibles dans l'application.
-    @Published var categories: [Categorie] = []
+    var categories: [Categorie] = []
     
     // Les astuces recommandées pour l'utilisateur.
     @Published var recommendedAstuces: [Astuce] = []
@@ -59,7 +61,7 @@ class GlobalDataModel: ObservableObject {
     
     
     // Possibilité d'ajouter ici une gestion des références croisées pour assurer la cohérence des données (Categorie/Astuce, Categorie/Topic)
-
+    
     func fetchCategories() {
         guard let url = URL(string: baseURL + "categories") else {
             print("Invalid URL")
@@ -81,7 +83,6 @@ class GlobalDataModel: ObservableObject {
             }
         }.resume()
     }
-    
     
     /// Met à jour le profil utilisateur en fonction de ses interactions avec l'app
     ///

@@ -13,32 +13,22 @@ import SwiftUI
 /// de l'utilisateur, incluant ses favoris et ses informations personnelles.
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
-    @ObservedObject var globalDataModel: GlobalDataModel
-
     /// La liste des favoris de l'utilisateur.
-    @Published var favoris: [Favori]
+    @Published var favoris: [Favori] = []
     
-    /// Les informations de l'utilisateur.
-    @Published var utilisateur: Utilisateur
+    @Published var utilisateur: Utilisateur = Utilisateur(id: UUID(), nom: "Nom par défaut", photo: "", favoris: [])
     
-    /// Initialise une nouvelle instance de `ProfileViewModel` avec une liste de favoris et les informations de l'utilisateur.
-    ///
-    /// - Parameters:
-    ///   - favoris: Une liste d'objets de type `Favori`.
-    ///   - utilisateur: Un objet de type `Utilisateur` représentant l'utilisateur.
-    init(globalDataModel: GlobalDataModel, favoris: [Favori], utilisateur: Utilisateur) {
-        self.globalDataModel = globalDataModel
-        self.favoris = favoris
-        let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
-        self.utilisateur = Utilisateur(id: UUID(), nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
-    }
-    
+    let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
     
     private var imageURL: URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
 
+    init() {
+        loadName()
+    }
+    
     func saveImage(_ image: UIImage?) {
         guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
         do {
@@ -52,6 +42,12 @@ class ProfileViewModel: ObservableObject {
     func loadImage() {
         guard let data = try? Data(contentsOf: imageURL) else { return }
 //        utilisateur.photo = UIImage(data: data)
+    }
+    
+    // Fonction pour charger le nom de l'utilisateur depuis UserDefaults
+    func loadName() {
+        let savedName = UserDefaults.standard.string(forKey: "name") ?? "Nom par défaut"
+        utilisateur.nom = savedName
     }
 
     func saveName(_ name: String) {

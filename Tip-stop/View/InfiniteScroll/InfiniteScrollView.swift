@@ -13,8 +13,6 @@ import AVKit
 /// Elle affiche une liste de vidéos qui se chargent dynamiquement au fur et à mesure que l'utilisateur fait défiler.
 struct InfiniteScrollView: View {
     @Binding var path: NavigationPath
-    // Injecté mais pas encore utilisé
-    @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel = InfiniteScrollViewModel()
     // Utilisée pour filtrer les astuces par catégorie
     @State var categoryTitre: String

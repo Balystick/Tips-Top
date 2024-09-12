@@ -13,8 +13,7 @@ import AVFoundation
 
 struct ProfileView: View {
     @Binding var path: NavigationPath
-    @ObservedObject var globalDataModel: GlobalDataModel
-    @StateObject private var viewModel: ProfileViewModel
+    @StateObject private var viewModel = ProfileViewModel()
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Productivité"
     // Booleen afficher ImagePicker
@@ -53,16 +52,6 @@ struct ProfileView: View {
     // gestion de la lecture des vidéos
     @State private var currentPlayingVideo: String? = nil
     @Binding var favoriteVideoSelected: String?
-    
-    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel, favoriteVideoSelected: Binding<String?>) {
-        self._path = path
-        self.globalDataModel = globalDataModel
-        self._favoriteVideoSelected = favoriteVideoSelected
-//        let utilisateur = Utilisateur(id: UUID(), nom: "", photo: nil, favoris: [])
-        let utilisateur = Utilisateur(id: UUID(), nom: "", photo: "", favoris: [])
-        self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
-        UITextField.appearance().clearButtonMode = .whileEditing
-    }
     
     var body: some View {
         VStack {
@@ -243,7 +232,7 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(globalDataModel.categories) {category in
+                        ForEach(GlobalDataModel.shared.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
