@@ -51,10 +51,7 @@ class GlobalDataModel: ObservableObject {
     // L'historique des vidéos vues par l'utilisateur
     @Published var viewedVideos: [String] = []
     
-    init(categories: [Categorie] = []) {
-        if !categories.isEmpty {
-            self.categories = categories
-        }
+    init() {
         self.profile = storedProfile
         self.viewedVideos = storedViewedVideos
         recommendVideos()
@@ -84,8 +81,6 @@ class GlobalDataModel: ObservableObject {
             }
         }.resume()
     }
-    
-    
     
     
     /// Met à jour le profil utilisateur en fonction de ses interactions avec l'app
