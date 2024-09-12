@@ -22,7 +22,8 @@ struct InfiniteScrollView: View {
     @State private var isFavorited: [Int: Bool] = [:]
     @State private var showingComments = false
     @State private var showingSteps = false
-    
+    @State private var currentSteps: [Step] = []
+
     var body: some View {
         ZStack {
             Color.white
@@ -145,6 +146,7 @@ struct InfiniteScrollView: View {
                         }
                         
                         Button(action: {
+                            currentSteps = viewModel.astuces[currentIndex].steps  // Set the steps for the current Astuce
                             showingSteps.toggle()
                         }) {
                             ZStack {
@@ -179,7 +181,7 @@ struct InfiniteScrollView: View {
             CommentaireView(commentaires: viewModel.astuces[currentIndex].commentaires)
         }
         .sheet(isPresented: $showingSteps) {
-            StepsView()
+            StepsView(steps: $currentSteps)  // Pass the current steps to the StepsView
         }
     }
     

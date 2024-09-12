@@ -10,22 +10,10 @@ import SwiftUI
 import Foundation
 import Combine
 
-struct AstuceResponse: Codable {
-    let titre: String
-    let video: String
-    let dateDeCreation: String
-    let pourcentageVue: Int
-    let nombreDeLikes: Int
-    let categorie: [String: String]
-    let steps: [String]
-    let commentaires: [String]
-    let id: String
-}
-
 class InfiniteScrollViewModel: ObservableObject {
     @Published var astuces: [Astuce] = []
-    @Published var isLiked: [Int: Bool] = [:]
-    @Published var isFavorited: [Int: Bool] = [:]
+    @Published var isLiked: [UUID: Bool] = [:]
+    @Published var isFavorited: [UUID: Bool] = [:]
     private var currentPage = 1
     private var cancellables = Set<AnyCancellable>()
 
@@ -34,7 +22,7 @@ class InfiniteScrollViewModel: ObservableObject {
     }
 
     func loadMoreAstuces() {
-        guard let url = URL(string: "http://10.80.55.40:3000/astuces?_page=\(currentPage)&_limit=10") else {
+        guard let url = URL(string: "https://azure-systematic-orangutan-728.mypinata.cloud/ipfs/QmXb4wm3bkeUJcd6vc9BHMNd7Ga7Pj9LT568TURVEHiqWA") else {
             print("Invalid URL")
             return
         }
@@ -59,9 +47,33 @@ class InfiniteScrollViewModel: ObservableObject {
                         dateDeCreation: ISO8601DateFormatter().date(from: response.dateDeCreation) ?? Date(),
                         pourcentageVue: response.pourcentageVue,
                         nombreDeLikes: response.nombreDeLikes,
-                        categorie: Categorie(titre: response.categorie["titre"] ?? "", description: response.categorie["description"] ?? "", icon: response.categorie["icon"] ?? "", astuces: [], topics: []),
-                        steps: response.steps.enumerated().map { Step(num: $0 + 1, titre: $1, description: "", isSelected: false) },
-                        commentaires: []
+                        categorie: Categorie( // Generate a new UUID if you don’t have it in the response
+                            titre: response.categorie.titre,
+                            description: response.categorie.description,
+                            icon: response.categorie.icon,
+                            astuces: [], // Nested `Astuce` if applicable
+                            topics: [] // Nested `Topic` if applicable
+                        ),
+                        steps: response.steps.map { step in
+                            Step(
+                                num: step.num,
+                                titre: step.titre,
+                                description: step.description,
+                                isSelected: step.isSelected
+                            )
+                        },
+                        commentaires: response.commentaires.map { comment in
+                            Commentaire(
+                                contenu: comment.contenu,
+                                date: comment.date,
+                                nombreDeLikes: comment.nombreDeLikes,
+                                utilisateur: Utilisateur(
+                                    nom: comment.utilisateur.nom,
+                                    photo: UIImage(named: comment.utilisateur.photo ?? ""),
+                                    favoris: [] // Handle nested `Favori` if needed
+                                )
+                            )
+                        }
                     )
                 }
                 self.astuces.append(contentsOf: newAstuces)
@@ -74,8 +86,8 @@ class InfiniteScrollViewModel: ObservableObject {
     func loadInitialState() {
         for index in astuces.indices {
             let video = astuces[index].video
-            isLiked[index] = getStoredLikeStatus(for: video)
-            isFavorited[index] = getStoredFavorite(for: video)
+            isLiked[astuces[index].id] = getStoredLikeStatus(for: video)
+            isFavorited[astuces[index].id] = getStoredFavorite(for: video)
             if let storedLikes = UserDefaults.standard.value(forKey: "likeCount_\(video)") as? Int {
                 astuces[index].nombreDeLikes = storedLikes
             }
@@ -85,7 +97,7 @@ class InfiniteScrollViewModel: ObservableObject {
     // MARK: - Gestion des likes
 
     func toggleLike(for astuce: Astuce) {
-        guard let index = astuces.firstIndex(where: { $0.video == astuce.video }) else { return }
+        guard let index = astuces.firstIndex(where: { $0.id == astuce.id }) else { return }
 
         var updatedAstuce = astuce
         var likedVideos = UserDefaults.standard.stringArray(forKey: "likedVideos") ?? []

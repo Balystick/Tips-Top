@@ -15,42 +15,31 @@ struct ProfileView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel: ProfileViewModel
-    // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Productivité"
-    // Booleen afficher ImagePicker
     @State private var showImagePicker = false
-    //VAR qui stocke image de profil via l'Image Picker
     @State private var image: UIImage?
-    //Source de la photo de profil, ici photo library
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    //VAR recuperer lien image profil choisie
     private var url: URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
     
-    //Booleens boutons textfield
     @State private var isModify = false
     @State private var isCancel = false
     @State private var isValidate = false
-    //Booleens alert textield
     @State private var failedEnterName = false
     @State private var showingAlert = false
     @State private var showAlert = false
-    //Clear button x in textfield
-    
-    //VAR pour valeur nom dans bouton annuler
     @State private var oldName: String = ""
     @State private var newName: String = ""
     
-    //Tab de video pour grid favoris
-    let video = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
+    // Updated video URL list from remote server
+    let videoPaths = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
     
-    //Grid de list favoris
     let columns = [
         GridItem(.adaptive(minimum: 100))
     ]
-    // gestion de la lecture des vidéos
+    
     @State private var currentPlayingVideo: String? = nil
     @Binding var favoriteVideoSelected: String?
     
@@ -65,11 +54,9 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading){
-                
-                HStack{
-                    VStack{
-                        // Photo image profile ou vide avec icone
+            VStack(alignment: .leading) {
+                HStack {
+                    VStack {
                         if let uiImage = image {
                             Image(uiImage: uiImage)
                                 .resizable()
@@ -82,7 +69,7 @@ struct ProfileView: View {
                                     showImagePicker = true
                                 }
                         } else {
-                            ZStack{
+                            ZStack {
                                 Circle()
                                     .frame(width: 150, height: 150)
                                     .foregroundColor(Color(.customLightGray))
@@ -97,7 +84,8 @@ struct ProfileView: View {
                                     .foregroundColor(Color(.customMediumGray))
                             }
                         }
-                    }.sheet(isPresented: $showImagePicker) {
+                    }
+                    .sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
                     .onChange(of: image) { oldValue, newValue in
@@ -105,9 +93,8 @@ struct ProfileView: View {
                     }
                     Spacer()
                     Spacer()
-                    HStack{
+                    HStack {
                         VStack {
-                            // Textfield pour modifier nom profil
                             if isModify {
                                 TextField("Entrer votre nom", text: $viewModel.utilisateur.nom)
                                     .font(.caption)
@@ -123,38 +110,32 @@ struct ProfileView: View {
                                     }
                                 HStack {
                                     Spacer()
-                                    //Bouton annuler et retour au text
                                     Button(action: {
                                         viewModel.utilisateur.nom = oldName
                                         isCancel = true
                                         isModify = false
                                     }, label: {
                                         Text("Annuler")
-                                            .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
-                                            .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                            .font(.footnote)
+                                            .fontWeight(.thin)
                                             .animation(.easeOut(duration: 0.2), value: isModify)
                                             .foregroundColor(.gray)
                                     })
                                     
-                                    //Bouton valider et enregistrer nom dans view model et userdefaults
                                     Button(action: {
-                                        //Ajout contraintes texte avec alerte si pas respectées
-                                        //    Aurélien                                    self.saveName()
                                         self.failedEnterName = false
-                                        if (self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3){
+                                        if self.viewModel.utilisateur.nom.isEmpty || self.viewModel.utilisateur.nom.count < 3 {
                                             showingAlert.toggle()
                                             self.failedEnterName.toggle()
                                         } else {
-                                            //Fonction pour garder le nom dans le model utilisateur
                                             viewModel.addUtilisateur()
-                                            //Fonction pour garder le nom dans les Userdefaults
                                             newName = viewModel.utilisateur.nom
                                             viewModel.saveName(newName)
                                             oldName = viewModel.utilisateur.nom
                                             isValidate.toggle()
                                             isModify = false
                                             
-                                            if oldName != newName{
+                                            if oldName != newName {
                                                 showAlert.toggle()
                                                 isValidate.toggle()
                                                 isModify = false
@@ -163,30 +144,28 @@ struct ProfileView: View {
                                     }, label: {
                                         Text("Valider")
                                             .font(.footnote)
-                                            .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                            .fontWeight(.thin)
                                             .foregroundColor(Color(.customBlue))
                                     })
-                                    //Affiche alerte si contraintes pas respectées
                                     .alert(isPresented: $showingAlert) {
                                         if self.failedEnterName {
                                             return Alert(title: Text("Le nom doit contenir au moins trois lettres"), message: Text("Veuillez modifier"), dismissButton: .default(Text("OK")))
-                                        }else {
+                                        } else {
                                             return Alert(title: Text("Validé"), message: Text("Changé"), dismissButton: .default(Text("OK")))
                                         }
                                     }
-                                    .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                    .font(.footnote)
+                                    .fontWeight(.thin)
                                     .scaleEffect(isModify ? 1.2 : 1)
                                     .animation(.easeOut(duration: 0.2), value: isModify)
                                 }
                                 .padding(.horizontal, 15)
                             } else {
-                                if viewModel.utilisateur.nom.isEmpty{
+                                if viewModel.utilisateur.nom.isEmpty {
                                     Text("Veuillez entrer votre nom")
                                         .foregroundColor(Color(.customMediumGray))
                                         .font(.caption)
                                 } else {
-                                    //Nom profil affiché
                                     Text(viewModel.utilisateur.nom)
                                         .multilineTextAlignment(.leading)
                                         .frame(minWidth: 0, maxWidth: 180, minHeight: 0, maxHeight: 30)
@@ -199,18 +178,15 @@ struct ProfileView: View {
                                 }
                                 HStack {
                                     Spacer()
-                                    //Bouton Modifier pour modifier nom de profil
                                     Button("Modifier") {
                                         oldName = viewModel.utilisateur.nom
                                         isModify = true
                                     }
-                                    .font(/*@START_MENU_TOKEN@*/.footnote/*@END_MENU_TOKEN@*/)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.thin/*@END_MENU_TOKEN@*/)
+                                    .font(.footnote)
+                                    .fontWeight(.thin)
                                     .padding(.horizontal, 5)
                                     .foregroundColor(.gray)
                                     .padding(.horizontal, 5)
-                                    
-                                    
                                 }
                             }
                         }
@@ -223,7 +199,7 @@ struct ProfileView: View {
             
             Section {
                 HStack {
-                    HStack{
+                    HStack {
                         Text("Favoris")
                             .font(.title2)
                             .fontWeight(.semibold)
@@ -238,11 +214,10 @@ struct ProfileView: View {
                 HStack {
                     Text("Catégories:")
                         .font(.headline)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .foregroundColor(Color(.customMediumGray))
-                    //Picker pour filter les videos par catégories
-                    Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(globalDataModel.categories) {category in
+                    Picker("Choisir une catégorie", selection: $selectedCategory) {
+                        ForEach(globalDataModel.categories) { category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
@@ -261,19 +236,20 @@ struct ProfileView: View {
             }
             
             VStack {
-                // Scroll pour afficher liste video en grid
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(video, id: \.self) { fileName in
-                            if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: url.absoluteString, currentPlayingVideo: $currentPlayingVideo)
+                        ForEach(videoPaths, id: \.self) { fileName in
+                            let videoURLString = "https://www.balystick.fr/tipstop/\(fileName).mp4"
+                            if let videoURL = URL(string: videoURLString) {
+                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: videoURL.absoluteString, currentPlayingVideo: $currentPlayingVideo)
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
                                     .background(Color.red)
                             }
                         }
-                    }                }
+                    }
+                }
             }
         }
         .padding()
@@ -294,5 +270,3 @@ struct ProfileView: View {
         }
     }
 }
-
-
