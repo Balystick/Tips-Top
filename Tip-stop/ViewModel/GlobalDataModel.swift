@@ -86,8 +86,6 @@ class GlobalDataModel: ObservableObject {
     }
     
     
-    
-    
     /// Met à jour le profil utilisateur en fonction de ses interactions avec l'app
     ///
     /// - Parameters:

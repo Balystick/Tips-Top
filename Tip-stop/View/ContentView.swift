@@ -55,6 +55,9 @@ struct ContentView: View {
                 }
             }
         }
+        .onAppear() {
+            globalDataModel.fetchCategories()
+        }
     }
 }
 
