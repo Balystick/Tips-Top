@@ -13,9 +13,9 @@ import Foundation
 /// le nombre de likes et l'utilisateur qui a posté le commentaire.
 ///
 /// Conformément au protocole `Identifiable`, chaque commentaire a un identifiant unique généré automatiquement.
-struct Commentaire: Identifiable {
+struct Commentaire: Codable, Identifiable {
     /// L'identifiant unique du commentaire.
-    let id = UUID()
+    let id: UUID
     
     /// Le contenu textuel du commentaire.
     var contenu: String

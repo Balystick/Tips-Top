@@ -13,9 +13,9 @@ import Foundation
 /// et la catégorie associée.
 ///
 /// Conformément au protocole `Identifiable`, chaque sujet de discussion a un identifiant unique généré automatiquement.
-struct Topic: Identifiable {
+struct Topic: Codable, Identifiable {
     /// L'identifiant unique du sujet de discussion.
-    let id = UUID()
+    let id: UUID
     
     /// La date de début du sujet de discussion.
     var dateDebut: Date

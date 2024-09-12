@@ -13,9 +13,9 @@ import SwiftUI
 /// d'astuces et de sujets connexes.
 ///
 /// Conformément au protocole `Identifiable`, chaque catégorie a un identifiant unique généré automatiquement.
-struct Categorie: Identifiable {
+struct Categorie: Codable, Identifiable {
     /// L'identifiant unique de la catégorie.
-    let id = UUID()
+    let id: UUID
     
     /// Le titre de la catégorie.
     let titre: String

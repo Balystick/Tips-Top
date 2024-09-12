@@ -13,9 +13,9 @@ import Foundation
 /// incluant un identifiant unique, un titre et une description.
 ///
 /// Conformément au protocole `Identifiable`, chaque étape a un identifiant unique généré automatiquement.
-struct Step: Identifiable {
+struct Step: Codable, Identifiable {
     /// L'identifiant unique de l'étape.
-    let id = UUID()
+    let id: UUID
     
     var num : Int
     

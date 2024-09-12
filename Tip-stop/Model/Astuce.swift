@@ -13,9 +13,9 @@ import Foundation
 /// un nombre de likes, une liste d'étapes et une liste de commentaires.
 ///
 /// Conformément au protocole `Identifiable`, chaque astuce a un identifiant unique généré automatiquement.
-struct Astuce: Identifiable {
+struct Astuce: Codable, Identifiable {
     /// L'identifiant unique de l'astuce.
-    let id = UUID()
+    let id: UUID
     
     /// Le titre de l'astuce.
     var titre: String
