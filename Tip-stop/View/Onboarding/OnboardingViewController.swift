@@ -30,7 +30,7 @@ class OnboardingViewController: UIPageViewController, UIPageViewControllerDataSo
                 
         for page in onboardingPages {
             if let pageVC = storyboard.instantiateViewController(withIdentifier: "OnboardingPageViewController") as? OnboardingPageViewController {
-                if let videoURL = URL(string: GlobalDataModel.shared.baseVideoURL + page.videoName) {
+                if let videoURL = URL(string: GlobalViewModel.shared.baseVideoURL + page.videoName) {
                     pageVC.videoURL = videoURL
                 }
                 pageVC.titleText = page.titleText

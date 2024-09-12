@@ -232,7 +232,7 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(GlobalDataModel.shared.categories) {category in
+                        ForEach(GlobalViewModel.shared.categories) {category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)

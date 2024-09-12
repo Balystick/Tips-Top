@@ -11,7 +11,7 @@ class OnboardingViewModel: ObservableObject {
     @Published var onboardingPages: [OnboardingPage] = []
     
     func fetchOnboardingPages() {
-        guard let url = URL(string: GlobalDataModel.shared.baseURL + "onboardingPages") else {
+        guard let url = URL(string: GlobalViewModel.shared.baseURL + "onboardingPages") else {
             print("Invalid URL")
             return
         }
