@@ -23,7 +23,7 @@ struct Utilisateur: Codable, Identifiable {
     /// La photo de profil de l'utilisateur.
     ///
     /// Cette propriété est optionnelle et peut être `nil` si l'utilisateur n'a pas de photo de profil.
-    var photo: UIImage?
+    var photo: String
     
     /// La liste des favoris de l'utilisateur.
     ///

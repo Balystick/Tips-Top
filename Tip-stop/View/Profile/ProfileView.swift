@@ -58,7 +58,8 @@ struct ProfileView: View {
         self._path = path
         self.globalDataModel = globalDataModel
         self._favoriteVideoSelected = favoriteVideoSelected
-        let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
+//        let utilisateur = Utilisateur(id: UUID(), nom: "", photo: nil, favoris: [])
+        let utilisateur = Utilisateur(id: UUID(), nom: "", photo: "", favoris: [])
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
         UITextField.appearance().clearButtonMode = .whileEditing
     }

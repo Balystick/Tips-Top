@@ -55,12 +55,14 @@ class InfiniteScrollViewModel: ObservableObject {
     private func getPredefinedAstuces() -> [Astuce] {
         return [
             Astuce(
+                id: UUID(),
                 titre: "How to Use SwiftUI 1",
                 video: "Vid1",
                 dateDeCreation: Date(),
                 pourcentageVue: 75,
                 nombreDeLikes: 302,
                 categorie: Categorie(
+                    id: UUID(),
                     titre: "Découverte",
                     description: "Maximiser votre efficacité au quotidien",
                     icon: "Découverte",
@@ -68,211 +70,29 @@ class InfiniteScrollViewModel: ObservableObject {
                     topics: []
                 ),
                 steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
+                    Step(id: UUID(), num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
+                    Step(id: UUID(), num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
+                    Step(id: UUID(), num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
                 ],
                 commentaires: [
                     Commentaire(
+                        id: UUID(),
                         contenu: "Great tutorial!",
                         date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
                         nombreDeLikes: 15,
                         utilisateur: Utilisateur(
+                            id: UUID(),
                             nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 2",
-                video: "Vid2",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 275,
-                categorie: Categorie(
-                    titre: "Personnalisation",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Personnalisation",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 3",
-                video: "Vid3",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 627,
-                categorie: Categorie(
-                    titre: "Productivité",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 5",
-                video: "Vid5",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 940,
-                categorie: Categorie(
-                    titre: "Productivité",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 7",
-                video: "Vid7",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 36,
-                categorie: Categorie(
-                    titre: "Productivité",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 8",
-                video: "Vid8",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 618,
-                categorie: Categorie(
-                    titre: "Productivité",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
-                            favoris: []
-                        )
-                    )
-                ]
-            ),
-            Astuce(
-                titre: "How to Use SwiftUI 9",
-                video: "Vid9",
-                dateDeCreation: Date(),
-                pourcentageVue: 75,
-                nombreDeLikes: 274,
-                categorie: Categorie(
-                    titre: "Productivité",
-                    description: "Maximiser votre efficacité au quotidien",
-                    icon: "Productivité",
-                    astuces: [],
-                    topics: []
-                ),
-                steps: [
-                    Step(num: 1, titre: "Setup", description: "Set up your Xcode project for SwiftUI.", isSelected: false),
-                    Step(num: 2, titre: "Basic Views", description: "Learn about basic SwiftUI views.", isSelected: false),
-                    Step(num: 3, titre: "State Management", description: "Understand state management in SwiftUI.", isSelected: false)
-                ],
-                commentaires: [
-                    Commentaire(
-                        contenu: "Great tutorial!",
-                        date: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),
-                        nombreDeLikes: 15,
-                        utilisateur: Utilisateur(
-                            nom: "John Doe",
-                            photo: UIImage(named: "user_photo_1"),
+//                            photo: UIImage(named: "user_photo_1"),
+                            photo: "user_photo_1",
                             favoris: []
                         )
                     )
                 ]
             )
+            ]
             // Add more predefined Astuce objects here
-        ]
+    
     }
     
     // MARK: - Gestion des likes

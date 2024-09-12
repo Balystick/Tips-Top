@@ -7,24 +7,25 @@
 
 import SwiftUI
 import UIKit
-var step1 = Step(num: 0, titre: "", description: "", isSelected: false)
+var step1 = Step(id: UUID(), num: 0, titre: "", description: "", isSelected: false)
 
 
-var rep1 = Reponse(date: Date(), contenu: """
+var rep1 = Reponse(id: UUID(), date: Date(), contenu: """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nunc sit amet nibh malesuada consectetur vitae a nulla. Sed enim ligula, tincidunt vel pharetra venenatis, efficitur sed tortor. Ut varius purus vitae volutpat feugiat. Morbi non magna ut tellus aliquet fringilla. Etiam efficitur lorem sed dolor tristique, sed scelerisque odio faucibus. Duis tristique sed leo et rhoncus. Etiam mattis aliquet lacus eget iaculis
 """, utilisateur: utilisateur1)
 
-var categorie1 = Categorie(titre: "Animaux", description: "", icon: "", astuces: [], topics: [])
+var categorie1 = Categorie(id: UUID(), titre: "Animaux", description: "", icon: "", astuces: [], topics: [])
 
-var topic1 = Topic(dateDebut: Date(), sujet: "", reponse: [], categorie: categorie1)
+var topic1 = Topic(id: UUID(), dateDebut: Date(), sujet: "", reponse: [], categorie: categorie1)
 
-var astuce = Astuce(titre: "", video: "", dateDeCreation: Date(), pourcentageVue: 0, nombreDeLikes: 0,categorie: Categorie(titre: "", description: "", icon: "", astuces: [], topics: []) ,steps: [], commentaires: [])
+var astuce = Astuce(id: UUID(), titre: "", video: "", dateDeCreation: Date(), pourcentageVue: 0, nombreDeLikes: 0,categorie: Categorie(id: UUID(), titre: "", description: "", icon: "", astuces: [], topics: []) ,steps: [], commentaires: [])
 
-var commentaires1 = Commentaire(contenu: "", date: "", nombreDeLikes: 0, utilisateur: utilisateur1)
+var commentaires1 = Commentaire(id: UUID(), contenu: "", date: "", nombreDeLikes: 0, utilisateur: utilisateur1)
 
-var favoris = Favori(dateAjout: Date(), astuce: astuce )
+var favoris = Favori(id: UUID(), dateAjout: Date(), astuce: astuce )
 
-var utilisateur1 = Utilisateur(nom: "Piolord", photo: UIImage(named: ""), favoris: [favoris])
+//var utilisateur1 = Utilisateur(id: UUID(), nom: "Piolord", photo: UIImage(named: ""), favoris: [favoris])
+var utilisateur1 = Utilisateur(id: UUID(), nom: "Piolord", photo: "", favoris: [favoris])
 
 struct TopicView: View {
     
