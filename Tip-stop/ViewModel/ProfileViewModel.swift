@@ -1,9 +1,3 @@
-//
-//  ProfileViewModel.swift
-//  Tip-stop
-//
-//  Created by Apprenant 122 on 18/07/2024.
-//
 import Foundation
 import SwiftUI
 
@@ -22,7 +16,7 @@ class ProfileViewModel: ObservableObject {
     /// Les informations de l'utilisateur.
     @Published var utilisateur: Utilisateur
     
-    private let baseURL = "http://10.80.55.40:3000/utilisateur"
+    private let utilisateurService = UtilisateurService() // Utilisation du service
     
     /// Initialise une nouvelle instance de `ProfileViewModel` avec une liste de favoris et les informations de l'utilisateur.
     ///
@@ -35,46 +29,34 @@ class ProfileViewModel: ObservableObject {
         let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
         self.utilisateur = Utilisateur(id: UUID(), nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
     }
-}
-
-extension ProfileViewModel {
-    
-    private var imageURL: URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0].appendingPathComponent("image.jpg")
-    }
     /// Ajoute un nouvel utilisateur avec un nom vide et les mêmes informations de photo que l'utilisateur actuel.
-    ///
-    /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
-    /// la même photo que l'utilisateur actuel et une liste de favoris vide.
+       ///
+       /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
+       /// la même photo que l'utilisateur actuel et une liste de favoris vide.
     func addUtilisateur() {
         var utilisateur = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
+    /// Sauvegarde le nom de l'utilisateur dans `UserDefaults`.
     func saveName(_ name: String) {
         UserDefaults.standard.set(name, forKey: "name")
         utilisateur.nom = name
     }
     
+    /// Récupère les informations de l'utilisateur depuis l'API.
     func fetchUtilisateur() {
-        guard let url = URL(string: baseURL) else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let decodedUtilisateur = try JSONDecoder().decode(Utilisateur.self, from: data)
-                    DispatchQueue.main.async {
-                        self.utilisateur = decodedUtilisateur
-                    }
-                } catch {
-                    print("Error decoding data: \(error)")
+        utilisateurService.fetchUtilisateur { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let utilisateur):
+                    self.utilisateur = utilisateur
+                case .failure(let error):
+                    print("Error fetching utilisateur: \(error)")
                 }
-            } else if let error = error {
-                print("Error fetching data: \(error)")
             }
-        }.resume()
+        }
     }
 }
+
+
+
