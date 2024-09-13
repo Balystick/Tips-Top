@@ -19,7 +19,7 @@ class InfiniteScrollViewModel: ObservableObject {
     @Published var isFavorited: [Int: Bool] = [:]
     // Index utilisé pour savoir où reprendre le chargement des prochaines astuces
     private var currentAstuceIndex = 0
-
+    
     init() {
         loadMoreAstuces()
         loadInitialState()  // Précharge les états des "likes" et "favoris"
@@ -178,7 +178,7 @@ class InfiniteScrollViewModel: ObservableObject {
     /// - Parameter video: Le nom de la vidéo
     /// - Returns: `true` si la vidéo est favorite, `false` sinon
     func getStoredFavorite(for video: String) -> Bool {
-        let favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
+        var favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
         return favoritedTitles.contains(video)
     }
 }

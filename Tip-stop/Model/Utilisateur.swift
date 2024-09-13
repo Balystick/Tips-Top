@@ -31,3 +31,4 @@ struct Utilisateur: Codable, Identifiable {
     /// l'utilisateur a ajoutés à ses favoris.
     var favoris: [Favori]
 }
+ 

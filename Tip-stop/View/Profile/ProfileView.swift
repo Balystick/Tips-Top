@@ -15,6 +15,7 @@ struct ProfileView: View {
     @Binding var path: NavigationPath
     @ObservedObject var globalDataModel: GlobalDataModel
     @StateObject private var viewModel: ProfileViewModel
+    @StateObject private var viewModelScrollView = InfiniteScrollViewModel()
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Productivité"
     // Booleen afficher ImagePicker
@@ -63,6 +64,8 @@ struct ProfileView: View {
         self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
         UITextField.appearance().clearButtonMode = .whileEditing
     }
+
+    
     
     var body: some View {
         VStack {
@@ -79,9 +82,9 @@ struct ProfileView: View {
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                 .shadow(radius: 5)
-                                .onTapGesture {
-                                    showImagePicker = true
-                                }
+//                                .onTapGesture {
+//                                    showImagePicker = true
+//                                }
                         } else {
                             ZStack{
                                 Circle()
@@ -89,21 +92,30 @@ struct ProfileView: View {
                                     .foregroundColor(Color(.customLightGray))
                                     .overlay(Circle().stroke(Color(.customMediumGray), lineWidth: 0.1))
                                     .shadow(radius: 2)
-                                    .onTapGesture {
-                                        showImagePicker = true
-                                    }
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color(.customMediumGray))
+//                                    .onTapGesture {
+//                                        showImagePicker = true
+//                                    }
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .frame(width: 30, height: 30)
+//                                    .foregroundColor(Color(.customMediumGray))
+                                
+                                AsyncImage(url: URL(string: viewModel.utilisateur.photo)){ image in
+                                    image
+                                        .image?.resizable()
+                                        .frame(width: 150, height: 150)
+                                        .scaledToFill()
+                                        .clipShape(Circle())
+                                }
                             }
                         }
-                    }.sheet(isPresented: $showImagePicker) {
-                        ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
-                    .onChange(of: image) { oldValue, newValue in
-                        viewModel.saveImage(newValue)
-                    }
+//                    .sheet(isPresented: $showImagePicker) {
+//                        ImagePicker(sourceType: .photoLibrary, Image: self.$image)
+//                    }
+//                    .onChange(of: image) { oldValue, newValue in
+//                        viewModel.saveImage(newValue)
+//                    }
                     Spacer()
                     Spacer()
                     HStack{
@@ -217,9 +229,9 @@ struct ProfileView: View {
                         }
                     }
                 }
-                .onAppear {
-                    url.loadImage(&image)
-                }
+//                .onAppear {
+//                    url.loadImage(&image)
+//                }
             }
             
             Section {
@@ -265,9 +277,14 @@ struct ProfileView: View {
                 // Scroll pour afficher liste video en grid
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
+//                        if viewModelScrollView.astuces.categorie == selectedCategory {
+//
+//                        }
                         ForEach(video, id: \.self) { fileName in
                             if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: url.absoluteString, currentPlayingVideo: $currentPlayingVideo)
+                                VStack {
+                                    VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: url.absoluteString, currentPlayingVideo: $currentPlayingVideo)
+                                }
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
@@ -276,6 +293,9 @@ struct ProfileView: View {
                         }
                     }                }
             }
+        }
+        .onAppear {
+            viewModel.fetchUtilisateur()
         }
         .padding()
         .navigationBarBackButtonHidden(true)

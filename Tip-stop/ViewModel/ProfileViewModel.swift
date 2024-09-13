@@ -14,12 +14,14 @@ import SwiftUI
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
     @ObservedObject var globalDataModel: GlobalDataModel
-
+    
     /// La liste des favoris de l'utilisateur.
     @Published var favoris: [Favori]
     
     /// Les informations de l'utilisateur.
     @Published var utilisateur: Utilisateur
+    
+    private let baseURL = "http://10.80.55.40:3000/utilisateur"
     
     /// Initialise une nouvelle instance de `ProfileViewModel` avec une liste de favoris et les informations de l'utilisateur.
     ///
@@ -38,22 +40,22 @@ class ProfileViewModel: ObservableObject {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
-
+    
     func saveImage(_ image: UIImage?) {
         guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
         do {
             try data.write(to: imageURL)
-//            utilisateur.photo = image
+            //            utilisateur.photo = image
         } catch {
             print("Erreur lors de la sauvegarde de l'image: \(error)")
         }
     }
-
+    
     func loadImage() {
         guard let data = try? Data(contentsOf: imageURL) else { return }
-//        utilisateur.photo = UIImage(data: data)
+        //        utilisateur.photo = UIImage(data: data)
     }
-
+    
     func saveName(_ name: String) {
         UserDefaults.standard.set(name, forKey: "name")
         utilisateur.nom = name
@@ -64,7 +66,29 @@ class ProfileViewModel: ObservableObject {
     /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
     /// la même photo que l'utilisateur actuel et une liste de favoris vide.
     func addUtilisateur() {
-        var user = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
+        var utilisateur = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
+    }
+    
+    func fetchUtilisateur() {
+        guard let url = URL(string: baseURL) else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let decodedUtilisateur = try JSONDecoder().decode(Utilisateur.self, from: data)
+                    DispatchQueue.main.async {
+                        self.utilisateur = decodedUtilisateur
+                    }
+                } catch {
+                    print("Error decoding data: \(error)")
+                }
+            } else if let error = error {
+                print("Error fetching data: \(error)")
+            }
+        }.resume()
     }
 }
