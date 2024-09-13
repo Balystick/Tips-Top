@@ -18,7 +18,7 @@ struct Topic: Codable, Identifiable {
     let id: UUID
     
     /// La date de début du sujet de discussion.
-    var dateDebut: Date
+    var dateDebut: String
     
     /// Le sujet de discussion.
     var sujet: String
@@ -30,5 +30,5 @@ struct Topic: Codable, Identifiable {
     var reponse: [Reponse]
     
     /// La catégorie associée au sujet de discussion.
-    var categorie: Categorie
+    var categorie: Categorie?
 }

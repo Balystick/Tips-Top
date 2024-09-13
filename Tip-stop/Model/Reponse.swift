@@ -18,7 +18,7 @@ struct Reponse: Codable, Identifiable {
     let id:  UUID
     
     /// La date de publication de la réponse.
-    var date: Date
+    var date: String
     
     /// Le contenu textuel de la réponse.
     var contenu: String
