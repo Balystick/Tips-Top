@@ -21,6 +21,8 @@ class ProfileViewModel: ObservableObject {
     
     @Published var filteredVideos: [Astuce] = []
     
+    private let utilisateurService = UtilisateurService() // Utilisation du service
+    
     //FavoriteVidéos
     let videos = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
     
@@ -30,9 +32,6 @@ class ProfileViewModel: ObservableObject {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
-    
-    //----------
-    private let baseURL = "http://localhost:3000/utilisateur"
 
     init() {
         loadName()
@@ -72,28 +71,17 @@ class ProfileViewModel: ObservableObject {
         var user = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
-    
-    //----------
+    /// Récupère les informations de l'utilisateur depuis l'API.
     func fetchUtilisateur() {
-        guard let url = URL(string: baseURL) else {
-            print("Invalid URL")
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                do {
-                    let decodedUtilisateur = try JSONDecoder().decode(Utilisateur.self, from: data)
-                    DispatchQueue.main.async {
-                        self.utilisateur = decodedUtilisateur
-                    }
-                } catch {
-                    print("Error decoding data: \(error)")
+        utilisateurService.fetchUtilisateur { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let utilisateur):
+                    self.utilisateur = utilisateur
+                case .failure(let error):
+                    print("Error fetching utilisateur: \(error)")
                 }
-            } else if let error = error {
-                print("Error fetching data: \(error)")
             }
-        }.resume()
+        }
     }
-
 }

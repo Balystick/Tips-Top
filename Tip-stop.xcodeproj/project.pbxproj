@@ -51,6 +51,7 @@
 		E1D28F242C57A196001B9766 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F232C57A196001B9766 /* OnboardingViewController.swift */; };
 		E1D28F262C57A378001B9766 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D28F252C57A378001B9766 /* OnboardingPageView.swift */; };
 		E1D31DCB2C9421CD0078454B /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D31DCA2C9421CD0078454B /* APIResponses.swift */; };
+		E1D43B6E2C947C50001158A4 /* utilisateurServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D43B6D2C947C50001158A4 /* utilisateurServiceModel.swift */; };
 		E1E9B4922C6351C90043A2BD /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E9B4912C6351C90043A2BD /* GlobalViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		E1D28F232C57A196001B9766 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E1D28F252C57A378001B9766 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		E1D31DCA2C9421CD0078454B /* APIResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
+		E1D43B6D2C947C50001158A4 /* utilisateurServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilisateurServiceModel.swift; sourceTree = "<group>"; };
 		E1E9B4912C6351C90043A2BD /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +253,7 @@
 				699DFD5B2C49018600044FB4 /* DecouverteViewModel.swift */,
 				699DFD5D2C4902B300044FB4 /* InfiniteScrollViewModel.swift */,
 				699DFD5F2C4903A100044FB4 /* ProfileViewModel.swift */,
+				E1D43B6D2C947C50001158A4 /* utilisateurServiceModel.swift */,
 				699DFD632C4904BF00044FB4 /* TopicViewModel.swift */,
 			);
 			path = ViewModel;
@@ -490,6 +493,7 @@
 				E12943A02C62607400F8BB83 /* NewReponseController.swift in Sources */,
 				E11748752C931475007895FD /* OnboardingViewModel.swift in Sources */,
 				E1E9B4922C6351C90043A2BD /* GlobalViewModel.swift in Sources */,
+				E1D43B6E2C947C50001158A4 /* utilisateurServiceModel.swift in Sources */,
 				699DFD172C48FAD900044FB4 /* Tip_stopApp.swift in Sources */,
 				699DFD602C4903A700044FB4 /* ProfileViewModel.swift in Sources */,
 				699DFD4E2C48FF4C00044FB4 /* Utilisateur.swift in Sources */,
