@@ -9,7 +9,7 @@ import Foundation
 
 /// Classe responsable de la gestion des requêtes réseau pour les utilisateurs.
 class UtilisateurService {
-    private let baseURL = "http://10.80.55.40:3000/utilisateur"
+    private let baseURL = "http://localhost:3000/utilisateur"
     
     /// Récupère un utilisateur depuis l'API.
     ///
