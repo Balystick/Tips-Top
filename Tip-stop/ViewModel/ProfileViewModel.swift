@@ -13,6 +13,7 @@ import SwiftUI
 /// de l'utilisateur, incluant ses favoris et ses informations personnelles.
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
+    
     @ObservedObject var globalDataModel: GlobalDataModel
     
     /// La liste des favoris de l'utilisateur.
@@ -34,33 +35,14 @@ class ProfileViewModel: ObservableObject {
         let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
         self.utilisateur = Utilisateur(id: UUID(), nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
     }
-    
+}
+
+extension ProfileViewModel {
     
     private var imageURL: URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
-    
-    func saveImage(_ image: UIImage?) {
-        guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
-        do {
-            try data.write(to: imageURL)
-            //            utilisateur.photo = image
-        } catch {
-            print("Erreur lors de la sauvegarde de l'image: \(error)")
-        }
-    }
-    
-    func loadImage() {
-        guard let data = try? Data(contentsOf: imageURL) else { return }
-        //        utilisateur.photo = UIImage(data: data)
-    }
-    
-    func saveName(_ name: String) {
-        UserDefaults.standard.set(name, forKey: "name")
-        utilisateur.nom = name
-    }
-    
     /// Ajoute un nouvel utilisateur avec un nom vide et les mêmes informations de photo que l'utilisateur actuel.
     ///
     /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
@@ -68,6 +50,10 @@ class ProfileViewModel: ObservableObject {
     func addUtilisateur() {
         var utilisateur = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
+    }
+    func saveName(_ name: String) {
+        UserDefaults.standard.set(name, forKey: "name")
+        utilisateur.nom = name
     }
     
     func fetchUtilisateur() {

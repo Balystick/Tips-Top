@@ -82,9 +82,9 @@ struct ProfileView: View {
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                 .shadow(radius: 5)
-//                                .onTapGesture {
-//                                    showImagePicker = true
-//                                }
+                                .onTapGesture {
+                                    showImagePicker = true
+                                }
                         } else {
                             ZStack{
                                 Circle()
@@ -92,9 +92,9 @@ struct ProfileView: View {
                                     .foregroundColor(Color(.customLightGray))
                                     .overlay(Circle().stroke(Color(.customMediumGray), lineWidth: 0.1))
                                     .shadow(radius: 2)
-//                                    .onTapGesture {
-//                                        showImagePicker = true
-//                                    }
+                                    .onTapGesture {
+                                        showImagePicker = true
+                                    }
 //                                Image(systemName: "photo")
 //                                    .resizable()
 //                                    .frame(width: 30, height: 30)
@@ -110,9 +110,9 @@ struct ProfileView: View {
                             }
                         }
                     }
-//                    .sheet(isPresented: $showImagePicker) {
-//                        ImagePicker(sourceType: .photoLibrary, Image: self.$image)
-//                    }
+                    .sheet(isPresented: $showImagePicker) {
+                        ImagePicker(sourceType: .photoLibrary, Image: self.$image)
+                    }
 //                    .onChange(of: image) { oldValue, newValue in
 //                        viewModel.saveImage(newValue)
 //                    }
