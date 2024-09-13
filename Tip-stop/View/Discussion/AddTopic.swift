@@ -27,8 +27,7 @@ struct AddTopic: View {
                 
                         Button(action:
                         {
-                            viewModel.topics.append(Topic(dateDebut: Date(), sujet: sujetText, reponse: [], categorie: categorie1))
-                   // print(ListTopicView().allTopic[2])
+//                            viewModel.topics.append(Topic(dateDebut: Date(), sujet: sujetText, reponse: [], categorie: Categorie(id: <#T##UUID#>(), titre: "", description: "", icon: "", astuces: <#T##[Astuce]#>, topics: <#T##[Topic]#>)))
                 },
                        label:
                         {
@@ -44,6 +43,7 @@ struct AddTopic: View {
         }
     }
 }
+
 
 
 
