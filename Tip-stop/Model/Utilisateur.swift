@@ -7,8 +7,8 @@
 import Foundation
 import UIKit
 
-struct Utilisateur: Identifiable {
-    let id = UUID()
+struct Utilisateur: Codable,Identifiable {
+    let id:UUID
     var nom: String
     var photo: String
     var favoris: [Favori]

@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class DecouverteViewModel {
+class DecouverteViewModel:ObservableObject {
     @Published var categories: [Categorie] = []
     @Published var topics: [Topic] = []
     

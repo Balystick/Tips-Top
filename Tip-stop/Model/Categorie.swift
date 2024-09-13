@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Categorie: Identifiable {
-    let id = UUID()
+struct Categorie: Codable,Identifiable {
+    let id:UUID
     let titre: String
     let description: String
     let icon: String

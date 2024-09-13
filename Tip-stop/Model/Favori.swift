@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Favori: Identifiable {
-    let id = UUID()
+struct Favori: Codable,Identifiable {
+    let id:UUID
     var dateAjout: Date
     var astuce : Astuce
 }

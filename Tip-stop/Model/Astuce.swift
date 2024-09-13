@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Astuce: Identifiable {
-    let id = UUID()
+struct Astuce: Codable,Identifiable {
+    let id:UUID
     var titre: String
     var video: String
     var dateDeCreation: Date

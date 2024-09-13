@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Commentaire: Identifiable {
-    let id = UUID()
+struct Commentaire: Codable,Identifiable {
+    let id:UUID
     var contenu: String
     var date: String
     var nombreDeLikes: Int

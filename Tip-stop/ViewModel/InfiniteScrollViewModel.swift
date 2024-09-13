@@ -7,7 +7,7 @@
 
 import Foundation
 
-class InfiniteScrollViewModel {
+class InfiniteScrollViewModel:ObservableObject {
     @Published var astuces: [Astuce] = []
     @Published var commentaires: [Commentaire] = []
     @Published var steps: [Step] = []

@@ -6,7 +6,7 @@
 //
 import Foundation
 
-class ProfileViewModel {
+class ProfileViewModel:ObservableObject {
     @Published var favoris: [Favori]
     @Published var utilisateur: Utilisateur
     

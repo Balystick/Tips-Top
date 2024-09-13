@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Topic: Identifiable {
-    let id = UUID()
+struct Topic: Codable,Identifiable {
+    let id:UUID
     var dateDebut: Date
     var sujet: String
     var reponse: [Reponse]

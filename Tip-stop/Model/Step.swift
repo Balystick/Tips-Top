@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Step: Identifiable {
-    let id = UUID()
+struct Step: Codable,Identifiable {
+    let id:UUID
     var titre: String
     var description: String
 }

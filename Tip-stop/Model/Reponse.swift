@@ -6,8 +6,8 @@
 //
 import Foundation
 
-struct Reponse: Identifiable {
-    let id = UUID()
+struct Reponse: Codable,Identifiable {
+    let id:UUID
     var date: Date
     var contenu: String
     var utilisateur: Utilisateur
