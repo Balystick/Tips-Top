@@ -142,29 +142,30 @@ class InfiniteScrollViewModel: ObservableObject {
         if isFavorited {
             removeFavorite(for: astuce.video)
         } else {
-            saveFavorite(for: astuce.video)
+            saveFavorite(for: astuce.video, category: astuce.categorie.titre)
         }
     }
-
-    private func saveFavorite(for video: String) {
-        var favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
-        if !favoritedTitles.contains(video) {
-            favoritedTitles.append(video)
-            UserDefaults.standard.set(favoritedTitles, forKey: "favoritedTitles")
+    
+    private func saveFavorite(for video: String, category: String) {
+        var favoritedVideos = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
+        if !favoritedVideos.contains(where: { $0["title"] == video }) {
+            let newFavorite = ["title": video, "category": category]
+            favoritedVideos.append(newFavorite)
+            UserDefaults.standard.set(favoritedVideos, forKey: "favoritedVideos")
         }
     }
-
+    
     private func removeFavorite(for video: String) {
-        var favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
-        if let index = favoritedTitles.firstIndex(of: video) {
-            favoritedTitles.remove(at: index)
-            UserDefaults.standard.set(favoritedTitles, forKey: "favoritedTitles")
+        var favoritedVideos = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
+        if let index = favoritedVideos.firstIndex(where: { $0["title"] == video }) {
+            favoritedVideos.remove(at: index)
+            UserDefaults.standard.set(favoritedVideos, forKey: "favoritedVideos")
         }
     }
-
+    
     func getStoredFavorite(for video: String) -> Bool {
-        let favoritedTitles = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
-        return favoritedTitles.contains(video)
+        let favoritedVideos = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
+        return favoritedVideos.contains(where: { $0["title"] == video })
     }
 }
 

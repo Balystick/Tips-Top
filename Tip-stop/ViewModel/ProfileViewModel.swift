@@ -13,10 +13,16 @@ import SwiftUI
 /// de l'utilisateur, incluant ses favoris et ses informations personnelles.
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
+    
     /// La liste des favoris de l'utilisateur.
     @Published var favoris: [Favori] = []
     
     @Published var utilisateur: Utilisateur = Utilisateur(id: UUID(), nom: "Nom par défaut", photo: "", favoris: [])
+    
+    @Published var filteredVideos: [Astuce] = []
+    
+    //FavoriteVidéos
+    let videos = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
     
     let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
     
@@ -63,4 +69,5 @@ class ProfileViewModel: ObservableObject {
         var user = Utilisateur(id: UUID(), nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
+    
 }

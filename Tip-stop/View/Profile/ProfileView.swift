@@ -15,7 +15,7 @@ struct ProfileView: View {
     @Binding var path: NavigationPath
     @StateObject private var viewModel = ProfileViewModel()
     // Catégorie sélectionnée automatiquement dans picker
-    @State private var selectedCategory = "Productivité"
+    @State private var selectedCategory = "Toutes"
     // Booleen afficher ImagePicker
     @State private var showImagePicker = false
     //VAR qui stocke image de profil via l'Image Picker
@@ -42,9 +42,6 @@ struct ProfileView: View {
     @State private var oldName: String = ""
     @State private var newName: String = ""
     
-    //Tab de video pour grid favoris
-    let video = UserDefaults.standard.stringArray(forKey: "favoritedTitles") ?? []
-    
     //Grid de list favoris
     let columns = [
         GridItem(.adaptive(minimum: 100))
@@ -52,6 +49,17 @@ struct ProfileView: View {
     // gestion de la lecture des vidéos
     @State private var currentPlayingVideo: String? = nil
     @Binding var favoriteVideoSelected: String?
+    
+    //Affichage des vidéos favorites
+    @State private var favoritedVideos: [[String: String]] = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
+
+    var filteredFavoritedVideos: [[String: String]] {
+        if selectedCategory == "Toutes" {
+            return favoritedVideos
+        } else {
+            return favoritedVideos.filter { $0["category"] == selectedCategory }
+        }
+    }
     
     var body: some View {
         VStack {
@@ -232,7 +240,10 @@ struct ProfileView: View {
                         .foregroundColor(Color(.customMediumGray))
                     //Picker pour filter les videos par catégories
                     Picker("Choisir une catégorie", selection: $selectedCategory){
-                        ForEach(GlobalViewModel.shared.categories) {category in
+                        Text("Toutes")
+                            .tag("Toutes")
+                            .font(.footnote)
+                        ForEach(GlobalViewModel.shared.categories) { category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
@@ -251,19 +262,26 @@ struct ProfileView: View {
             }
             
             VStack {
-                // Scroll pour afficher liste video en grid
+                // Affichage des vidéos des favoris filtrées
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(video, id: \.self) { fileName in
-                            if let url = Bundle.main.url(forResource: fileName, withExtension: "mp4") {
-                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: url.absoluteString, currentPlayingVideo: $currentPlayingVideo)
+                        ForEach(filteredFavoritedVideos, id: \.["title"]) { favorite in
+                            if let fileName = favorite["title"], let url = URL(string: GlobalViewModel.shared.baseVideoURL + fileName + ".mp4") {
+                                VideoThumbnailView(
+                                    path: $path,
+                                    favoriteVideoSelected: $favoriteVideoSelected,
+                                    videoToPlay: url.absoluteString,
+                                    currentPlayingVideo: $currentPlayingVideo
+                                )
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
                                     .background(Color.red)
                             }
                         }
-                    }                }
+                        
+                    }
+                }
             }
         }
         .padding()
