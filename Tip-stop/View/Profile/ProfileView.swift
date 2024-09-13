@@ -14,6 +14,8 @@ import AVFoundation
 struct ProfileView: View {
     @Binding var path: NavigationPath
     @StateObject private var viewModel = ProfileViewModel()
+    //---------------
+    @StateObject private var viewModelScrollView = InfiniteScrollViewModel()
     // Catégorie sélectionnée automatiquement dans picker
     @State private var selectedCategory = "Toutes"
     // Booleen afficher ImagePicker
@@ -50,7 +52,7 @@ struct ProfileView: View {
     @State private var currentPlayingVideo: String? = nil
     @Binding var favoriteVideoSelected: String?
     
-    //Affichage des vidéos favorites
+    // Vidéos favorites
     @State private var favoritedVideos: [[String: String]] = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
 
     var filteredFavoritedVideos: [[String: String]] {
@@ -89,13 +91,19 @@ struct ProfileView: View {
                                     .onTapGesture {
                                         showImagePicker = true
                                     }
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color(.customMediumGray))
+                                
+                                AsyncImage(url: URL(string: viewModel.utilisateur.photo)){ image in
+                                    image
+                                        .image?.resizable()
+                                        .scaledToFill()
+                                        .frame(width: 150, height: 150)
+                                        .offset(y: 40)
+                                        .clipShape(Circle())
+                                }
                             }
                         }
-                    }.sheet(isPresented: $showImagePicker) {
+                    }
+                    .sheet(isPresented: $showImagePicker) {
                         ImagePicker(sourceType: .photoLibrary, Image: self.$image)
                     }
                     .onChange(of: image) { oldValue, newValue in
@@ -283,6 +291,9 @@ struct ProfileView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            viewModel.fetchUtilisateur()
         }
         .padding()
         .navigationBarBackButtonHidden(true)

@@ -222,9 +222,9 @@
 				699DFD4B2C48FEC000044FB4 /* Favori.swift */,
 				699DFD4D2C48FF3B00044FB4 /* Utilisateur.swift */,
 				699DFD4F2C48FF8500044FB4 /* Reponse.swift */,
+				E1D31DCA2C9421CD0078454B /* APIResponses.swift */,
 				699DFD512C49002A00044FB4 /* Topic.swift */,
 				E11748722C930D41007895FD /* Onboarding.swift */,
-				E1D31DCA2C9421CD0078454B /* APIResponses.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

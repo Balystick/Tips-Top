@@ -30,6 +30,9 @@ class ProfileViewModel: ObservableObject {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0].appendingPathComponent("image.jpg")
     }
+    
+    //----------
+    private let baseURL = "http://localhost:3000/utilisateur"
 
     init() {
         loadName()
@@ -70,4 +73,27 @@ class ProfileViewModel: ObservableObject {
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
     
+    //----------
+    func fetchUtilisateur() {
+        guard let url = URL(string: baseURL) else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let decodedUtilisateur = try JSONDecoder().decode(Utilisateur.self, from: data)
+                    DispatchQueue.main.async {
+                        self.utilisateur = decodedUtilisateur
+                    }
+                } catch {
+                    print("Error decoding data: \(error)")
+                }
+            } else if let error = error {
+                print("Error fetching data: \(error)")
+            }
+        }.resume()
+    }
+
 }
