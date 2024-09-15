@@ -22,7 +22,9 @@ class InfiniteScrollViewModel: ObservableObject {
     }
 
     func loadMoreAstuces() {
-        guard let url = URL(string: "https://azure-systematic-orangutan-728.mypinata.cloud/ipfs/QmXb4wm3bkeUJcd6vc9BHMNd7Ga7Pj9LT568TURVEHiqWA") else {
+//        guard let url = URL(string: "https://azure-systematic-orangutan-728.mypinata.cloud/ipfs/QmXb4wm3bkeUJcd6vc9BHMNd7Ga7Pj9LT568TURVEHiqWA") else {
+        guard let url = URL(string: GlobalViewModel.shared.baseURL + "astuces")
+        else {
             print("Invalid URL")
             return
         }
