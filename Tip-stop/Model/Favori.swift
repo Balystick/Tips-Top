@@ -12,12 +12,9 @@ import Foundation
 /// incluant un identifiant unique, la date d'ajout et l'astuce associée.
 ///
 /// Conformément au protocole `Identifiable`, chaque favori a un identifiant unique généré automatiquement.
-struct Favori: Identifiable {
-    /// L'identifiant unique du favori.
-    let id = UUID()
-    
+struct Favori: Codable {
     /// La date à laquelle l'astuce a été ajoutée aux favoris.
-    var dateAjout: Date
+    var dateAjout: String
     
     /// L'astuce associée à ce favori.
     var astuce: Astuce

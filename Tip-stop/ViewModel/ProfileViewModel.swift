@@ -30,7 +30,7 @@ class ProfileViewModel: ObservableObject {
         self.globalDataModel = globalDataModel
         self.favoris = favoris
         let savedName = UserDefaults.standard.string(forKey: "name") ?? ""
-        self.utilisateur = Utilisateur(nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
+        self.utilisateur = Utilisateur(id:utilisateur.id, nom: savedName, photo: utilisateur.photo, favoris: utilisateur.favoris)
     }
     
     
@@ -39,20 +39,6 @@ class ProfileViewModel: ObservableObject {
         return paths[0].appendingPathComponent("image.jpg")
     }
 
-    func saveImage(_ image: UIImage?) {
-        guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
-        do {
-            try data.write(to: imageURL)
-            utilisateur.photo = image
-        } catch {
-            print("Erreur lors de la sauvegarde de l'image: \(error)")
-        }
-    }
-
-    func loadImage() {
-        guard let data = try? Data(contentsOf: imageURL) else { return }
-        utilisateur.photo = UIImage(data: data)
-    }
 
     func saveName(_ name: String) {
         UserDefaults.standard.set(name, forKey: "name")
@@ -64,7 +50,7 @@ class ProfileViewModel: ObservableObject {
     /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
     /// la même photo que l'utilisateur actuel et une liste de favoris vide.
     func addUtilisateur() {
-        var user = Utilisateur(nom: "", photo: utilisateur.photo, favoris: [])
+        var user = Utilisateur(id: utilisateur.id, nom: utilisateur.nom, photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
 }

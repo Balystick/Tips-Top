@@ -13,17 +13,15 @@ import UIKit
 /// incluant un identifiant unique, un nom, une photo de profil optionnelle et une liste de favoris.
 ///
 /// Conformément au protocole `Identifiable`, chaque utilisateur a un identifiant unique généré automatiquement.
-struct Utilisateur: Identifiable {
-    /// L'identifiant unique de l'utilisateur.
-    let id = UUID()
-    
+struct Utilisateur: Codable {
+    var id: String
     /// Le nom de l'utilisateur.
     var nom: String
     
     /// La photo de profil de l'utilisateur.
     ///
     /// Cette propriété est optionnelle et peut être `nil` si l'utilisateur n'a pas de photo de profil.
-    var photo: UIImage?
+    var photo: String
     
     /// La liste des favoris de l'utilisateur.
     ///

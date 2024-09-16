@@ -13,10 +13,9 @@ import Foundation
 /// un nombre de likes, une liste d'étapes et une liste de commentaires.
 ///
 /// Conformément au protocole `Identifiable`, chaque astuce a un identifiant unique généré automatiquement.
-struct Astuce: Identifiable {
-    /// L'identifiant unique de l'astuce.
-    let id = UUID()
+struct Astuce: Codable {
     
+    var id: String
     /// Le titre de l'astuce.
     var titre: String
     
@@ -24,7 +23,7 @@ struct Astuce: Identifiable {
     var video: String
     
     /// La date de création de l'astuce.
-    var dateDeCreation: Date
+    var dateDeCreation: String
     
     /// Le pourcentage de la vidéo vue par les utilisateurs.
     var pourcentageVue: Int

@@ -13,12 +13,10 @@ import Foundation
 /// et l'utilisateur qui a posté la réponse.
 ///
 /// Conformément au protocole `Identifiable`, chaque réponse a un identifiant unique généré automatiquement.
-struct Reponse: Identifiable {
-    /// L'identifiant unique de la réponse.
-    let id = UUID()
-    
+struct Reponse: Codable {
+    var id: String
     /// La date de publication de la réponse.
-    var date: Date
+    var date: String
     
     /// Le contenu textuel de la réponse.
     var contenu: String

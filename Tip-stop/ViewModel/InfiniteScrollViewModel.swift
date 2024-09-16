@@ -12,8 +12,8 @@ import Combine
 
 class InfiniteScrollViewModel: ObservableObject {
     @Published var astuces: [Astuce] = []
-    @Published var isLiked: [UUID: Bool] = [:]
-    @Published var isFavorited: [UUID: Bool] = [:]
+    @Published var isLiked: [String: Bool] = [:]
+    @Published var isFavorited: [String: Bool] = [:]
     private var currentPage = 1
     private var cancellables = Set<AnyCancellable>()
 
@@ -29,7 +29,7 @@ class InfiniteScrollViewModel: ObservableObject {
 
         URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
-            .decode(type: [AstuceResponse].self, decoder: JSONDecoder())
+            .decode(type: [Astuce].self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -42,12 +42,14 @@ class InfiniteScrollViewModel: ObservableObject {
                 guard let self = self else { return }
                 let newAstuces = astuceResponses.map { response in
                     Astuce(
+                        id: response.id,
                         titre: response.titre,
                         video: response.video,
-                        dateDeCreation: ISO8601DateFormatter().date(from: response.dateDeCreation) ?? Date(),
+                        dateDeCreation: response.dateDeCreation,
                         pourcentageVue: response.pourcentageVue,
                         nombreDeLikes: response.nombreDeLikes,
                         categorie: Categorie( // Generate a new UUID if you don’t have it in the response
+                            id: response.id,
                             titre: response.categorie.titre,
                             description: response.categorie.description,
                             icon: response.categorie.icon,
@@ -56,6 +58,7 @@ class InfiniteScrollViewModel: ObservableObject {
                         ),
                         steps: response.steps.map { step in
                             Step(
+                                id: response.id,
                                 num: step.num,
                                 titre: step.titre,
                                 description: step.description,
@@ -64,12 +67,14 @@ class InfiniteScrollViewModel: ObservableObject {
                         },
                         commentaires: response.commentaires.map { comment in
                             Commentaire(
+                                id: response.id,
                                 contenu: comment.contenu,
                                 date: comment.date,
                                 nombreDeLikes: comment.nombreDeLikes,
                                 utilisateur: Utilisateur(
+                                    id: response.id,
                                     nom: comment.utilisateur.nom,
-                                    photo: UIImage(named: comment.utilisateur.photo ?? ""),
+                                    photo: comment.utilisateur.photo,
                                     favoris: [] // Handle nested `Favori` if needed
                                 )
                             )
