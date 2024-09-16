@@ -72,7 +72,3 @@ struct CarouselView: View {
         .frame(width: imageWidth)
     }
 }
-
-#Preview {
-    DecouverteView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
-}

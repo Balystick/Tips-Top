@@ -43,13 +43,15 @@ struct ProfileView: View {
     @State private var currentPlayingVideo: String? = nil
     @Binding var favoriteVideoSelected: String?
     
-    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel, favoriteVideoSelected: Binding<String?>) {
-        self._path = path
-        self.globalDataModel = globalDataModel
-        self._favoriteVideoSelected = favoriteVideoSelected
-        let utilisateur = Utilisateur(nom: "", photo: nil, favoris: [])
-        self._viewModel = StateObject(wrappedValue: ProfileViewModel(globalDataModel: globalDataModel, favoris: [], utilisateur: utilisateur))
-        UITextField.appearance().clearButtonMode = .whileEditing
+    // Vidéos favorites
+    @State private var favoritedVideos: [[String: String]] = UserDefaults.standard.array(forKey: "favoritedVideos") as? [[String: String]] ?? []
+
+    var filteredFavoritedVideos: [[String: String]] {
+        if selectedCategory == "Toutes" {
+            return favoritedVideos
+        } else {
+            return favoritedVideos.filter { $0["category"] == selectedCategory }
+        }
     }
     
     var body: some View {
@@ -78,10 +80,15 @@ struct ProfileView: View {
                                     .onTapGesture {
                                         showImagePicker = true
                                     }
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(Color(.customMediumGray))
+                                
+                                AsyncImage(url: URL(string: viewModel.utilisateur.photo)){ image in
+                                    image
+                                        .image?.resizable()
+                                        .scaledToFill()
+                                        .frame(width: 150, height: 150)
+                                        .offset(y: 40)
+                                        .clipShape(Circle())
+                                }
                             }
                         }
                     }
@@ -216,8 +223,12 @@ struct ProfileView: View {
                         .font(.headline)
                         .fontWeight(.bold)
                         .foregroundColor(Color(.customMediumGray))
-                    Picker("Choisir une catégorie", selection: $selectedCategory) {
-                        ForEach(globalDataModel.categories) { category in
+                    //Picker pour filter les videos par catégories
+                    Picker("Choisir une catégorie", selection: $selectedCategory){
+                        Text("Toutes")
+                            .tag("Toutes")
+                            .font(.footnote)
+                        ForEach(GlobalViewModel.shared.categories) { category in
                             Text(category.titre)
                                 .tag(category.titre)
                                 .font(.footnote)
@@ -236,21 +247,30 @@ struct ProfileView: View {
             }
             
             VStack {
+                // Affichage des vidéos des favoris filtrées
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(videoPaths, id: \.self) { fileName in
-                            let videoURLString = "https://www.balystick.fr/tipstop/\(fileName).mp4"
-                            if let videoURL = URL(string: videoURLString) {
-                                VideoThumbnailView(path: $path, favoriteVideoSelected: $favoriteVideoSelected, videoToPlay: videoURL.absoluteString, currentPlayingVideo: $currentPlayingVideo)
+                        ForEach(filteredFavoritedVideos, id: \.["title"]) { favorite in
+                            if let fileName = favorite["title"], let url = URL(string: GlobalViewModel.shared.baseVideoURL + fileName + ".mp4") {
+                                VideoThumbnailView(
+                                    path: $path,
+                                    favoriteVideoSelected: $favoriteVideoSelected,
+                                    videoToPlay: url.absoluteString,
+                                    currentPlayingVideo: $currentPlayingVideo
+                                )
                             } else {
                                 Text("Vidéo non trouvée")
                                     .frame(height: 180)
                                     .background(Color.red)
                             }
                         }
+                        
                     }
                 }
             }
+        }
+        .onAppear {
+            viewModel.fetchUtilisateur()
         }
         .padding()
         .navigationBarBackButtonHidden(true)

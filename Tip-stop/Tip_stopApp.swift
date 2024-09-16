@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct Tip_stopApp: App {
+    @StateObject private var suggestionsManager = SuggestionsManager()
+
     init() {
 //          Supprime la clé hasSeenOnboarding du UserDefault afin de relancer l'onboarding pour les tests
 //            UserDefaults.standard.removeObject(forKey: "hasSeenOnboarding")
@@ -16,7 +18,7 @@ struct Tip_stopApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(InfiniteScrollViewModel())
+            .environmentObject(suggestionsManager)
         }
     }
 }

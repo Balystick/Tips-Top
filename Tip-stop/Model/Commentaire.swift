@@ -17,6 +17,8 @@ struct Commentaire: Codable {
     
     var id: String
     /// L'identifiant unique du commentaire.
+    let id: UUID
+    
     /// Le contenu textuel du commentaire.
     var contenu: String
     

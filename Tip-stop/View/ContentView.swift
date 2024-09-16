@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var globalDataModel = GlobalDataModel()
+    @ObservedObject var onboardingViewModel = OnboardingViewModel()
     @State private var path = NavigationPath()
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding: Bool = false
     @State private var favoriteVideoSelected: String? = nil
@@ -19,41 +19,51 @@ struct ContentView: View {
                 Color.white // Force le fullscreen de la zone d'affichage
                     .ignoresSafeArea()
                 if !hasSeenOnboarding {
-                    OnboardingPageView()
+                    if onboardingViewModel.onboardingPages.isEmpty {
+                        Text("Chargement en cours...")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                    } else {
+                        OnboardingPageView(onboardingPages: onboardingViewModel.onboardingPages)
+                    }
                 } else {
-                    InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "", favoriteVideoSelected: $favoriteVideoSelected)
+                    InfiniteScrollView(path: $path, categoryTitre: "", favoriteVideoSelected: $favoriteVideoSelected)
                         .navigationDestination(for: String.self) { value in
                             switch value {
                             case "DecouverteView":
-                                DecouverteView(path: $path, globalDataModel: globalDataModel)
+                                DecouverteView(path: $path)
                             case "InfiniteScrollView:Productivité":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Productivité", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Productivité", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Personnalisation":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Personnalisation", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Personnalisation", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Utilisation Avancée":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Utilisation Avancée", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Utilisation Avancée", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Sécurité & Confidentialité":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Sécurité & Confidentialité", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Sécurité & Confidentialité", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Connectivité et Communication":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Connectivité et Communication", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Connectivité et Communication", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Multimédia":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Multimédia", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Multimédia", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Accessibilité":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Accessibilité", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Accessibilité", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Batterie et Performances":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Batterie et Performances", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Batterie et Performances", favoriteVideoSelected: $favoriteVideoSelected)
                             case "InfiniteScrollView:Nouveautés":
-                                InfiniteScrollView(path: $path, globalDataModel: globalDataModel, categoryTitre: "Nouveautés", favoriteVideoSelected: $favoriteVideoSelected)
+                                InfiniteScrollView(path: $path, categoryTitre: "Nouveautés", favoriteVideoSelected: $favoriteVideoSelected)
                             case "Discussions":
-                                ListTopicView(path: $path, globalDataModel: globalDataModel)
+                                ListTopicView(path: $path)
                             case "ProfileView":
-                                ProfileView(path: $path, globalDataModel: globalDataModel, favoriteVideoSelected: $favoriteVideoSelected)
+                                ProfileView(path: $path, favoriteVideoSelected: $favoriteVideoSelected)
                             default:
                                 Text("Vue inconnue")
                             }
                         }
                 }
             }
+        }
+        .onAppear() {
+            GlobalViewModel.shared.fetchCategories()
+            onboardingViewModel.fetchOnboardingPages()
         }
     }
 }

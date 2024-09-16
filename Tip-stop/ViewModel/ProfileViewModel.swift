@@ -13,8 +13,7 @@ import SwiftUI
 /// de l'utilisateur, incluant ses favoris et ses informations personnelles.
 /// Cette classe conforme au protocole `ObservableObject` permet de notifier les vues de tout changement.
 class ProfileViewModel: ObservableObject {
-    @ObservedObject var globalDataModel: GlobalDataModel
-
+    
     /// La liste des favoris de l'utilisateur.
     @Published var favoris: [Favori]
     
@@ -39,6 +38,31 @@ class ProfileViewModel: ObservableObject {
         return paths[0].appendingPathComponent("image.jpg")
     }
 
+    init() {
+        loadName()
+    }
+    
+    func saveImage(_ image: UIImage?) {
+        guard let image = image, let data = image.jpegData(compressionQuality: 0.8) else { return }
+        do {
+            try data.write(to: imageURL)
+//            utilisateur.photo = image
+        } catch {
+            print("Erreur lors de la sauvegarde de l'image: \(error)")
+        }
+    }
+
+    func loadImage() {
+        guard let data = try? Data(contentsOf: imageURL) else { return }
+//        utilisateur.photo = UIImage(data: data)
+    }
+    
+    // Fonction pour charger le nom de l'utilisateur depuis UserDefaults
+    func loadName() {
+        let savedName = UserDefaults.standard.string(forKey: "name") ?? "Nom par défaut"
+        utilisateur.nom = savedName
+    }
+
 
     func saveName(_ name: String) {
         UserDefaults.standard.set(name, forKey: "name")
@@ -52,5 +76,18 @@ class ProfileViewModel: ObservableObject {
     func addUtilisateur() {
         var user = Utilisateur(id: utilisateur.id, nom: utilisateur.nom, photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
+    }
+    /// Récupère les informations de l'utilisateur depuis l'API.
+    func fetchUtilisateur() {
+        utilisateurService.fetchUtilisateur { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let utilisateur):
+                    self.utilisateur = utilisateur
+                case .failure(let error):
+                    print("Error fetching utilisateur: \(error)")
+                }
+            }
+        }
     }
 }

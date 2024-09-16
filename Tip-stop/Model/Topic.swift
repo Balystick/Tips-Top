@@ -28,5 +28,5 @@ struct Topic: Codable {
     var reponse: [Reponse]
     
     /// La catégorie associée au sujet de discussion.
-    var categorie: Categorie
+    var categorie: Categorie?
 }

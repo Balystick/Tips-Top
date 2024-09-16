@@ -10,16 +10,9 @@ import SwiftUI
 /// Elle utilise un carrousel pour afficher les images des catégories.
 struct DecouverteView: View {
     @Binding var path: NavigationPath
-    @ObservedObject var globalDataModel: GlobalDataModel
-    @StateObject private var viewModel: DecouverteViewModel
+    @StateObject private var viewModel = DecouverteViewModel()
     @State private var activeID: UUID?  // Identifiant de l'image active dans le carrousel
     @State private var carouselImages: [CarouselImage] = []
-    
-    init(path: Binding<NavigationPath>, globalDataModel: GlobalDataModel) {
-        self._path = path
-        self.globalDataModel = globalDataModel
-        self._viewModel = StateObject(wrappedValue: DecouverteViewModel(globalDataModel: globalDataModel))
-    }
     
     var body: some View {
         VStack {
@@ -91,6 +84,7 @@ struct DecouverteView: View {
             }
         }
         .onAppear {
+            GlobalViewModel.shared.fetchCategories()
             carouselImages = viewModel.getCarouselImages() // Récupère les images du carrousel à l'apparition de la vue
             DispatchQueue.main.async { // Prévient une erreur de mise à jour de l'interface
                 if !carouselImages.isEmpty {
@@ -104,5 +98,5 @@ struct DecouverteView: View {
 
 
 #Preview {
-    DecouverteView(path: .constant(NavigationPath()), globalDataModel: GlobalDataModel())
+    DecouverteView(path: .constant(NavigationPath()))
 }
