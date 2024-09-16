@@ -64,7 +64,7 @@ class ProfileViewModel: ObservableObject {
     /// Cette fonction crée une nouvelle instance de `Utilisateur` avec un nom vide,
     /// la même photo que l'utilisateur actuel et une liste de favoris vide.
     func addUtilisateur() {
-        var user = Utilisateur(nom: "", photo: utilisateur.photo, favoris: [])
+        _ = Utilisateur(nom: "", photo: utilisateur.photo, favoris: [])
         // Ici, il pourrait y avoir un code pour ajouter cet utilisateur quelque part.
     }
 }

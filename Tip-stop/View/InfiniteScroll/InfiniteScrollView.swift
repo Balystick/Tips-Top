@@ -224,7 +224,7 @@ struct InfiniteScrollView: View {
     
     private func resetPlayers() {
         players.removeAll()
-        for (index, astuce) in viewModel.astuces.enumerated() {
+        for (index, _) in viewModel.astuces.enumerated() {
             loadVideo(for: index)
         }
     }
